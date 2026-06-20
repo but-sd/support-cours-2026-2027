@@ -11,6 +11,4 @@ duration: 5min
 
 # Supports de Cours 2026-2027
 
-## Présentation générale du cours
 
-[Voir le support d'introduction généré](./introduction/)
