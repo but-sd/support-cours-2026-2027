@@ -35,9 +35,16 @@ jobs:
         working-directory: slides
         run: npm ci
 
-      - name: Build slides
+      - name: Build landing deck
         working-directory: slides
         run: npm run build -- --base "/${{ github.event.repository.name }}/"
+
+      - name: Build introduction deck
+        working-directory: slides
+        run: |
+          npm run build:deck -- decks/introduction.md --base "/${{ github.event.repository.name }}/introduction/"
+          mkdir -p dist/introduction
+          cp -R decks/dist/. dist/introduction/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
