@@ -37,7 +37,7 @@ jobs:
 
       - name: Build slides
         working-directory: slides
-        run: npm run build
+        run: npm run build -- --base "/${{ github.event.repository.name }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
