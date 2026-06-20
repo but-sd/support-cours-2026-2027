@@ -1,0 +1,21 @@
+{
+  "name": "slides",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "slidev --open slides.md",
+    "dev:intro": "slidev --open decks/introduction.md",
+    "dev:web": "slidev --open decks/web-html-css.md",
+    "dev:deck": "slidev --open",
+    "build": "slidev build slides.md",
+    "build:deck": "slidev build",
+    "export": "slidev export slides.md",
+    "export:deck": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.16.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.33"
+  }
+}
