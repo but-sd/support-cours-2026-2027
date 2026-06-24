@@ -228,7 +228,7 @@ class: qr-slide
 <p class="qr-subtitle">Scannez le QR code ou utilisez le lien ci-dessous</p>
 
 <div class="intro-access">
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fbut-sd.github.io%2Fsupport-cours-2026-2027" alt="QR code vers le support de cours" />
+  <img src="./qr-support-cours-2026-2027.png" alt="QR code vers le support de cours" />
   <a href="https://but-sd.github.io/support-cours-2026-2027" target="_blank" rel="noopener noreferrer">
     https://but-sd.github.io/support-cours-2026-2027
   </a>
