@@ -3,6 +3,7 @@ theme: seriph
 title: Introduction a l'algorithmique
 class: text-center
 duration: 1h30
+routerMode: hash
 ---
 
 # Introduction a l'algorithmique

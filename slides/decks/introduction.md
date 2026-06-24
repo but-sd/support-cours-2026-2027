@@ -3,6 +3,7 @@ theme: seriph
 title: Introduction
 class: intro-slide text-left
 duration: 2h
+routerMode: hash
 background: ./fond-amif.jpg
 ---
 

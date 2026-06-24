@@ -3,11 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "slidev --open slides.md",
+    "dev": "bash scripts/dev-portal.sh",
+    "dev:slidev": "slidev --open slides.md",
     "dev:intro": "slidev --open decks/introduction.md",
     "dev:web": "slidev --open decks/web-html-css.md",
     "dev:deck": "slidev --open",
     "build": "slidev build slides.md",
+    "build:all": "bash scripts/build-all.sh",
     "build:deck": "slidev build",
     "export": "slidev export slides.md",
     "export:deck": "slidev export"
