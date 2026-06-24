@@ -113,14 +113,15 @@ Présenter les approches et les outils qui permettent de mener à bien un projet
 ## __Développement web__
 Programmation web pour la visualisation de données
 
-# 24 séances de 2H
+
+## 24 séances de 2H
 Mélangeant de la théorie et surtout beaucoup de pratique pour mettre en application les concepts abordés
 
 ---
 
 # Objectifs
 
-## **Mettre en place une application web en suivant les bonnes pratiques de développement**
+## Mettre en place une application web en suivant les bonnes pratiques de développement
 
 Les technologies utilisées sont celles actuellement utilisées dans le monde professionnel.
 
@@ -128,13 +129,13 @@ Les technologies utilisées sont celles actuellement utilisées dans le monde pr
  * __préparer__ au mieux pour votre future insertion professionnelle.
  * __donner__ les bases pour que vous puissiez continuer à apprendre par vous-même par la suite. Les technologies évoluent très vite, il est important de __savoir s'adapter__.
  * __vous faire découvrir__ les outils et les pratiques qui sont utilisés dans le monde professionnel.
- * __s'ensibiliser__ sur l'usage de l'Intelligence Artificielle dans le développement logiciel, ce quelle apporte comme opportunités et les risques associés.
+ * __être sensibilisé__ sur l'usage de l'**I**ntelligence **A**rtificielle dans le développement logiciel, ce quelle apporte comme opportunités et les risques associés.
 
 ---
 
 # Application développée
 
-Exploration de l'API de The Movie Database (TMDB) pour découvrir les films et séries populaires, les détails des films, les acteurs et les réalisateurs.
+Exploration de l'**API** de **T**he **M**ovie **D**atabase (TMDB) pour découvrir les films et séries populaires, les détails des films, les acteurs et les réalisateurs.
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <img src="./tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
@@ -143,14 +144,25 @@ Exploration de l'API de The Movie Database (TMDB) pour découvrir les films et s
 
 ---
 
-# Concepts manipulés
+# Concepts manipulés (1/2)
 
-* __agilité__ : méthode de développement
-* __développement web__ : html, css, javascript, react
-* __aide au développement__: github copilot, eslint, prettier
-* __travail collaboratif__: git, github
-* __tests unitaires, tests d'intégration__: jest, playwright
-* __intégration continue__: github actions
-* __déploiement continu__: github actions
-* __documentation__: markdown, mkdocs
-* __qualimétrie__: sonarqube
+* __agilité__ : méthode de développement, permettant de livrer rapidement des fonctionnalités et de s'adapter aux changements
+* __développement web__ : librairies et frameworks spécialisés pour le web.
+* __aide au développement__: outils de débogage, outils de test, aide à la génération de code
+* __travail collaboratif__: organisation du code, revue de code, gestion des versions, gestion des branches, pull request, issues
+* __tests unitaires, tests d'intégration__: différentes stratégies de tests, couverture de tests
+* __intégration continue__: automatisation des tests, compilation, qualité du code
+* __déploiement continu__: automatisation du déploiement sur un serveur de test ou de production
+* __documentation__: outils de génération de documentation, documentation des API
+* __qualimétrie__: analyse statique de code, couverture de tests, détection de vulnérabilités, qualité du code
+
+---
+
+# Concepts manipulés (2/2)
+
+Afin de mettre en pratique les concepts abordés, nous utiliserons des outils couramment employés dans le monde professionnel pour le développement logiciel et web.
+
+L'essentiel n'est pas l'outil, mais la compréhension des concepts et des bonnes pratiques, qui restent valables d'un outil à l'autre.
+
+Le développement logiciel évolue très vite : il faut savoir s'adapter et continuer à apprendre par soi-même. Les technologies changent, mais les concepts et les bonnes pratiques restent.
+
