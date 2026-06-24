@@ -39,12 +39,15 @@ jobs:
         working-directory: slides
         run: npm run build -- --base "/${{ github.event.repository.name }}/"
 
-      - name: Build introduction deck
+      - name: Build all decks
         working-directory: slides
         run: |
-          npm run build:deck -- decks/introduction.md --base "/${{ github.event.repository.name }}/introduction/"
-          mkdir -p dist/introduction
-          cp -R decks/dist/. dist/introduction/
+          for deck in decks/*.md; do
+            slug="$(basename "$deck" .md)"
+            npm run build:deck -- "$deck" --base "/${{ github.event.repository.name }}/${slug}/"
+            mkdir -p "dist/${slug}"
+            cp -R decks/dist/. "dist/${slug}/"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
