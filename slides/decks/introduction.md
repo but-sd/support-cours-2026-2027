@@ -32,6 +32,59 @@ background: ./fond-amif.jpg
   z-index: 1;
 }
 
+:global(.qr-slide) {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  background: radial-gradient(circle at 20% 20%, #dbeafe 0%, #f8fafc 38%, #e2e8f0 100%);
+  color: #0f172a;
+}
+
+:global(.qr-slide h1) {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #0b3b66;
+}
+
+:global(.qr-subtitle) {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #334155;
+}
+
+:global(.intro-access) {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
+  color: #111827;
+}
+
+:global(.intro-access a) {
+  color: #0f766e;
+  text-decoration: underline;
+  word-break: break-all;
+  font-size: 0.92rem;
+  max-width: 28rem;
+}
+
+:global(.intro-access img) {
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  background: white;
+}
+
 /* Slide 2: diagramme centre et agrandi sans deformation */
 .forge-slide {
   display: flex;
@@ -166,3 +219,17 @@ L'essentiel n'est pas l'outil, mais la compréhension des concepts et des bonnes
 
 Le développement logiciel évolue très vite : il faut savoir s'adapter et continuer à apprendre par soi-même. Les technologies changent, mais les concepts et les bonnes pratiques restent.
 
+---
+class: qr-slide
+---
+
+# Accès au support
+
+<p class="qr-subtitle">Scannez le QR code ou utilisez le lien ci-dessous</p>
+
+<div class="intro-access">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fbut-sd.github.io%2Fsupport-cours-2026-2027" alt="QR code vers le support de cours" />
+  <a href="https://but-sd.github.io/support-cours-2026-2027" target="_blank" rel="noopener noreferrer">
+    https://but-sd.github.io/support-cours-2026-2027
+  </a>
+</div>
