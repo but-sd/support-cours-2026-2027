@@ -188,7 +188,7 @@ Les technologies utilisées sont celles actuellement utilisées dans le monde pr
 
 # Application développée
 
-Exploration de l'**API** de **T**he **M**ovie **D**atabase (TMDB) pour découvrir les films et séries populaires, les détails des films, les acteurs et les réalisateurs.
+Exploration de l'**API** de **T**he **M**ovie **D**atabase (TMDB) pour découvrir les films et séries populaires, les détails des films, les acteurs et les réalisateurs et les statistiques associées.
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <img src="./tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
