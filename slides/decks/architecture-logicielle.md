@@ -29,13 +29,67 @@ routerMode: hash
     - Le **back-end** est le moteur de l'application, il traite les données et fournit les informations au front-end.
     - La couche **données** est le stockage des informations, souvent une base de données.
 
-
+---
 
 ## Architecture logicielle de TMDB Discovery App
 
 - Pour TMDB Discovery, nous retenons un duo **front-end + back-end**.
 - Le **back-end** interroge l'API TMDB et expose les données utiles au **front-end**.
 - Pas de base locale dans cette version : l'API TMDB fait office de source de données.
+- Pour plus de simplicité le **front-end** et le **back-end** seront développés dans le même projet, mais ils pourraient être séparés dans des projets distincts.
+    - Nous pourrions par exemple avoir un projet **tmdb-discovery-backend** et un projet **tmdb-discovery-frontend**.
+    - Pour plus de simplicité, allons aussi utiliser la même technologie pour le **front-end** et le **back-end** : **JavaScript** via **Node.js**.
+
+
+```mermaid
+flowchart LR
+    U[Utilisateur]
+
+    subgraph APP[Application TMDB Discovery]
+        F[Front-end
+Interface utilisateur]
+        B[Back-end
+API serveur]
+    end
+
+    subgraph EXT[Source de données]
+        T[API TMDB]
+    end
+
+    U -->|Recherche et navigation| F
+    F -->|Requêtes HTTP| B
+    B -->|Appels REST| T
+    T -->|Films, séries, crédits| B
+    B -->|JSON simplifié| F
+```
+
+---
+
+# Architecture logicielle - back-end
+
+Le **back-end** est le moteur de l'application, il interroge l'API TMDB et expose les données utiles au **front-end**.
+
+C'est le **back-end** qui gère la logique métier de l'application, c'est-à-dire les règles et les traitements qui permettent de répondre aux besoins des utilisateurs.
+
+Dans le cas de TMDB Discovery, le **back-end** interroge l'API TMDB pour récupérer les films, séries, acteurs et réalisateurs, et expose ces données au **front-end** sous forme de JSON simplifié (on ne renvoie pas toutes les données de l'API TMDB, mais seulement celles qui sont utiles pour l'application). On n'expose pas toutes les api, mais seulement les endpoints nécessaires pour l'application.
+
+Le **back-end** masque la complexité de l'API TMDB au **front-end**, qui n'a pas besoin de connaître les détails de l'API TMDB pour fonctionner. Le **front-end** se contente d'appeler le **back-end** pour obtenir les données dont il a besoin.
+
+Le **back-end** peut également effectuer des traitements sur les données avant de les renvoyer au **front-end**, par exemple pour filtrer, trier ou transformer les données.
+
+Le **back-end** pourrait également utiliser une base de données locale pour stocker les données de l'API TMDB, mais dans cette version de l'application, nous n'avons pas besoin de stocker les données localement, car l'API TMDB est suffisamment rapide et fiable pour fournir les données en temps réel.
+
+---
+
+# Architecture logicielle - back-end (suite)
+
+Pour TMDB Discovery, le **back-end** sera développé en **Node.js** avec le framework **Express.js**. Framework très populaire pour développer des applications web en **JavaScript** côté serveur.
+
+Le **back-end** sera organisé en **routes** et **contrôleurs**. Les **routes** définissent les endpoints de l'API, et les **contrôleurs** contiennent la logique métier pour traiter les requêtes et renvoyer les réponses.
+
+Le **back-end** interrogera l'API TMDB via des requêtes HTTP, et exposera les données utiles au **front-end** sous forme de JSON simplifié. 
+
+Les **endpoints** (ce que le **back-end** expose) seront documentés en utilisant **Swagger**, un outil qui permet de générer automatiquement une documentation interactive de l'API, pour que le **front-end** sache comment les utiliser.
 
 ---
 
@@ -89,16 +143,19 @@ Sur le bassin Niortais, de nombreuses entreprises utilisent **React** pour leurs
 
 ---
 
-# Pourquoi Vite + TypeScript ?
+# Architecture logicielle - front-end (suite)
 
-- **On démarre plus vite** : Vite lance le projet instantanément et accélère les itérations en TP (HMR très réactif).
-- **On fait moins d'erreurs** : TypeScript détecte tôt les incohérences avant l'exécution dans le navigateur.
-- **On maintient mieux le projet** : code plus clair en équipe, refactorings plus sûrs, application plus robuste dans le temps.
+# React + Vite + TypeScript
+
+La combinaison de **React**, **Vite** et **TypeScript** est très populaire pour le développement web moderne. 
+
+**TypeScript** est un sur-ensemble de JavaScript qui ajoute le typage statique et la vérification de type à la compilation. Cela permet de détecter les erreurs de type avant l'exécution du code, ce qui améliore la qualité du code et la productivité des développeurs.
+
+**Vite** est un outil de build et de développement rapide pour les applications web modernes. Il permet de démarrer un projet rapidement, de recharger le code en temps réel lors du développement, et d'optimiser le code pour la production.
 
 ---
 
-# 
+# Architecture logicielle - stack technique
 
-- **React** reste très recherché, avec une base d’adoption large.
-- **TypeScript** maintient une dynamique solide et régulière.
-- **Vite** progresse nettement sur la période, signe d'une adoption croissante des outils front-end modernes.
+
+
