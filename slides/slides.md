@@ -14,6 +14,7 @@ duration: 5min
 
 - [Introduction](./introduction/)
 - [Architecture logicielle - TMDB Discovery](./architecture-logicielle/)
+- [Back-end - TMDB Discovery](./backend/)
 
 </div>
 
