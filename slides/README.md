@@ -27,6 +27,7 @@ npm run dev:deck -- decks/algo-introduction.md
 - `npm run dev:web` : support HTML/CSS
 - `npm run dev:deck -- decks/mon-cours.md` : deck au choix
 - `npm run export:deck -- decks/mon-cours.md` : export PDF
+- `npm run dev:tmdb -- 0.2.0` : support TMDB version 0.2.0, on peut passer un argument pour choisir la version du support à lancer (0.1.0, 0.2.0, 0.3.0, ...)
 
 ## Structure
 
