@@ -21,6 +21,18 @@ routerMode: hash
 
 ---
 
+```mermaid
+gitGraph
+    commit id: "..."
+    commit id: "add devmoji dependency" tag: "0.2.0"
+    branch develop
+    checkout develop
+    commit id: "...."
+    commit id: "....."
+```
+
+---
+
 # Films populaires (/api/movies/popular) (suite) - TODO à partir d'ici
  
 Ajout d'un type pour la réponse de l'API TMDB afin d'améliorer la sécurité et la lisibilité du code. 

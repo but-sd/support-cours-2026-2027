@@ -10,6 +10,7 @@
     "dev:backend": "slidev --open decks/backend.md",
     "dev:tmdb-0.1.0": "slidev --open decks/tmdb-discovery-0.1.0.md",
     "dev:tmdb-0.2.0": "slidev --open decks/tmdb-discovery-0.2.0.md",
+    "dev:tmdb-0.3.0": "slidev --open decks/tmdb-discovery-0.3.0.md",
     "dev:web": "slidev --open decks/web-html-css.md",
     "dev:deck": "slidev --open",
     "build": "slidev build slides.md",
