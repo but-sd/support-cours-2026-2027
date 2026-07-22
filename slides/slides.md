@@ -15,9 +15,9 @@ duration: 5min
 - [Introduction](./introduction/)
 - [Architecture logicielle - TMDB Discovery](./architecture-logicielle/)
 - [Back-end - TMDB Discovery](./backend/) A supprimer
-- [Version 0.1.0](./tmdb-0.1.0/)
-- [Version 0.2.0](./tmdb-0.2.0/)
-- [Version 0.3.0](./tmdb-0.3.0/)
+- [Version 0.1.0](./tmdb-discovery-0.1.0/)
+- [Version 0.2.0](./tmdb-discovery-0.2.0/)
+- [Version 0.3.0](./tmdb-discovery-0.3.0/)
 
 </div>
 
