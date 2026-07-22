@@ -191,8 +191,8 @@ Les technologies utilisées sont celles actuellement utilisées dans le monde pr
 Exploration de l'**API** de **T**he **M**ovie **D**atabase (TMDB) pour découvrir les films et séries populaires, les détails des films, les acteurs et les réalisateurs et les statistiques associées.
 
 <div class="grid grid-cols-2 gap-4 mt-4">
-  <img src="./tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
-  <img src="./tmdb-discovery-2.png" alt="Capture films populaires" class="w-full rounded-lg border border-slate-200" />
+  <img src="./assets/tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
+  <img src="./assets/tmdb-discovery-2.png" alt="Capture films populaires" class="w-full rounded-lg border border-slate-200" />
 </div>
 
 ---
@@ -228,7 +228,7 @@ class: qr-slide
 <p class="qr-subtitle">Scannez le QR code ou utilisez le lien ci-dessous</p>
 
 <div class="intro-access">
-  <img src="./qr-support-cours-2026-2027.png" alt="QR code vers le support de cours" />
+  <img src="./assets/qr-support-cours-2026-2027.png" alt="QR code vers le support de cours" />
   <a href="https://but-sd.github.io/support-cours-2026-2027" target="_blank" rel="noopener noreferrer">
     https://but-sd.github.io/support-cours-2026-2027
   </a>
