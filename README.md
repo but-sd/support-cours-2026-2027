@@ -16,3 +16,12 @@ npm run dev
 
 1. Creer un fichier `slides/decks/mon-cours.md`.
 2. Lancer `npm run dev:deck -- decks/mon-cours.md`.
+
+
+# TODO
+
+Contenu des supports de cours à compléter.
+
+- 1.0.0
+    - première version fonctionnelle de l'application
+    - Parle du semver, de la gestion de versions et du versionning (voir prez marvel-app-0.1.0)
