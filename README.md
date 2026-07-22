@@ -22,6 +22,11 @@ npm run dev
 
 Contenu des supports de cours à compléter.
 
+- 0.4.0: A finir
+- 0.5.0: 
+    - ajouter des paramètres lors de l'appel de l'API TMDB pour récupérer les films populaires (langue, page, ...)
+    - pouvoir passer les paramètres de l'API TMDB via l'URL (query params)
+
 - 1.0.0
     - première version fonctionnelle de l'application
     - Parle du semver, de la gestion de versions et du versionning (voir prez marvel-app-0.1.0)
