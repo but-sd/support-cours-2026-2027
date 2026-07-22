@@ -12,12 +12,14 @@ duration: 5min
 
 # Supports de Cours
 
-- [Introduction](./introduction/)
-- [Architecture logicielle - TMDB Discovery](./architecture-logicielle/)
-- [Back-end - TMDB Discovery](./backend/) A supprimer
-- [Version 0.1.0](./tmdb-discovery-0.1.0/)
-- [Version 0.2.0](./tmdb-discovery-0.2.0/)
-- [Version 0.3.0](./tmdb-discovery-0.3.0/)
+<ul>
+  <li><a href="./introduction/">Introduction</a></li>
+  <li><a href="./architecture-logicielle/">Architecture logicielle - TMDB Discovery</a></li>
+  <li><a href="./backend/">Back-end - TMDB Discovery</a> A supprimer</li>
+  <li><a href="./tmdb-discovery-0.1.0/">Version 0.1.0</a></li>
+  <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
+  <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>
+</ul>
 
 </div>
 
