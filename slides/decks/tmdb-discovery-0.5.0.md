@@ -22,6 +22,11 @@ routerMode: hash
 - eslint, outil de linting pour le code JavaScript/TypeScript
 - pull request, mécanisme de contribution sur GitHub pour proposer des modifications à un projet
 
+<!--
+
+Exemple de notes
+
+-->
 ---
 
 ```mermaid
