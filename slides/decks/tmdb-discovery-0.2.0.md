@@ -3,6 +3,7 @@ theme: seriph
 title: Back-end - TMDB Discovery App
 duration: 2h
 routerMode: hash
+layout: tmdb-hero
 mermaid:
   look: handDrawn
   theme: base
@@ -23,6 +24,8 @@ mermaid:
 ---
 
 # TMDB Discovery App - 0.2.0
+
+<p class="hero-kicker">TMDB API - Commits atomiques - Commitlint - Husky</p>
 
 ---
 

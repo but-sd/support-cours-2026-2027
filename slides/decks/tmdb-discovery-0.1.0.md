@@ -3,9 +3,12 @@ theme: seriph
 title: TMDB Discovery App - 0.1.0
 duration: 2h
 routerMode: hash
+layout: tmdb-hero
 ---
 
 # TMDB Discovery App - 0.1.0
+
+<p class="hero-kicker">Back-end Foundation - Express - TypeScript - Git</p>
 
 ---
 
