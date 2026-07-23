@@ -26,6 +26,7 @@ Contenu des supports de cours à compléter.
 - 0.5.0: 
     - ajouter des paramètres lors de l'appel de l'API TMDB pour récupérer les films populaires (langue, page, ...)
     - pouvoir passer les paramètres de l'API TMDB via l'URL (query params)
+    - lint 
 
 - 1.0.0
     - première version fonctionnelle de l'application
