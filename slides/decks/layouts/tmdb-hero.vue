@@ -14,6 +14,19 @@
 </template>
 
 <style>
+
+/* Fond commun du deck quand le template tmdb-hero est utilisé */
+.slidev-layout {
+  background: linear-gradient(140deg, #f7fbff 0%, #eef6ff 48%, #e8f7f5 100%);
+}
+
+html.dark .slidev-layout,
+body.dark .slidev-layout,
+.dark .slidev-layout,
+[data-theme='dark'] .slidev-layout {
+  background: linear-gradient(135deg, #0b1220 0%, #13233b 55%, #0f4c5c 100%);
+}
+
 .tmdb-hero-layout {
   --hero-text: #0f172a;
   --hero-kicker: #33516b;
