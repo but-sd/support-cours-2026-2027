@@ -16,8 +16,8 @@ layout: tmdb-hero
 
 ## Application
 - Mise en place de l'architecture logicielle **back-end**
-    - Utilisation de **Node.js** et **Express**
-- Exposition d'un premier endpoint __Hello World__ 
+  - Utilisation de **Node.js** et **Express**
+  - Exposition d'un premier endpoint __Hello World__ 
 
 ## Ingénierie logicielle
 - Utilisation de **git**
@@ -175,7 +175,7 @@ gitGraph
 
 # GitHub - Codespaces
 
-**Codespaces** est un service proposé par GitHub qui permet de créer un environnement de développement complet dans le cloud, directement à partir d'un dépôt GitHub. 
+**Codespaces** est un service proposé par **GitHub** qui permet de créer un environnement de développement complet dans le cloud, directement à partir d'un dépôt **GitHub**.
 
 Il offre une expérience de développement similaire à celle d'un **IDE** local, mais avec l'avantage de ne pas avoir à configurer l'environnement sur votre machine.
 
@@ -194,14 +194,14 @@ Il est possible aussi d'utiliser **Codespaces** avec l'application **VS Code** i
 
 # Initialisation du projet
 
-Dans un terminal intégré à **Codespaces**, nous allons initialiser notre projet Node.js avec les options par défaut et le configurer pour utiliser les modules ES6.
+Dans un terminal intégré à **Codespaces**, nous allons initialiser notre projet Node.js avec les options par défaut et le configurer pour utiliser les modules ES.
 
 ```shell
 
 # Initialisation du projet Node.js avec les options par défaut
 npm init -y
 
-# Positionnement du projet en mode module pour utiliser les imports ES6
+# Positionnement du projet en mode module pour utiliser les imports ES
 npm pkg set type=module
 ```
 
@@ -275,7 +275,7 @@ app.listen(port, () => {
 
 # Express.js (suite)
 
-Pour valider que le serveur fonctionne correctement lancer le serveur avec la commande suivante :
+Pour vérifier que le serveur fonctionne correctement, lancez le serveur avec la commande suivante :
 
 ```shell
 node index.js
@@ -364,9 +364,9 @@ Si les fichiers **package.json** et **package-lock.json** sont suivis par Git, i
 
 ---
 
-# GIT - add
+# Git - add
 
-La commande `git add` permet d'ajouter des fichiers à l'index**Git**, c'est-à-dire de les préparer pour le prochain commit. 
+La commande `git add` permet d'ajouter des fichiers à l'index **Git**, c'est-à-dire de les préparer pour le prochain commit. 
 
 Nous allons ajouter tous les fichiers non suivis par **Git**, sauf le dossier **node_modules/** qui est exclu par le fichier **.gitignore**.
 
@@ -395,7 +395,7 @@ Changes to be committed:
 
 ---
 
-# GIT - commit
+# Git - commit
 
 La commande `git commit` permet de valider les modifications ajoutées à l'index **Git** et de créer un nouveau commit dans l'historique du projet.
 
@@ -420,7 +420,7 @@ Résultat attendu :
 
 ---
 
-# GIT - commit (suite)
+# Git - commit (suite)
 
 Une vérification de l'état du projet avec la commande `git status` nous indique que nous n'avons plus de modifications en attente et que notre branche locale est à jour avec la branche distante `origin/main`.
 
@@ -442,7 +442,7 @@ nothing to commit, working tree clean
 
 ---
 
-# GIT - push
+# Git - push
 
 La commande `git push` permet d'envoyer les **commits** locaux vers le dépôt distant sur GitHub. 
 
@@ -469,7 +469,7 @@ To https://github.com/but-sd/themoviedb-discovery-app-demo
 
 ---
 
-# GIT - push (suite)
+# Git - push (suite)
 
 Une vérification de l'état du projet avec la commande `git status` nous indique que notre branche locale est maintenant à jour avec la branche distante `origin/main`.
 
@@ -490,7 +490,7 @@ nothing to commit, working tree clean
 
 ---
 
-# GIT - push (suite)
+# Git - push (suite)
 
 Le **commit** initial a été poussé avec succès vers le dépôt distant sur **GitHub**. Vous pouvez vérifier que les fichiers ont été correctement ajoutés et que le commit est présent dans l'historique du dépôt en visitant la page du dépôt sur GitHub.
 
@@ -666,7 +666,7 @@ Afin de commencer à organiser notre projet, nous allons créer un dossier `src/
 # Création du dossier src/back-end pour les fichiers source TypeScript du back-end
 mkdir -p src/back-end
 
-# Création du fichier src/back-end/index.ts et suppression du fichier index.js
+# Déplacement du fichier index.js vers src/back-end/index.ts
 mv index.js src/back-end/index.ts
 ```
 
@@ -725,7 +725,7 @@ Nous allons maintenant ajouter un script dans le fichier `package.json` pour lan
 
 Nous allons maintenant transformer notre projet back-end pour utiliser TypeScript. Cela implique de renommer le fichier `index.js` en `index.ts` et de modifier le code pour utiliser les types TypeScript.
 
-```javascript
+```typescript
 import express from 'express';
 
 // Create a new express application instance
