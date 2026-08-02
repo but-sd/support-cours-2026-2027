@@ -21,11 +21,11 @@ layout: tmdb-hero
 
 # **T**he **M**ovie **D**ata**b**ase (TMDB)
 
-**TMDB** est une base de données de films et de séries, accessible via une **API**.
+**TMDB** est une base de données de films et de séries accessible via une **API**.
 
-- Elle est utilisée par de nombreuses applications web
-- Elle fournit des informations sur les films, séries, acteurs et réalisateurs
-- C'est cette **API** que nous utiliserons pour construire l'application **TMDB Discovery App**
+- Utilisée par de nombreuses applications web
+- Fournit des données sur les films, séries, acteurs et réalisateurs
+- Sert de source de données pour **TMDB Discovery App**
 
 Ressources :
 - Site officiel : https://www.themoviedb.org
@@ -41,7 +41,11 @@ Ressources :
 
 # TMDB Discovery App
 
-Nous allons construire une application web qui exploite l'**API** TMDB pour découvrir des films et des séries dans l'application **TMDB Discovery App**.
+Nous allons construire une application web qui exploite l'**API TMDB** pour :
+
+- Rechercher des films et des séries
+- Explorer des statistiques et tendances
+- Afficher les résultats dans **TMDB Discovery App**
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <img src="./assets/tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
