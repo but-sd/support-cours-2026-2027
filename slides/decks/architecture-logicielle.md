@@ -1,14 +1,14 @@
 ---
 theme: seriph
-title: Architecture applicative - TMDB Discovery App
+title: Architecture logicielle - TMDB Discovery App
 duration: 2h
 routerMode: hash
 layout: tmdb-hero
 ---
 
-# Architecture applicative
+# Architecture logicielle
 
-<p class="hero-kicker">Front-end - Back-end - Agilité - Versionning</p>
+<p class="hero-kicker">Front-end - Back-end - Agilité - Gestion de versions</p>
 
 ---
 
@@ -150,6 +150,9 @@ Les solutions les plus utilisées aujourd'hui sont :
 
 ![Google Trends React Vite TypeScript sur 5 ans](./assets/google-trends-react-vite-typescript-5y.png)
 
+
+
+
 ---
 
 # Architecture logicielle - front-end (suite)
@@ -187,7 +190,7 @@ Cette combinaison est très populaire pour construire des applications web moder
 
 # Méthodes de développement agiles
 
-Pour livrer rapidement une première version fonctionnelle, nous adopterons une approche **agile**.
+Pour livrer rapidement une première version fonctionnelle, nous adoptons une approche **agile**.
 
 - itérations courtes
 - priorisation des fonctionnalités
