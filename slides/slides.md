@@ -15,7 +15,6 @@ duration: 5min
 <ul>
   <li><a href="./introduction/">Introduction</a></li>
   <li><a href="./architecture-logicielle/">Architecture logicielle - TMDB Discovery</a></li>
-  <li><a href="./backend/">Back-end - TMDB Discovery</a> A supprimer</li>
   <li><a href="./tmdb-discovery-0.1.0/">Version 0.1.0</a></li>
   <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
   <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>

@@ -14,29 +14,34 @@ layout: tmdb-hero
 
 # Objectifs
 
-- Construire une application web de découverte s'appuyant sur les données de **TMDB** : films, séries et statistiques
-- Livrer rapidement une première version fonctionnelle
+- Construire une application web s'appuyant sur les données de **T**he **M**ovie **D**ata**b**ase : films, séries et statistiques
 - Mettre en place une architecture évolutive pour accueillir les fonctionnalités à venir
 - Avancer en mode **agile** : itérations courtes, valeur livrée en continu, adaptation au changement
 ---
 
-# The Movie Database (TMDB)
+# **T**he **M**ovie **D**ata**b**ase (TMDB)
 
-**TMDB** est une base de données de films et de séries, accessible via une API.
+**TMDB** est une base de données de films et de séries, accessible via une **API**.
 
 - Elle est utilisée par de nombreuses applications web
 - Elle fournit des informations sur les films, séries, acteurs et réalisateurs
-- C'est cette API que nous utiliserons pour construire TMDB Discovery App
+- C'est cette **API** que nous utiliserons pour construire l'application **TMDB Discovery App**
 
 Ressources :
 - Site officiel : https://www.themoviedb.org
 - Documentation API : https://developer.themoviedb.org/docs/getting-started
 
+<!--
+
+**A**pplication **P**rogramming **I**nterface: ensemble de règles et de conventions qui permet à des applications de communiquer entre elles. 
+
+-->
+
 ---
 
 # TMDB Discovery App
 
-Nous allons construire une application web qui exploite l'API TMDB pour découvrir des films et des séries.
+Nous allons construire une application web qui exploite l'**API** TMDB pour découvrir des films et des séries dans l'application **TMDB Discovery App**.
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <img src="./assets/tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
@@ -45,9 +50,7 @@ Nous allons construire une application web qui exploite l'API TMDB pour découvr
 
 ---
 
-# Architecture logicielle
-
-## Architecture logicielle d'une application web
+# Architecture logicielle d'une application web
 
 - Une application web s'organise généralement en 3 couches : **front-end**, **back-end**, **données**
     - Le **front-end** est l'interface utilisateur, ce que l'utilisateur voit et avec quoi il interagit
@@ -55,11 +58,11 @@ Nous allons construire une application web qui exploite l'API TMDB pour découvr
     - La couche **données** est le stockage des informations, souvent une base de données
 ---
 
-## Architecture logicielle de TMDB Discovery App
+# Architecture logicielle de TMDB Discovery App
 
-- Pour **TMDB Discovery**, nous retenons un duo **front-end + back-end**
-- Le **back-end** interroge l'API TMDB et expose les données utiles au **front-end**
-- Pas de base locale dans cette version : l'API TMDB fait office de source de données
+- Pour **TMDB Discovery App**, nous retenons un duo **front-end + back-end**
+- Le **back-end** interroge l'**API TMDB** et expose les données utiles au **front-end**
+- Pas de base locale dans cette version : l'**API TMDB** fait office de source de données
 - Pour plus de simplicité, le **front-end** et le **back-end** seront développés dans le même projet, mais ils pourraient être séparés dans des projets distincts
     - Nous pourrions par exemple avoir un projet **tmdb-discovery-backend** et un projet **tmdb-discovery-frontend**
     - Pour plus de simplicité, nous allons utiliser la même technologie pour le **front-end** et le **back-end** : **TypeScript** via **Node.js**
@@ -95,7 +98,7 @@ Le **back-end** est le moteur de l'application :
 - il applique la logique métier (règles et traitements)
 - il expose au **front-end** uniquement les données utiles, au format JSON simplifié
 
-Dans TMDB Discovery, nous n'exposons pas toute l'API TMDB : seulement les **endpoints** nécessaires à l'application.
+Dans **TMDB Discovery App**, nous n'exposons pas toute l'**API TMDB** : seulement les **endpoints** nécessaires à l'application.
 
 ---
 
@@ -103,23 +106,23 @@ Dans TMDB Discovery, nous n'exposons pas toute l'API TMDB : seulement les **endp
 
 Le **back-end** joue aussi un rôle de simplification :
 
-- le **front-end** n'appelle pas directement TMDB
+- le **front-end** n'appelle pas directement *l'**API TMDB***
 - le **back-end** masque la complexité de l'API
 - il peut filtrer, trier ou transformer les données avant de les renvoyer
 
-Une base locale serait possible, mais pas nécessaire dans cette version : l'API TMDB suffit pour un accès en temps réel.
+Une base locale serait possible, mais pas nécessaire dans cette version : l'**API TMDB** suffit pour un accès en temps réel.
 
 ---
 
 # Architecture logicielle - back-end (suite)
 
-Pour TMDB Discovery, le **back-end** sera développé en **Node.js** avec **Express.js**.
+Pour **TMDB Discovery App**, le **back-end** sera développé en **Node.js** avec **Express.js**.
 
 - Structure : **routes** + **contrôleurs**
-- Les routes définissent les **endpoints**
-- Les contrôleurs appliquent la logique métier et renvoient la réponse
+    - Les routes définissent les **endpoints**
+    - Les contrôleurs appliquent la logique métier et renvoient la réponse
 
-Le back-end interroge TMDB en HTTP et renvoie au **front-end** un JSON simplifié.
+Le back-end interroge *l'**API TMDB** en HTTP et renvoie au **front-end** un JSON simplifié.
 Les endpoints seront documentés avec **Swagger** pour faciliter l'intégration côté front-end.
 
 ---
@@ -170,7 +173,7 @@ Les solutions les plus utilisées aujourd'hui sont :
 
 Sur le bassin Niortais, de nombreuses entreprises utilisent **React** pour leurs applications web.
 
-- Librairie JavaScript développée par Meta
+- Librairie JavaScript développée par **Meta**
 - Approche déclarative et modulaire
 - Écosystème très riche (communauté, tutoriels, outils)
 
