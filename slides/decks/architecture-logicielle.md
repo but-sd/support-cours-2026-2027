@@ -1,26 +1,42 @@
 ---
 theme: seriph
-title: Architecture logicielle - TMDB Discovery App
+title: Architecture applicative - TMDB Discovery App
 duration: 2h
 routerMode: hash
 layout: tmdb-hero
 ---
 
-# Architecture logicielle - TMDB Discovery App
+# Architecture applicative
 
-<p class="hero-kicker">Front-end - Back-end - React - Express - TypeScript</p>
+<p class="hero-kicker">Front-end - Back-end - Agilité - Versionning</p>
 
 ---
 
 # Objectifs
 
-- Construire une application web de découverte TMDB : films, séries, acteurs, réalisateurs et statistiques
+- Construire une application web de découverte s'appuyant sur les données de **TMDB** : films, séries et statistiques
 - Livrer rapidement une première version fonctionnelle
 - Mettre en place une architecture évolutive pour accueillir les fonctionnalités à venir
 - Avancer en mode **agile** : itérations courtes, valeur livrée en continu, adaptation au changement
 ---
 
+# The Movie Database (TMDB)
+
+**TMDB** est une base de données de films et de séries, accessible via une API.
+
+- Elle est utilisée par de nombreuses applications web
+- Elle fournit des informations sur les films, séries, acteurs et réalisateurs
+- C'est cette API que nous utiliserons pour construire TMDB Discovery App
+
+Ressources :
+- Site officiel : https://www.themoviedb.org
+- Documentation API : https://developer.themoviedb.org/docs/getting-started
+
+---
+
 # TMDB Discovery App
+
+Nous allons construire une application web qui exploite l'API TMDB pour découvrir des films et des séries.
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <img src="./assets/tmdb-discovery-1.png" alt="Capture statistiques des films" class="w-full rounded-lg border border-slate-200" />
@@ -192,7 +208,7 @@ Dans ce projet, ces rôles seront simulés pour illustrer la démarche :
 - **Product Owner** : porte la vision du produit et priorise les fonctionnalités
 - **Scrum Master** : facilite l'équipe et veille au respect des pratiques agiles
 - **Équipe de développement** : conçoit, développe et teste le produit
-- **Parties prenantes** : partagent les retours et les attentes
+- **Parties prenantes** : expriment les besoins et les retours
 
 ---
 
@@ -206,7 +222,8 @@ Quelques artefacts structurent le travail :
 
 Un **sprint** (ou itération) est une période fixe, souvent de 1 à 4 semaines.
 
-Dans un premier temps, nous simulerons les itérations et les retours pour illustrer la démarche agile, puis nous enrichirons progressivement le produit.
+Dans un premier temps, nous simulerons les itérations et les retours pour illustrer la démarche agile.
+Ensuite, nous enrichirons progressivement le produit.
 
 ---
 
@@ -224,7 +241,7 @@ Plus d'infos : [semver.org](https://semver.org/lang/fr/).
 
 ---
 
-# SemVer - Semantic Versioning (suite)
+# SemVer - Suffixes de version
 
 Des suffixes peuvent préciser l'état d'avancement :
 
@@ -235,7 +252,7 @@ Des suffixes peuvent préciser l'état d'avancement :
 
 ---
 
-# SemVer - Semantic Versioning (suite)
+# SemVer - Exemples de progression
 
 Exemples de progression :
 
@@ -267,6 +284,7 @@ Exemples de progression :
 
 Cette approche permet de livrer rapidement une première version, puis d'ajouter des fonctionnalités au fil du temps.
 
-Les besoins évolueront : nous pourrons nous adapter grâce à l'architecture choisie et à la démarche agile.
+Les besoins évolueront.
+Nous pourrons nous adapter grâce à l'architecture choisie et à la démarche agile.
 
 Dans les prochaines séances, nous verrons comment implémenter ces fonctionnalités de manière progressive.
