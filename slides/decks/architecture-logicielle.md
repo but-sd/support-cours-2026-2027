@@ -187,7 +187,7 @@ Cette combinaison est très populaire pour construire des applications web moder
 
 # Méthodes de développement agiles
 
-Pour livrer rapidement une première version fonctionnelle, nous adoptons une approche **agile**.
+Pour livrer rapidement une première version fonctionnelle, nous adopterons une approche **agile**.
 
 - itérations courtes
 - priorisation des fonctionnalités
