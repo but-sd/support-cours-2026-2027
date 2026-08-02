@@ -53,7 +53,7 @@ Système de gestion de version distribué
 - Chaque utilisateur possède une copie complète de l'historique du projet
 - Il est possible de travailler en local, sans connexion permanente à un serveur, contrairement aux anciens systèmes centralisés
 
-**Git**  - https://git-scm.com/
+**git**  - https://git-scm.com/
 
 - Créé par Linus Torvalds (créateur de Linux) en 2005,
 - Rapide, simple, léger, performant, open source
@@ -63,9 +63,9 @@ Système de gestion de version distribué
 
 ---
 
-# Git - terminologie
+# git - terminologie
 
-- **repository**: dépôt Git, contient l'historique des modifications du projet
+- **repository**: dépôt it, contient l'historique des modifications du projet
 - **commit**: enregistrement d'un ensemble de modifications dans le dépôt Git
 - **branch**: branche de développement indépendante dans le dépôt Git
 - **merge**: fusion de deux branches dans le dépôt Git
@@ -741,7 +741,7 @@ app.get('/', (_req: express.Request, res: express.Response) => {
 });
 
 // Start the server and listen on the specified port
-app.listen(port as number, () => {
+app.listen(port, () => {
   console.log(`Example app in TypeScript listening on port ${port}`);
 });
 ```
