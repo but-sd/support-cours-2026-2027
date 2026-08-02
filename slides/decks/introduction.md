@@ -132,7 +132,7 @@ class: forge-slide
 
 Ensemble des outils pour le développement logiciel mis à la disposition des équipes de développement 
 
-* __GitHub__ : gestion des dépôts de code source (versionning, pull request, issues)
+* __Github__ : gestion des dépôts de code source (versionning, pull request, issues)
 * __Jenkins__ : intégration continue (exécution des tests, compilation, déploiement)
 * __SonarQube__ : qualité du code (analyse statique, couverture de tests, détection de vulnérabilités)
 * __Nexus__ : gestion des artefacts (dépendances, librairies, packages) 
