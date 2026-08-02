@@ -643,7 +643,8 @@ La configuration de TypeScript se fait via un fichier `tsconfig.json` à la raci
 
 Pour créer ce fichier, nous pourrions utiliser la commande `tsc --init`, qui génère un fichier de configuration par défaut que nous pourrons ensuite modifier selon nos besoins.
 
-Mais pour simplifier et préparer le projet pour une architecture multi-projets (back-end et front-end), nous allons créer directement un fichier `tsconfig.json` principal avec les options suivantes :
+Pour simplifier, nous allons créer directement un fichier `tsconfig.json` principal.
+Il contient les options suivantes :
 
 ```json
 {
@@ -706,7 +707,8 @@ Sur le slide suivant, nous allons créer le fichier `tsconfig.backend.json` qui 
 
 # TypeScript - Configuration (suite)
 
-Nous allons ajouter un script dans le fichier `package.json` pour lancer le projet **back-end** en mode développement avec **TypeScript**. Nous allons utiliser `tsx`, un outil qui permet d'exécuter des fichiers **TypeScript** directement sans avoir besoin de les compiler au préalable.
+Nous allons ajouter un script dans `package.json` pour lancer le back-end en mode développement.
+Nous utiliserons `tsx`, qui exécute directement les fichiers **TypeScript**.
 
 ```json
 {
@@ -748,7 +750,8 @@ app.listen(port as number, () => {
 
 # TypeScript - Lancement du projet
 
-Pour lancer le projet back-end en mode développement avec **TypeScript**, nous allons utiliser le script que nous avons ajouté dans le fichier `package.json`. Cela permettra de démarrer le serveur et de surveiller les modifications apportées aux fichiers **TypeScript**.
+Pour lancer le projet back-end en mode développement, utilisez le script ajouté dans `package.json`.
+Il démarre le serveur et recharge automatiquement les changements.
 
 ```shell
 # Lancement du projet back-end en mode développement avec TypeScript
