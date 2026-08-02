@@ -148,10 +148,9 @@ Les solutions les plus utilisées aujourd'hui sont :
 
 ## Google Trends (5 ans)
 
-![Google Trends React Vite TypeScript sur 5 ans](./assets/google-trends-react-vite-typescript-5y.png)
-
-
-
+<div style="width:100%; height:calc(100vh - 320px); min-height:200px; max-height:46vh;">
+  <iframe src="https://trends.google.com/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%2Fm%2F012l1vxv%22%2C%22geo%22%3A%22FR%22%2C%22time%22%3A%22today%205-y%22%7D%2C%7B%22keyword%22%3A%22%2Fg%2F11c0vmgx5d%22%2C%22geo%22%3A%22FR%22%2C%22time%22%3A%22today%205-y%22%7D%2C%7B%22keyword%22%3A%22%2Fm%2F0j45p7w%22%2C%22geo%22%3A%22FR%22%2C%22time%22%3A%22today%205-y%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=0" width="100%" height="100%" frameborder="0" scrolling="no" loading="lazy" style="border:0; width:100%; height:100%;"></iframe>
+</div>
 
 ---
 
