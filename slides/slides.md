@@ -14,12 +14,16 @@ duration: 5min
 
 <ul>
   <li><a href="./introduction/">Introduction</a></li>
-  <li><a href="./architecture-logicielle/">Architecture logicielle - TMDB Discovery</a></li>
-  <li><a href="./tmdb-discovery-0.1.0/">Version 0.1.0</a></li>
-  <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
-  <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>
-  <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
-  <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0</a></li>
+  <li><a href="./architecture-logicielle/">Architecture logicielle - <b>TMDB Discovery App</b></a></li>
+  <li><span class="versions-group-title">TMDB Discovery App</span>
+    <ul class="versions-list">
+      <li><a href="./tmdb-discovery-0.1.0/">Version 0.1.0</a></li>
+      <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
+      <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>
+      <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
+      <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0</a></li>
+    </ul>
+  </li>
 </ul>
 
 </div>
@@ -62,6 +66,23 @@ duration: 5min
 .landing-list li {
   margin: 0.45rem 0;
 }
+
+.versions-list {
+  margin-top: 0.3rem;
+  margin-left: 1.4rem;
+  padding-left: 0.9rem;
+}
+
+.versions-list li {
+  margin: 0.28rem 0;
+}
+
+.versions-group-title {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+
 
 .landing-list a {
   color: #0f766e;
