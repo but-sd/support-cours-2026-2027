@@ -36,7 +36,7 @@ layout: tmdb-hero
 
 # Source Control Management (SCM)
 
-Système qui permet de suivre les modifications apportées à une collection de fichiers.
+Système qui permet de suivre les modifications apportées aux fichiers d’un projet.
 
 - Suivre les modifications apportées à un projet (quand, qui)
 - Inclure un message descriptif pour chaque modification pour expliquer le pourquoi
@@ -51,7 +51,7 @@ Système qui permet de suivre les modifications apportées à une collection de 
 Système de gestion de version distribué
 
 - Chaque utilisateur possède une copie complète de l'historique du projet
-- Permet de travailler en local sans connexion à un serveur contrairement aux anciens systèmes de gestion de version centralisés (CVS, Subversion), qui nécessitent une connexion permanente au serveur
+- Il est possible de travailler en local, sans connexion permanente à un serveur, contrairement aux anciens systèmes centralisés
 
 **Git**  - https://git-scm.com/
 
@@ -83,7 +83,7 @@ gitGraph
 
 - 2 **commits** vont être réalisés dans cette version 0.1.0 du projet.
 - un premier **commit** pour la mise en place d'un serveur web avec **Express.js** et un endpoint REST __Hello World__
-- un second **commit** pour la mise en place d'un serveur web avec **Express.js** et un endpoint REST __Hello World__ en **TypeScript**
+- un second **commit** pour la transformation du projet pour utiliser **TypeScript**
 
 - 1 **tag** sera créé pour marquer la version 0.1.0 du projet.
 
@@ -181,7 +181,7 @@ Il offre une expérience de développement similaire à celle d'un **IDE** local
 
 **Codespaces** est un **VS Code** complet dans le navigateur, avec un terminal intégré, un débogueur, un gestionnaire de versions et d'autres fonctionnalités utiles pour le développement. Il permet de travailler sur le projet depuis n'importe quel appareil avec un navigateur web, sans avoir à installer de logiciels supplémentaires.
 
-Il est possible aussi d'utiliser **Codespaces** avec l'application **VS Code** installée sur votre machine, ce qui permet de bénéficier de toutes les fonctionnalités de VS Code tout en travaillant dans un environnement pré-configuré.
+Il est aussi possible d’utiliser **Codespaces** avec l’application **VS Code** installée sur votre machine, tout en conservant un environnement déjà configuré.
 
 <!--
 
@@ -368,7 +368,7 @@ Si les fichiers **package.json** et **package-lock.json** sont suivis par Git, i
 
 La commande `git add` permet d'ajouter des fichiers à l'index **Git**, c'est-à-dire de les préparer pour le prochain commit. 
 
-Nous allons ajouter tous les fichiers non suivis par **Git**, sauf le dossier **node_modules/** qui est exclu par le fichier **.gitignore**.
+Nous allons ajouter tous les fichiers non suivis par **Git**, sauf le dossier **node_modules/** qui est exclu grâce à la configuration du fichier **.gitignore**.
 
 ```shell
 # Ajout de tous les fichiers non suivis par Git, sauf le dossier node_modules/ car il est exclu par le fichier .gitignore
@@ -422,7 +422,7 @@ Résultat attendu :
 
 # Git - commit (suite)
 
-Une vérification de l'état du projet avec la commande `git status` nous indique que nous n'avons plus de modifications en attente et que notre branche locale est à jour avec la branche distante `origin/main`.
+Une vérification de l'état du projet avec la commande `git status` nous indique que nous n'avons plus de modifications en attente et que notre branche locale est en avance sur la branche distante `origin/main` d'un commit.
 
 ```shell
 # Vérification de l'état du projet après le commit
@@ -643,7 +643,7 @@ La configuration de TypeScript se fait via un fichier `tsconfig.json` à la raci
 
 Pour créer ce fichier, nous pourrions utiliser la commande `tsc --init`, qui génère un fichier de configuration par défaut que nous pourrons ensuite modifier selon nos besoins.
 
-Mais pour simplifier et préparer le projet pour une architecture multi-projets (back-end et front-end), nous allons créer directement un fichier `tsconfig.json` avec les options suivantes :
+Mais pour simplifier et préparer le projet pour une architecture multi-projets (back-end et front-end), nous allons créer directement un fichier `tsconfig.json` principal avec les options suivantes :
 
 ```json
 {
@@ -652,13 +652,11 @@ Mais pour simplifier et préparer le projet pour une architecture multi-projets 
 }
 ```
 
-Nous aurons ainsi un fichier de configuration principal qui référence un fichier de configuration spécifique pour le back-end (`tsconfig.backend.json`). Cela nous permettra de gérer plus facilement les configurations pour différents projets dans le même dépôt.
+Nous aurons ainsi un fichier principal qui référence la configuration du back-end (`tsconfig.backend.json`).
 
 ---
 
 # TypeScript - Configuration (suite)
-
-Sur le slide suivant, nous allons créer le fichier `tsconfig.backend.json` qui contiendra les options de compilation spécifiques pour le projet back-end.
 
 Afin de commencer à organiser notre projet, nous allons créer un dossier `src/back-end` pour y placer nos fichiers source TypeScript de la partie back-end. Le fichier `index.ts` sera déplacé dans ce dossier.
 
@@ -670,6 +668,7 @@ mkdir -p src/back-end
 mv index.js src/back-end/index.ts
 ```
 
+Sur le slide suivant, nous allons créer le fichier `tsconfig.backend.json` qui contiendra la configuration propre au back-end.
 
 ---
 
@@ -707,7 +706,7 @@ mv index.js src/back-end/index.ts
 
 # TypeScript - Configuration (suite)
 
-Nous allons maintenant ajouter un script dans le fichier `package.json` pour lancer le projet back-end en mode développement avec TypeScript. Nous allons utiliser `tsx`, un outil qui permet d'exécuter des fichiers TypeScript directement sans avoir besoin de les compiler au préalable.
+Nous allons ajouter un script dans le fichier `package.json` pour lancer le projet **back-end** en mode développement avec **TypeScript**. Nous allons utiliser `tsx`, un outil qui permet d'exécuter des fichiers **TypeScript** directement sans avoir besoin de les compiler au préalable.
 
 ```json
 {
@@ -723,7 +722,7 @@ Nous allons maintenant ajouter un script dans le fichier `package.json` pour lan
 
 # TypeScript - Transformation du projet
 
-Nous allons maintenant transformer notre projet back-end pour utiliser TypeScript. Cela implique de renommer le fichier `index.js` en `index.ts` et de modifier le code pour utiliser les types TypeScript.
+Nous allons maintenant transformer notre projet back-end pour utiliser **TypeScript**. Cela implique de renommer le fichier `index.js` en `index.ts` et de modifier le code pour utiliser les types **TypeScript**.
 
 ```typescript
 import express from 'express';
@@ -749,7 +748,7 @@ app.listen(port as number, () => {
 
 # TypeScript - Lancement du projet
 
-Pour lancer le projet back-end en mode développement avec TypeScript, nous allons utiliser le script que nous avons ajouté dans le fichier `package.json`. Cela permettra de démarrer le serveur et de surveiller les modifications apportées aux fichiers TypeScript.
+Pour lancer le projet back-end en mode développement avec **TypeScript**, nous allons utiliser le script que nous avons ajouté dans le fichier `package.json`. Cela permettra de démarrer le serveur et de surveiller les modifications apportées aux fichiers **TypeScript**.
 
 ```shell
 # Lancement du projet back-end en mode développement avec TypeScript
@@ -760,7 +759,7 @@ Une fois le serveur démarré, vous pouvez accéder à l'adresse [http://localho
 
 Si vous apportez des modifications au fichier `index.ts`, le serveur se rechargera automatiquement pour refléter les changements. Il faut cependant recharger la page dans le navigateur pour voir les modifications.
 
-Nous pouvons maintenant commiter ces modifications et les pousser vers le dépôt distant sur GitHub pour sauvegarder notre travail.
+Nous pouvons maintenant commiter ces modifications et les pousser vers le dépôt distant sur **GitHub** pour sauvegarder notre travail.
 
 ---
 
