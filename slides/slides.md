@@ -12,6 +12,8 @@ duration: 5min
 
 # Supports de Cours
 
+<p class="landing-kicker">Parcours TMDB Discovery App</p>
+
 <ul>
   <li><a href="./introduction/">Introduction</a></li>
   <li><a href="./architecture-logicielle/">Architecture logicielle - <b>TMDB Discovery App</b></a></li>
@@ -31,31 +33,25 @@ duration: 5min
 <footer class="slide-footer">alexandre.girard@maif.fr</footer>
 
 <style>
-.slidev-layout {
-  position: relative;
-  min-height: 100%;
-  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 100%);
-}
-
 .landing-list {
   max-width: 760px;
-  margin: 2.2rem auto 0;
-  padding: 1.2rem 1.4rem;
+  margin: 0 auto;
+  padding: 0.2rem 0.4rem;
   text-align: left;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 14px;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .landing-list h1 {
-  margin: 0 0 0.55rem;
+  margin: 0 0 0.2rem;
   color: #0f172a;
 }
 
-.subtitle {
+.landing-kicker {
   margin: 0 0 0.65rem;
-  color: #334155;
+  color: #33516b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .landing-list ul {
@@ -65,6 +61,11 @@ duration: 5min
 
 .landing-list li {
   margin: 0.45rem 0;
+  color: #0f172a;
+}
+
+.landing-list li::marker {
+  color: #0f172a;
 }
 
 .versions-list {
@@ -82,24 +83,16 @@ duration: 5min
   font-weight: 700;
 }
 
-
-
 .landing-list a {
   color: #0f766e;
   text-decoration: none;
   border-bottom: 1px solid rgba(15, 118, 110, 0.35);
 }
 
-.landing-list a:hover {
-  color: #115e59;
-  border-bottom-color: rgba(17, 94, 89, 0.6);
-}
-
 .slide-footer {
   position: absolute;
   right: 1.2rem;
   bottom: 0.8rem;
-  text-align: right;
   font-size: 0.82rem;
   color: #475569;
 }
