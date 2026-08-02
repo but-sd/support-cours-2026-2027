@@ -182,6 +182,34 @@ Pour livrer rapidement une première version fonctionnelle, nous adoptons une ap
 
 ---
 
+# Méthodes de développement agiles (suite)
+
+Dans une approche agile, nous ne cherchons pas à tout planifier dès le départ.
+Nous privilégions les **itérations courtes** et les **retours fréquents** pour ajuster le développement selon les besoins réels.
+
+Dans ce projet, ces rôles seront simulés pour illustrer la démarche :
+
+- **Product Owner** : porte la vision du produit et priorise les fonctionnalités
+- **Scrum Master** : facilite l'équipe et veille au respect des pratiques agiles
+- **Équipe de développement** : conçoit, développe et teste le produit
+- **Parties prenantes** : partagent les retours et les attentes
+
+---
+
+# Méthodes de développement agiles (suite)
+
+Quelques artefacts structurent le travail :
+
+- **Backlog produit** : liste priorisée des fonctionnalités et améliorations
+- **Backlog sprint** : éléments sélectionnés pour un sprint
+- **Incrément** : version fonctionnelle livrée en fin de sprint
+
+Un **sprint** (ou itération) est une période fixe, souvent de 1 à 4 semaines.
+
+Dans un premier temps, nous simulerons les itérations et les retours pour illustrer la démarche agile, puis nous enrichirons progressivement le produit.
+
+---
+
 # SemVer - Semantic Versioning
 
 Pour planifier les livraisons, chaque fonctionnalité est associée à une **version** selon **SemVer**.
@@ -234,3 +262,11 @@ Exemples de progression :
 | **1.1.0** | Nouvelles fonctionnalités et améliorations |
 
 ---
+
+# TMDB Discovery App - versions (suite)
+
+Cette approche permet de livrer rapidement une première version, puis d'ajouter des fonctionnalités au fil du temps.
+
+Les besoins évolueront : nous pourrons nous adapter grâce à l'architecture choisie et à la démarche agile.
+
+Dans les prochaines séances, nous verrons comment implémenter ces fonctionnalités de manière progressive.
