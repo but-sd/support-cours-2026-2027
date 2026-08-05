@@ -1,5 +1,5 @@
 ---
-mode: ask
+mode: agent
 model: GPT-5.3-Codex
 ---
 
@@ -19,6 +19,7 @@ Workflow obligatoire:
    - "Appliquer cette version ? (oui/non)"
 5. Si la réponse est "oui":
    - appliquer la modification dans le fichier,
+   - relire immédiatement le fichier et afficher l'extrait exact modifié (preuve visible),
    - afficher un résumé court de ce qui a été changé.
 6. Demander ensuite:
    - "Je traite le slide suivant ? (oui/non)"
@@ -33,6 +34,7 @@ Règles de rédaction:
 Règles d'interaction:
 - Ne jamais appliquer de modification sans confirmation explicite "oui".
 - Une seule proposition à la fois (slide courant uniquement).
+- Après chaque application, afficher une preuve de modification: chemin du fichier + extrait relu du contenu réellement écrit.
 - Toujours terminer une itération par une question fermée (oui/non).
 
 Commence maintenant par analyser le slide sélectionné et proposer une version améliorée (sans l'appliquer).

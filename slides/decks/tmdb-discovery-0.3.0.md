@@ -13,14 +13,10 @@ layout: tmdb-hero
 ---
 
 # Objectifs
-    
-## Application
 
-- amélioration du end point REST pour récupérer les films populaires via l'**API TMDB**
-
-## Ingénierie logicielle
-
-- notion de branche Git
+- Objectif application : améliorer un endpoint REST qui récupère les films populaires via l'**API TMDB**.
+- Objectif ingénierie : introduire la notion de **branche Git**.
+- Résultat attendu : implémenter une évolution fonctionnelle sans impacter la branche principale.
 
 ---
 
@@ -38,30 +34,29 @@ gitGraph
 
 # git - Branches
 
-* Les branches constituent un élément central de **Git**.
-  - Elles permettent de créer des lignes de développement parallèles au sein d'un même dépôt Git.
-* Permettent de travailler sur plusieurs aspects d'un projet en parallèle.
-  - Chaque branche peut contenir un ensemble de modifications distinctes, ce qui permet de développer de nouvelles fonctionnalités, de corriger des bugs ou d'expérimenter sans affecter la branche principale (généralement appelée `main` ou `master`).
+- Objectif : travailler sur plusieurs évolutions en parallèle sans casser la base du projet.
+- Définition : une branche est une ligne de développement indépendante dans **Git**.
+- Pourquoi c'est utile : isoler une fonctionnalité, un bugfix ou un essai technique.
+- Exemple rapide : développer sur une branche dédiée puis fusionner vers `main` ou `develop` une fois validé.
 
 ---
 
 # git - Branches (suite)
 
-Lors de la création d'une branche, celle-ci est dupliquée à partir de la branche courante. 
-
-Les modifications apportées à cette branche n'impactent pas les autres branches. 
-
-Une fois les modifications terminées, il est possible de fusionner la branche avec la branche courante.
+- Étape 1 : créer une branche à partir de la branche courante.
+- Étape 2 : développer dessus sans impacter les autres branches.
+- Étape 3 : fusionner la branche quand les modifications sont validées.
+- Résultat attendu : intégrer la fonctionnalité sans perturber le flux principal.
 
 ---
 
 # git - Branches (suite)
 
-* Les branches sont des pointeurs vers un commit.
-* Créer une nouvelle branche revient à créer un nouveau pointeur sur le commit courant.
-* Les branches sont très légères et peu coûteuses en ressources.
-* Les branches sont locales par défaut.
-* Les branches peuvent être partagées avec d'autres développeurs en les poussant sur le dépôt distant.
+- Les branches sont des pointeurs vers un commit.
+- Créer une nouvelle branche revient à créer un nouveau pointeur sur le commit courant.
+- Les branches sont très légères et peu coûteuses en ressources.
+- Les branches sont locales par défaut.
+- Les branches peuvent être partagées avec d'autres développeurs en les poussant sur le dépôt distant.
 
 ---
 
@@ -94,43 +89,52 @@ gitGraph
 
 # gitflow
 
-* Méthode de gestion des branches en utilisant Git.
-* Permet de structurer le développement logiciel en définissant des règles pour les branches.
-* Utilise des branches spécifiques pour les fonctionnalités, les correctifs, les versions, les releases...
-* Permet de travailler sur plusieurs fonctionnalités en même temps sans impacter le code de production.
+- Méthode de gestion des branches en utilisant Git.
+- Permet de structurer le développement logiciel en définissant des règles pour les branches.
+- Utilise des branches spécifiques pour les fonctionnalités, les correctifs, les versions, les releases...
+- Permet de travailler sur plusieurs fonctionnalités en même temps sans impacter le code de production.
 
 ---
 
 # gitflow - branche **develop**
 
-La branche **develop** est la branche de développement. Elle contient les fonctionnalités en cours de développement, ainsi la branche **main** reste stable et contient le code de production. 
+- La branche **main** est la branche principale du projet. Elle contient le code de production et doit rester stable.
 
-On ne travaille jamais directement sur la branche **main**, afin de ne pas impacter involontairement le code de production (risque de bugs, de régressions...).
+- La branche **develop** est la branche de développement. Elle contient les fonctionnalités en cours de développement, ainsi la branche **main** reste stable et contient le code de production.
+
+- On ne travaille jamais directement sur la branche **main**, afin de ne pas impacter involontairement le code de production (risque de bugs, de régressions...).
 
 ---
 
 # gitflow - branches **feature**
 
-Lorsque l'on souhaite ajouter une nouvelle fonctionnalité, on crée une branche spécifique **feature/nom-fonctionnalite** à partir de la branche **develop**. 
+- Créer une branche `feature/nom-fonctionnalite` depuis **develop**.
+- Développer la fonctionnalité de façon isolée.
+- Fusionner la branche vers **develop** une fois validée.
+- Permet d'avancer sur plusieurs fonctionnalités en parallèle sans bloquer l'équipe.
+- Une bonne pratique est d'attribuer un périmètre clair à chaque branche feature pour limiter les conflits.
 
-Une fois la fonctionnalité terminée, on fusionne la branche avec la branche **develop**.
 
-Le fait de travailler sur des branches **feature** permet de travailler sur plusieurs fonctionnalités en même temps pour une même version en cours de développement.
-
-Dans le cadre de notre projet, nous allons par exemple créer une branche **feature/improvements-endpoint-movies-popular** pour améliorer le end point REST qui récupère les films populaires, et en parallèle une branche **feature/health-check-endpoint** pour ajouter un end point REST qui permet de vérifier que le serveur est bien en fonctionnement.
-
-Pour que les développements en parallèle ne se gênent pas, il est important de bien définir les responsabilités de chaque branche **feature** et de ne pas modifier le même code dans plusieurs branches **feature** en même temps. Il s'agit d'une bonne pratique, mais il est possible que deux branches **feature** modifient le même code en même temps. Dans ce cas, il faudra résoudre les conflits lors de la fusion des branches.
+Exemple concret : nous allons créer deux branches **feature** pour travailler sur deux évolutions en parallèle.
+  - **feature/improvements-endpoint-movies-popular** pour améliorer le end point REST qui récupère les films populaires.
+  - **feature/health-check-endpoint** pour ajouter un end point REST qui permet de vérifier que le serveur est bien en fonctionnement.
 
 ---
 
 # gitflow - Mise en pratique
 
-* Créer une nouvelle branche **develop** à partir de la branche principale
-    * `git checkout -b develop`
-* Créer une branche **feature/improvements-endpoint-movies-popular** pour améliorer le end point REST qui récupère les films populaires
-    * `git checkout -b feature/improvements-endpoint-movies-popular`
-* Créer une branche **feature/health-check-endpoint** pour ajouter un end point REST qui permet de vérifier que le serveur est bien en fonctionnement
-    * `git checkout -b feature/health-check-endpoint`
+- Étape 1 : créer la branche **develop** depuis la branche principale.
+- Étape 2 : créer la branche **feature/improvements-endpoint-movies-popular**.
+- Étape 3 : créer la branche **feature/health-check-endpoint**.
+- Commandes :
+
+```bash
+git checkout -b develop
+git checkout -b feature/improvements-endpoint-movies-popular
+git checkout -b feature/health-check-endpoint
+```
+
+- Résultat attendu : les trois branches locales sont prêtes pour développer en parallèle.
 
 ---
 
@@ -152,7 +156,6 @@ Résultat attendu:
 
 ```bash
 @alexandre-girard-maif ➜ /workspaces/themoviedb-discovery-app-demo (feature/health-check-endpoint) $ git branch -v
-  backup-before-rewrite                        a22b904 feat: ✨ add devmoji dependency for improved commit message management
   develop                                      a22b904 feat: ✨ add devmoji dependency for improved commit message management
 * feature/health-check-endpoint                a22b904 feat: ✨ add devmoji dependency for improved commit message management
   feature/improvements-endpoint-movies-popular a22b904 feat: ✨ add devmoji dependency for improved commit message management
