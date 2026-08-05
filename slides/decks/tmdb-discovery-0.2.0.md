@@ -33,13 +33,17 @@ mermaid:
     
 ## Application
 
-- exposition du premier end point REST pour récupérer les films populaires via l'**API TMDB**
+- Exposition d'un premier endpoint REST pour récupérer les films populaires
+  - Appel de l'**API TMDB** depuis le back-end
+  - Retour d'une réponse JSON exploitable par le client
 
 ## Ingénierie logicielle
-- Bonnes pratiques de développement avec **Git**: commits atomiques, messages de commit clairs et précis
-- Validation du message de commit via un linter pour les messages de commit avec **commitlint**
-- Amélioration du message de commit via l'ajout d'une dépendance **devmoji** pour ajouter des emojis aux messages de commit
-- Contrôle du message de commit via un hook Git avec **Husky**
+- Bonnes pratiques de développement avec **Git**
+  - Commits atomiques
+  - Messages de commit clairs et précis
+- Validation des messages de commit avec **commitlint**
+- Contrôle automatique via un hook **Git** avec **Husky**
+- Amélioration de la lisibilité des commits avec **devmoji**
 
 ---
 
@@ -52,90 +56,183 @@ gitGraph
 
 ```
 
-Pour cette version 0.2.0, nous allons faire de nombreux changements dans notre projet.
+- 4 **commits** atomiques vont être réalisés dans cette version 0.2.0.
+  - 1 commit pour sécuriser la configuration (.env dans .gitignore).
+  - 1 commit pour ajouter l'endpoint /api/movies/popular.
+  - 1 commit pour mettre en place **Husky** et **commitlint**.
+  - 1 commit pour ajouter **devmoji**.
 
-Afin de mieux comprendre les changements, nous allons créer un nouveau commit atomique pour chaque changement (ensemble cohérent de modifications) que nous allons effectuer. Cela nous permettra de mieux suivre l'évolution de notre projet et de revenir en arrière si nécessaire.
+- 1 **tag** sera créé pour marquer la version 0.2.0.
 
 ---
 
+<style>
+.backend-showcase {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.backend-media {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.backend-media img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+  border-radius: 1rem;
+}
+
+.backend-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.backend-copy h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.backend-copy p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .backend-showcase {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+</style>
+
 # **T**he **M**ovie **D**ata**B**ase (TMDB) - Découverte de l'API
 
-[TMDB](https://www.themoviedb.org/?language=fr) est une base de données en ligne qui fournit des informations sur les films, les séries télévisées et les acteurs. Elle propose également une **API** (**A**pplication **P**rogramming **I**nterface) qui permet aux développeurs d'accéder à ces données et de les intégrer dans leurs applications.
+<div class="backend-showcase">
+  <div class="backend-media">
+    <img src="./assets/TMDB-web-site.png" alt="TMDB web site" />
+  </div>
 
-<div style="display:flex;justify-content:center;align-items:center;max-height:52vh;overflow:hidden;">
-  <img src="./assets/TMDB-web-site.png" alt="Aperçu du site TMDB" style="display:block;max-height:52vh;max-width:100%;width:auto;height:auto;object-fit:contain;border-radius:0.8rem;" />
+  <div class="backend-copy">
+    <ul>
+      <li><a href="https://www.themoviedb.org/?language=fr">TMDB</a> est une base de données sur les films, séries et acteurs.</li>
+      <li>TMDB fournit une <b>API</b> (<b>A</b>pplication <b>P</b>rogramming <b>I</b>nterface).</li>
+      <li>Cette API permet à notre application :
+        <ul>
+          <li>de récupérer des informations sur les films, séries et acteurs</li>
+          <li>de rechercher des films, séries et acteurs</li>
+          <li>d'obtenir des recommandations de films et séries</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>
+
+---
+
+# Exploitation de l'API TMDB
+
+- Documentation officielle (prise en main) :
+  - https://developer.themoviedb.org/docs/getting-started
+- Référence des endpoints :
+  - https://developer.themoviedb.org/reference/getting-started
+
+- Les endpoints TMDB sont organisés par catégories (films, séries, acteurs, etc.).
+- Chaque endpoint répond à un besoin précis :
+  - recherche,
+  - détails,
+  - recommandations.
 
 ---
 
 # Exploitation de l'API TMDB (suite)
 
-Pour plus d'informations sur l'API TMDB et comment l'utiliser, vous pouvez consulter la documentation officielle à l'adresse suivante :
+## Wrappers pour l'API TMDB
 
-https://developer.themoviedb.org/docs/getting-started
+- Un wrapper est une bibliothèque qui simplifie l'appel à une API.
+- Il fournit des fonctions prêtes à l'emploi pour envoyer les requêtes.
+- Il existe des wrappers pour TMDB.
 
-Les endpoints de l'API TMDB sont organisés en différentes catégories, telles que les films, les séries télévisées, les acteurs, etc. Chaque endpoint fournit des informations spécifiques et peut être utilisé pour effectuer des recherches, récupérer des détails sur un film ou une série, obtenir des recommandations, etc.
-
-https://developer.themoviedb.org/reference/getting-started
-
-### Wrappers pour l'API TMDB
-
-Un wrapper est une bibliothèque qui simplifie l'utilisation d'une API en fournissant des fonctions et des méthodes prêtes à l'emploi pour effectuer des requêtes et traiter les réponses.
-
-Il existe des Wrappers pour l'API TMDB, mais nous allons utiliser directement l'API REST pour mieux comprendre son fonctionnement et apprendre à interagir avec elle.
+Dans ce cours, nous utiliserons directement l'API REST pour bien comprendre :
+- la construction des requêtes HTTP,
+- la lecture des réponses,
+- la gestion des erreurs.
 
 ---
 
 # Authentification avec l'API TMDB
 
-Créer un compte sur le site [TMDB](https://www.themoviedb.org/?language=fr) pour obtenir une clé d'API et un token d'accès
 
-Vous pouvez gérer vos clés d'API à l'adresse suivante : [https://www.themoviedb.org/settings/api?language=fr](https://www.themoviedb.org/settings/api?language=fr)
+- Créer un compte sur [TMDB](https://www.themoviedb.org/?language=fr).
+- Générer des identifiants d'API depuis :
+  - [https://www.themoviedb.org/settings/api?language=fr](https://www.themoviedb.org/settings/api?language=fr)
 
-Une fois que vous avez créé un compte et obtenu une clé d'API et un token d'accès, vous pouvez les utiliser pour authentifier vos requêtes à l'API TMDB. L'authentification est nécessaire pour accéder aux données et effectuer des actions telles que la recherche de films, la récupération de détails sur un film ou une série, etc.
-
-Il est préférable d'utiliser un token d'accès pour l'authentification, car il offre un niveau de sécurité plus élevé que la clé d'API. Le token d'accès est généralement utilisé dans l'en-tête de la requête HTTP pour authentifier l'utilisateur et autoriser l'accès aux ressources de l'API.
-
+- Pour appeler l'API TMDB, il faut authentifier chaque requête.
+- Deux options existent :
+  - clé d'API,
+  - token d'accès.
+- Dans ce cours, nous privilégions le token d'accès (plus sécurisé).
+- Le token est envoyé dans l'en-tête HTTP `Authorization`.
 ---
 
 # Authentification avec l'API TMDB (suite)
 
-Nous allons utiliser le token d'accès pour authentifier nos requêtes à l'API TMDB. Pour ce faire, nous allons créer un fichier `.env` à la racine du projet back-end pour stocker notre token d'accès en toute sécurité.
+
+- Étape 1 : créer un fichier `.env` à la racine du projet back-end.
+- Étape 2 : y stocker le token d'accès TMDB.
 
 ```shell
 # Création du fichier .env pour stocker le token d'accès à l'API TMDB
 echo "TMDB_ACCESS_TOKEN=your_access_token_here" > .env
 ```
 
-Remplacez `your_access_token_here` par votre token d'accès réel obtenu depuis votre compte TMDB (Jeton d'accès en lecture à l'API).
-
-__Attention__: Ne partagez jamais votre token d'accès publiquement, car il permettrait à des personnes malveillantes d'accéder à votre compte et de modifier vos données.
-
+- Étape 3 : remplacer `your_access_token_here` par votre vrai token TMDB.
+- Ne jamais partager ce token publiquement.
 --- 
 
 # Github et sécurité des informations sensibles
 
-Il ne faut jamais inclure des fichiers contenant des informations sensibles (mot de passe, token d'accès, clé d'API, etc.) dans votre dépôt GitHub, car cela pourrait exposer vos informations d'identification à des personnes malveillantes.
+- Ne jamais versionner des informations sensibles :
+  - mot de passe,
+  - token d'accès,
+  - clé d'API.
+- Ajouter ces fichiers dans .gitignore avant le premier commit.
 
-Si jamais vous avez accidentellement ajouté un fichier contenant des informations sensibles à votre dépôt GitHub, vous devez le supprimer immédiatement, mais cela ne suffit pas. Il est également nécessaire de révoquer le token d'accès ou la clé d'API compromise et d'en générer un nouveau pour garantir la sécurité de votre compte.
+- Si un secret a été commité par erreur :
+  - supprimer le fichier du dépôt,
+  - révoquer immédiatement le secret compromis,
+  - générer un nouveau secret.
 
-En effet, même si vous supprimez le fichier contenant les informations sensibles de votre dépôt GitHub, git conserve l'historique des commits, ce qui signifie que les informations sensibles peuvent toujours être accessibles dans les anciens commits. Il est donc crucial de révoquer le token d'accès ou la clé d'API compromise et d'en générer un nouveau pour garantir la sécurité de votre compte.
-
+- Pourquoi révoquer ?
+  - Git conserve l'historique,
+  - un secret déjà poussé peut rester accessible dans les anciens commits.
+  
 ---
 
 # Authentification avec l'API TMDB (suite)
 
-Pour éviter de commiter par erreur le fichier `.env`, nous allons l'ajouter à notre fichier `.gitignore`.
+
+- Étape 1 : ajouter `.env` dans `.gitignore` pour éviter tout commit accidentel.
 
 ```shell
-# Ajout du fichier .env au fichier .gitignore pour éviter de le partager publiquement
+# Ajout du fichier .env au fichier .gitignore
 echo ".env" >> .gitignore
 ```
 
-Faire un commit pour ce changement afin de sécuriser notre projet et éviter de partager notre token d'accès publiquement.
+- Étape 2 : faire un commit atomique pour ce changement de sécurité.
 
 ```shell
-# Commit atomique pour l'ajout du fichier .env au fichier .gitignore
+# Commit atomique pour la protection du fichier .env
 git add .gitignore .env
 git commit -m "🔒 Add .env file to .gitignore to secure TMDB access token"
 ```
@@ -144,17 +241,30 @@ git commit -m "🔒 Add .env file to .gitignore to secure TMDB access token"
 
 # Authentification avec l'API TMDB (suite)
 
-Nous allons maintenant installer la bibliothèque `dotenv` pour charger les variables d'environnement depuis le fichier `.env`. Cela nous permettra d'accéder à notre token d'accès dans notre code sans l'exposer directement.
+
+- Objectif : charger automatiquement les variables d'environnement du fichier `.env`.
+- Solution : installer la bibliothèque `dotenv`.
 
 ```shell
-# Installation de la bibliothèque dotenv pour charger les variables d'environnement depuis le fichier .env
+# Installation de dotenv
 npm install dotenv
 ```
 ---
 
 # Authentification avec l'API TMDB (suite)
 
-Et créer un fichier `config.ts` dans le dossier `src/back-end` pour gérer la configuration de notre application, y compris le token d'accès à l'API TMDB.
+
+- Créer un fichier `config.ts` dans `src/back-end`.
+- Ce fichier centralise la configuration de l'application.
+- Objectifs du code :
+  - charger les variables d'environnement depuis `.env`,
+  - récupérer le token TMDB,
+  - arrêter l'application si le token est absent,
+  - exporter le token pour le réutiliser ailleurs.
+
+---
+
+# Authentification avec l'API TMDB (suite)
 
 ```typescript
 import dotenv from "dotenv";
@@ -178,7 +288,18 @@ export { tmdbAccessToken };
 
 # Films populaires (/api/movies/popular)
 
-Nous allons maintenant créer un endpoint pour récupérer les films populaires depuis l'API TMDB. Nous allons définir une route `/api/movies/popular` qui fera une requête à l'API TMDB et renverra les résultats au client en ajoutant le code suivant dans le fichier `index.ts` :
+
+- Objectif : exposer un endpoint REST qui renvoie les films populaires dans le fichier `index.ts` du back-end.
+- Route à créer : `/api/movies/popular`.
+- Comportement attendu :
+  - appeler l'API TMDB,
+  - transmettre le token dans l'en-tête `Authorization`,
+  - renvoyer la réponse JSON au client,
+  - retourner une erreur HTTP 500 en cas d'échec.
+
+---
+
+# Films populaires (/api/movies/popular) (suite)
 
 ```typescript
 // Define a route handler for fetching popular movies from TMDB API
@@ -208,26 +329,28 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
 
 ## Films populaires (/api/movies/popular) (suite)
 
-Nous pouvons maintenant tester notre endpoint `/api/movies/popular` en utilisant un outil comme Postman ou en faisant une requête HTTP depuis le navigateur ou un client HTTP.
+
+- Étape 1 : démarrer le serveur back-end.
 
 ```
 npm run dev:server
 ```
 
-et ouvrez votre navigateur à l'adresse suivante : [http://localhost:3000/api/movies/popular](http://localhost:3000/api/movies/popular)
+- Étape 2 : ouvrir l'endpoint dans le navigateur (ou Postman) :
+  - [http://localhost:3000/api/movies/popular](http://localhost:3000/api/movies/popular)
 
-Nous devrions voir une réponse JSON contenant les films populaires récupérés depuis l'API TMDB.
-
+- Étape 3 : vérifier que la réponse est un JSON avec les films populaires TMDB.
 ---
 
 ## Films populaires (/api/movies/popular) (suite)
 
-Notre endpoint `/api/movies/popular` est maintenant opérationnel, nous allons continuer à l'améliorer, mais nous allons d'abord faire un commit atomique pour ce changement afin de garder un historique clair et précis de l'évolution de notre projet.
+L'endpoint /api/movies/popular fonctionne. Avant de continuer, nous faisons un commit atomique pour ce changement.
 
+- Étape 1 : vérifier les fichiers modifiés.
 ```shell
 # Commit atomique pour l'ajout de l'endpoint /api/movies/popular
 git status
-````
+```
 
 Résultat attendu :
 
@@ -245,105 +368,101 @@ Changes not staged for commit:
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
         src/back-end/config.ts
-````
+```
 
 ---
 
 ## Films populaires (/api/movies/popular) (suite)
 
-Après avoir vérifié les fichiers modifiés et ajoutés, nous pouvons maintenant faire un commit.
-
+- Étape 2 : créer le commit une fois la vérification terminée.
 ```shell
 
 git add .
 git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from TMDB API"
 ```
 
-Nous allons avoir de plus en plus de commits dans notre projet, il est donc important de suivre les bonnes pratiques pour le commit afin de garder un historique clair et précis de l'évolution de notre projet.
 
+- Ce commit isole l'ajout de l'endpoint et garde un historique lisible.
 ---
 
 # GIT - Bonnes pratiques pour le commit
 
-- Faire des commits réguliers et atomiques
-    - Un commit par fonctionnalité/changement
-    - Eviter les commits trop gros (trop de fichiers modifiés, trop de lignes modifiées)
 
-Si vous commitez trop de fichiers en même temps, il est difficile de savoir ce qui a été modifié et pourquoi. Il est préférable de faire plusieurs commits pour des modifications différentes.
+- Faire des commits réguliers et atomiques.
+  - 1 commit = 1 changement cohérent.
+  - Éviter les commits trop volumineux.
 
-- Les messages de commit doivent être courts et descriptifs
-- Ils doivent expliquer les modifications apportées par le commit
-    - Quoi : modifications apportées
-    - Pourquoi : pourquoi ces modifications ont été apportées
+- Écrire des messages de commit courts et descriptifs.
+- Le message doit répondre à deux questions :
+  - Quoi ?
+  - Pourquoi ?
 
-Si vous avez des difficultés à écrire un message de commit, c'est peut-être que vous devriez faire plusieurs commits pour des modifications différentes.
-
+- Si le message devient difficile à rédiger, le commit est probablement trop large.
 ---
 
 # GIT - Bonnes pratiques pour le commit (suite)
 
-Un bon message de commit doit permettre de comprendre les modifications apportées sans avoir à lire le code.
+- Un bon message de commit doit être compréhensible sans lire le code.
+- Un message clair aide à relire l'historique et à collaborer en équipe.
+- Un message vague rend la maintenance plus difficile.
 
-Les messages de commit permettent de comprendre l'historique du projet et de savoir qui a fait quoi et pourquoi.
-On doit pouvoir comprendre l'historique du projet sans avoir à lire le code.
+- Règles de rédaction :
+  - commencer par un verbe à l'impératif avec une majuscule,
+  - limiter le titre à environ 70 caractères,
+  - ajouter une ligne vide avant le corps si nécessaire,
+  - utiliser le corps pour expliquer le pourquoi et les conséquences.
 
-Des messages de commit clairs et concis permettent de faciliter la collaboration entre les membres d'une équipe et de faciliter la maintenance du code.
-
-Des messages trop génériques ou trop vagues rendent l'historique du projet difficile à comprendre et n'apportent pas d'informations utiles.
-
-- Commencer le message de commit par un verbe à l'impératif avec une majuscule
-    - "Ajoute la fonctionnalité xxx"
-    - "Modifie le style de la page d'accueil"
-    - "Supprime le fichier xxx devenu inutile"
-- Limiter la longueur du titre à environ 70 caractères
-- Ajouter une ligne vide entre le titre et le corps du message si le corps est nécessaire
-- Utiliser le corps du message pour expliquer les modifications plus en détail si nécessaire
-    - Expliquer le pourquoi des modifications
-    - Expliquer les conséquences des modifications
-
+- Exemples :
+  - Ajoute la fonctionnalité xxx
+  - Modifie le style de la page d'accueil
+  - Supprime le fichier xxx devenu inutile
 ----
 
 # GIT - Conventionnal Commits
 
-Les **Conventional Commits** sont une convention de nommage pour les messages de commit qui permet de rendre l'historique des modifications plus lisible et structuré. Voici les types de commits les plus courants :
 
-- **feat** : Une nouvelle fonctionnalité
-- **fix** : Correction d'un bug
-- **docs** : Modifications de la documentation
-- **style** : Changements de style (formatage, espaces, etc.)
-- **refactor** : Refactorisation du code (sans ajout de fonctionnalité ni correction de bug)
-- **test** : Ajout ou modification de tests
-- **chore** : Tâches diverses (mise à jour des dépendances, scripts, etc.)
+- Les **Conventional Commits** standardisent les messages de commit.
+- Format recommandé : `type: description`.
+- Objectif : un historique plus lisible et plus facile à exploiter.
 
-Pour plus d'informations sur les Conventional Commits, vous pouvez consulter le site officiel : [https://www.conventionalcommits.org/fr/v1.0.0/#summary](https://www.conventionalcommits.org/fr/v1.0.0/#summary)
+- Types les plus courants :
+  - **feat** : nouvelle fonctionnalité
+  - **fix** : correction de bug
+  - **docs** : documentation
+  - **style** : formatage / style
+  - **refactor** : refactorisation sans changement fonctionnel
+  - **test** : ajout ou modification de tests
+  - **chore** : tâches techniques (dépendances, scripts, etc.)
 
+- Référence : [https://www.conventionalcommits.org/fr/v1.0.0/#summary](https://www.conventionalcommits.org/fr/v1.0.0/#summary)
 ---
 
 # GIT - Conventionnal Commits (suite)
 
-En respectant cette convention, chaque membre de l'équipe peut rapidement identifier le type de changement apporté par un commit donné.
-
-Les Conventional Commits permettent de faciliter la recherche de commits spécifiques dans l'historique du projet, en utilisant des filtres basés sur les types de commits.
-
-Les Conventional Commits permettent également d'automatiser certaines tâches, comme la génération de changelogs ou la gestion des versions, en se basant sur les types de commits effectués, nous verrons cela dans les prochaines versions de notre projet.
-
-Enfin, étant donné que les Conventional Commits suivent une convention standardisée, il est possible d'utiliser des outils pour valider les messages de commit et s'assurer qu'ils respectent la convention.
+- Avec cette convention, le type de changement est visible immédiatement.
+- L'historique est plus simple à filtrer (feat, fix, docs, etc.).
+- Certains processus peuvent être automatisés :
+  - génération de changelog,
+  - aide au versioning.
+- Les messages peuvent être validés automatiquement avec des outils dédiés.
 
 ----
 
 # GIT - Conventionnal Commits - commitlint
 
-**commitlint** est un outil qui permet d'effectuer ce contrôle pour des projets **nodejs**
 
-**Installation:**
+- Objectif : vérifier que les messages de commit respectent la convention.
+- Outil utilisé : **commitlint** (projet Node.js).
+
+**Étape 1 - Installation**
 
 ```bash
 npm install -D @commitlint/cli @commitlint/config-conventional
 ```
 
-**Configuration:**
+**Étape 2 - Configuration**
 
-Créer un fichier `commitlint.config.ts` à la racine du projet avec le contenu suivant :
+Créer le fichier `commitlint.config.ts` à la racine du projet :
 
 ```bash
 import type { UserConfig } from '@commitlint/types';
@@ -354,64 +473,66 @@ extends: ['@commitlint/config-conventional'],
 
 export default config;
 ```
-
 ---
 
 # GIT - Conventionnal Commits - commitlint (suite)
 
-Il est ensuite possible par exemple de vérifier le dernier message de commit
+
+- Vérifier le dernier message de commit :
 
 ```bash
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
-La commande permet de voir si le commit est valide et si ce n'est pas le cas, d'avoir des indications sur les erreurs.
+- La commande indique si le message est valide.
+- En cas d'erreur, commitlint précise les règles non respectées.
+- Idéalement, ce contrôle doit être exécuté avant chaque commit.
 
-Ce contrôle devrait être effectué avant chaque commit pour s'assurer que le message de commit est valide.
-
-Afin d'automatiser ce contrôle, il est possible d'utiliser des **git hooks**.
-
+- Étape suivante : automatiser cette vérification avec des **git hooks**.
 ---
 
 # GIT - hooks
 
-**git** met à disposition des hooks, qui sont des scripts exécutés à des moments clés du cycle de vie de **git**. 
 
-Par exemple, on peut utiliser un hook `commit-msg` pour vérifier le message d'un commit avant qu'il ne soit enregistré.
+- Les hooks **git** sont des scripts déclenchés automatiquement à des moments précis.
+- Ils permettent d'ajouter des contrôles avant ou après certaines actions Git.
 
-Ou encore un hook `pre-commit` pour exécuter des tests ou des vérifications de code avant qu'un commit ne soit effectué.
+- Exemples utiles :
+  - `commit-msg` : valider le message de commit,
+  - `pre-commit` : lancer des tests ou des vérifications de code.
 
-Pour plus d'informations sur les hooks **git**, vous pouvez consulter la documentation officielle : https://git-scm.com/book/en/Customizing-Git-Git-Hooks
+- Référence : https://git-scm.com/book/en/Customizing-Git-Git-Hooks
 
 ---
 
 # GIT - hooks - husky
 
-**husky** est un outil **Node.js** qui permet de gérer les hooks **git** de manière simple et efficace. Il s'intègre facilement dans les projets **JavaScript** et **TypeScript**. 
 
-Pour installer **husky**, vous pouvez utiliser la commande suivante :
+- **husky** simplifie la gestion des hooks **git** dans un projet Node.js.
+
+- Étape 1 - Installer husky :
 
 ```bash
 npm install --save-dev husky
 ```
 
-Pour configurer **husky**, vous pouvez utiliser la commande suivante :
+- Étape 2 - Initialiser husky :
 
 ```bash
 npx husky init
 ```
-
 ---
 
 # GIT - hooks - husky (suite)
 
-Par défaut cela va ajouter un hook `pre-commit` qui va exécuter les tests avant chaque commit. Nous n'avons pas encore vu la configuration des tests, nous verrons cela plus tard. Il est donc nécessaire de supprimer ce hook pour l'instant.
+- Après `npx husky init`, un hook `pre-commit` est créé par défaut.
+- Pour l'instant, nous le supprimons (les tests seront vus plus tard).
 
 ```bash
 rm .husky/pre-commit
 ```
 
-Pour ajouter un hook `commit-msg` qui va vérifier le message de commit avec **commitlint**, vous pouvez utiliser la commande suivante :
+- Étape suivante : ajouter un hook `commit-msg` pour lancer **commitlint**.
 
 ```bash
 echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
@@ -421,65 +542,68 @@ echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 
 # GIT - hooks - husky (suite)
 
-Vérifions que le hook fonctionne correctement en essayant de faire un commit avec un message invalide.
+
+- Étape 1 : tester un commit avec un message invalide.
 
 ```bash
 git add .
 git commit -m "foo: this will fail"
 ```
 
-Le commit doit échouer avec un message d'erreur indiquant que le message de commit ne respecte pas la convention.
+- Résultat attendu : le commit échoue (message non conforme).
 
-Commiter de nouveau avec un message valide.
+- Étape 2 : refaire le commit avec un message valide.
 
 ```bash
-git commit -m "chore: add husky and commitlint for improved commit message management"
+git commit -m "chore: add husky and commitlint to improve commit message management"
 ```
-
 ---
 
 # GIT - Conventionnal Commits - devmoji
 
-Nous avons maintenant un contrôle automatique des messages de commit pour s'assurer qu'ils respectent bien la convention.
 
-Nous allons améliorer l'expérience de l'utilisateur en utilisant des emojis pour représenter les types de commits. Cela permet de rendre les messages de commit plus visuels et plus faciles à comprendre.
+- Nous avons déjà un contrôle automatique avec commitlint + husky.
+- Objectif maintenant : rendre les messages de commit plus visuels.
 
-Pour cela, nous allons utiliser **devmoji**. **devmoji** est une liste d'emojis spécialement conçue pour les développeurs. Chaque emoji représente un type de commit spécifique. 
+- Outil : **devmoji**.
+- Principe : associer un emoji au type de commit.
 
-Pour plus d'informations, vous pouvez consulter le site officiel : https://github.com/folke/devmoji
-
+- Résultat : des commits plus rapides à lire dans l'historique.
+- Référence : https://github.com/folke/devmoji
 ---
 
 # GIT - Conventionnal Commits - devmoji (suite)
 <!-- _footer: "" -->
 
-**Installation:**
+
+- Étape 1 - Installer devmoji.
 
 ```bash
 npm install --save-dev devmoji
 ```
 
-**Configuration**
+- Étape 2 - Configurer le hook `prepare-commit-msg`.
 
 ```bash
 echo "npx devmoji -e --lint" > .husky/prepare-commit-msg
 ```
 
-**Utilisation**
+- Étape 3 - Utiliser un message de commit compatible.
+
 ```bash
 git add .
 git commit -m "feat: add devmoji dependency for improved commit message management"
 ```
-
 ---
 
 # GIT - push and tag
 
-Pour finir, nous allons pousser nos commits sur le dépôt distant et créer un tag pour cette version 0.2.0.
+- Étape 1 : pousser les commits sur `main`.
+- Étape 2 : créer le tag de version `v0.2.0`.
+- Étape 3 : pousser le tag sur le dépôt distant.
 
 ```bash
 git push origin main
 git tag -a v0.2.0 -m "Release version 0.2.0"
 git push origin v0.2.0
 ```
-
