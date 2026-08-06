@@ -806,3 +806,15 @@ Le **tag** a été créé avec succès et poussé vers le dépôt distant sur Gi
 Vous pouvez retrouver le **tag** v0.1.0 dans l'onglet "Tags" de votre dépôt GitHub, ce qui vous permet de revenir facilement à cette version du projet si nécessaire.
 
 ![GitHub - Tag v0.1.0](./assets/github-com-tag-v0.1.0-2.png)
+
+---
+
+# Récapitulatif de la version 0.1.0
+
+- Initialisation du projet Node.js avec Express.js
+- Création d'un endpoint REST __Hello World__
+- Transformation du projet pour utiliser TypeScript
+- Ajout d'un script pour lancer le serveur en mode développement avec rechargement automatique
+- Sauvegarde du projet sur GitHub avec un commit initial
+- Création d'un **tag** pour marquer la version 0.1.0
+

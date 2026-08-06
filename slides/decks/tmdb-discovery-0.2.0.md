@@ -5,22 +5,8 @@ duration: 2h
 routerMode: hash
 layout: tmdb-hero
 mermaid:
-  look: handDrawn
-  theme: base
   handDrawnSeed: 7
-  gitGraph:
-    rotateCommitLabel: true
-  themeVariables:
-    git0: "#1a2dff"
-    git1: "#1a2dff"
-    git2: "#1a2dff"
-    gitBranchLabel0: "#ffffff"
-    commitLabelColor: "#0c143a"
-    commitLabelBackground: "#f6f5e8"
-    commitLabelFontSize: "16px"
-    tagLabelColor: "#0c143a"
-    tagLabelBackground: "#f6f5e8"
-    tagLabelBorder: "#bfc4df"
+  
 ---
 
 # TMDB Discovery App - 0.2.0
@@ -44,6 +30,12 @@ mermaid:
 - Validation des messages de commit avec **commitlint**
 - Contrôle automatique via un hook **Git** avec **Husky**
 - Amélioration de la lisibilité des commits avec **devmoji**
+
+<!--
+
+commit atomique: un commit qui ne contient qu'un seul changement cohérent. Il est plus facile à comprendre et à maintenir.
+
+-->
 
 ---
 
@@ -197,8 +189,8 @@ echo "TMDB_ACCESS_TOKEN=your_access_token_here" > .env
 ```
 
 - Étape 3 : remplacer `your_access_token_here` par votre vrai token TMDB.
-- Ne jamais partager ce token publiquement.
---- 
+
+---
 
 # Github et sécurité des informations sensibles
 
@@ -206,7 +198,7 @@ echo "TMDB_ACCESS_TOKEN=your_access_token_here" > .env
   - mot de passe,
   - token d'accès,
   - clé d'API.
-- Ajouter ces fichiers dans .gitignore avant le premier commit.
+- Ajouter ces fichiers dans **.gitignore** avant le premier commit.
 
 - Si un secret a été commité par erreur :
   - supprimer le fichier du dépôt,
@@ -255,6 +247,10 @@ npm install dotenv
 
 
 - Créer un fichier `config.ts` dans `src/back-end`.
+```shell
+# Création du fichier config.ts pour centraliser la configuration de l'application
+touch src/back-end/config.ts
+```
 - Ce fichier centralise la configuration de l'application.
 - Objectifs du code :
   - charger les variables d'environnement depuis `.env`,
@@ -302,6 +298,10 @@ export { tmdbAccessToken };
 # Films populaires (/api/movies/popular) (suite)
 
 ```typescript
+import express from 'express';
+import { tmdbAccessToken } from './config';
+...
+
 // Define a route handler for fetching popular movies from TMDB API
 app.get('/api/movies/popular', async (_req: express.Request, res: express.Response) => {
   try {
@@ -323,6 +323,7 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
   }
 });
 
+...
 ```
 
 ---
@@ -416,7 +417,7 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
   - Ajoute la fonctionnalité xxx
   - Modifie le style de la page d'accueil
   - Supprime le fichier xxx devenu inutile
-----
+---
 
 # GIT - Conventionnal Commits
 
@@ -446,7 +447,7 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
   - aide au versioning.
 - Les messages peuvent être validés automatiquement avec des outils dédiés.
 
-----
+---
 
 # GIT - Conventionnal Commits - commitlint
 
@@ -463,6 +464,12 @@ npm install -D @commitlint/cli @commitlint/config-conventional
 **Étape 2 - Configuration**
 
 Créer le fichier `commitlint.config.ts` à la racine du projet :
+
+```shell
+touch commitlint.config.ts
+```
+
+Ajouter le contenu suivant dans `commitlint.config.ts` :
 
 ```bash
 import type { UserConfig } from '@commitlint/types';
@@ -483,9 +490,20 @@ export default config;
 ```bash
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
-
 - La commande indique si le message est valide.
 - En cas d'erreur, commitlint précise les règles non respectées.
+
+```shell
+@alexandre-girard-maif ➜ /workspaces/themoviedb-discovery-app-demo-2026-2027 (main) $ npx commitlint --from HEAD~1 --to HEAD --verbose
+⧗   --- input ---
+✨ Add /api/movies/popular endpoint to fetch popular movies from TMDB API
+✖   subject may not be empty [subject-empty]
+✖   type may not be empty [type-empty]
+
+✖   found 2 problems, 0 warnings
+ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+```
+
 - Idéalement, ce contrôle doit être exécuté avant chaque commit.
 
 - Étape suivante : automatiser cette vérification avec des **git hooks**.
@@ -557,12 +575,14 @@ git commit -m "foo: this will fail"
 ```bash
 git commit -m "chore: add husky and commitlint to improve commit message management"
 ```
+
+Nous avons maintenant un contrôle automatique avec **commitlint** + **husky**.
+
 ---
 
 # GIT - Conventionnal Commits - devmoji
 
 
-- Nous avons déjà un contrôle automatique avec commitlint + husky.
 - Objectif maintenant : rendre les messages de commit plus visuels.
 
 - Outil : **devmoji**.
@@ -599,11 +619,28 @@ git commit -m "feat: add devmoji dependency for improved commit message manageme
 # GIT - push and tag
 
 - Étape 1 : pousser les commits sur `main`.
-- Étape 2 : créer le tag de version `v0.2.0`.
-- Étape 3 : pousser le tag sur le dépôt distant.
 
 ```bash
 git push origin main
+```
+
+- Étape 2 : créer le tag de version `v0.2.0`.
+
+```bash
 git tag -a v0.2.0 -m "Release version 0.2.0"
+```
+- Étape 3 : pousser le tag sur le dépôt distant.
+
+```bash
 git push origin v0.2.0
 ```
+
+---
+
+# Récapitulatif de la version 0.2.0
+
+- Ajout du fichier `.env` pour stocker le token d'accès à l'API TMDB.
+- Ajout de l'endpoint `/api/movies/popular` pour récupérer les films populaires.
+- Mise en place de **Husky** et **commitlint** pour valider les messages de commit.
+- Ajout de **devmoji** pour améliorer la lisibilité des messages de commit.
+- Création du tag `v0.2.0` pour marquer cette version.
