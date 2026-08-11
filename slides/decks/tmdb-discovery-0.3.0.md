@@ -14,9 +14,9 @@ layout: tmdb-hero
 
 # Objectifs
 
-- Objectif application : améliorer un endpoint REST qui récupère les films populaires via l'**API TMDB**.
-- Objectif ingénierie : introduire la notion de **branche Git**.
-- Résultat attendu : implémenter une évolution fonctionnelle sans impacter la branche principale.
+- **Objectif application:** améliorer un endpoint REST qui récupère les films populaires via l'**API TMDB**.
+- **Objectif ingénierie:** introduire la notion de **branche Git**.
+- **Résultat attendu:** implémenter une évolution fonctionnelle sans impacter la branche principale.
 
 ---
 
@@ -34,19 +34,19 @@ gitGraph
 
 # git - Branches
 
-- Objectif : travailler sur plusieurs évolutions en parallèle sans casser la base du projet.
-- Définition : une branche est une ligne de développement indépendante dans **Git**.
-- Pourquoi c'est utile : isoler une fonctionnalité, un bugfix ou un essai technique.
-- Exemple rapide : développer sur une branche dédiée puis fusionner vers `main` ou `develop` une fois validé.
+- **Objectif:** travailler sur plusieurs évolutions en parallèle sans casser la base du projet.
+- **Définition:** une branche est une ligne de développement indépendante dans **Git**.
+- **Pourquoi c'est utile:** isoler une fonctionnalité, un bugfix ou un essai technique.
+- **Exemple rapide:** développer sur une branche dédiée puis fusionner vers `main` ou `develop` une fois validé.
 
 ---
 
 # git - Branches (suite)
 
-- Étape 1 : créer une branche à partir de la branche courante.
-- Étape 2 : développer dessus sans impacter les autres branches.
-- Étape 3 : fusionner la branche quand les modifications sont validées.
-- Résultat attendu : intégrer la fonctionnalité sans perturber le flux principal.
+- **Étape 1:** créer une branche à partir de la branche courante.
+- **Étape 2:** développer dessus sans impacter les autres branches.
+- **Étape 3:** fusionner la branche quand les modifications sont validées.
+- **Résultat attendu:** intégrer la fonctionnalité sans perturber le flux principal.
 
 ---
 
@@ -85,56 +85,136 @@ gitGraph
    commit
 ```
 
+<!--
+
+Dans ce diagramme, nous voyons que la branche `branch1` a été créée à partir du commit 2, puis un commit a été ajouté sur `branch1`. Ensuite, nous avons basculé sur la branche `main` et créé la branche `branch2`, puis ajouté deux commits sur `branch2`. Ensuite, nous avons basculé sur `branch1` et ajouté un commit, puis basculé sur `branch2` et ajouté deux commits. Enfin, nous avons fusionné les branches `branch1` et `branch2` dans la branche `main`, puis ajouté un commit sur la branche `main` et créé une nouvelle branche `branch3`.
+-->
+---
+
+# VS Code extension - Git Graph
+
+- **Objectif:** visualiser l'historique des commits et des branches de façon graphique dans VS Code.
+- **Définition:** **Git Graph** est une extension VS Code pour explorer le graphe Git (commits, branches, merges).
+- **Pourquoi c'est utile:** comprendre rapidement l'état du dépôt avant de créer, fusionner ou nettoyer des branches.
+- **Exemple rapide:** installation via le marketplace en local, ou via `.devcontainer/devcontainer.json` en environnement conteneurisé **Code Spaces** (configuration au slide suivant).
+
+---
+
+# VS Code extension - Git Graph (suite)
+
+- **Etape 1:** créer le fichier `.devcontainer/devcontainer.json` avec la commande:
+
+```bash
+touch .devcontainer/devcontainer.json
+```
+
+- **Etape 2:** ajouter le contenu suivant dans le fichier `.devcontainer/devcontainer.json` pour installer l'extension **Git Graph** dans le conteneur de développement:
+
+```json
+{
+  "name": "themoviedb-discovery-app-demo-2026-2027",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph"
+      ]
+    }
+  }
+}
+
+```
+
+---
+
+# VS Code extension - Git Graph (suite)
+
+- **Etape 3:** Commiter et pousser le fichier `.devcontainer/devcontainer.json` vers le dépôt distant sur GitHub pour que l'extension **Git Graph** soit installée automatiquement dans le conteneur de développement.
+
+```bash
+git add .devcontainer/devcontainer.json
+git commit -m "chore: add devcontainer.json to install Git Graph extension in the development container"
+git push origin main
+```
+
+- **Etape 4:** Recharger le conteneur de développement pour que l'extension **Git Graph** soit installée automatiquement dans le conteneur de développement.
+
+---
+
+# VS Code extension - Git Graph (suite)
+
+class: p-0
+
+<img
+  src="/assets/vs-code-git-graph.png"
+  alt="VS Code Git Graph extension"
+  class="h-full w-full object-contain"
+/>
+
 ---
 
 # gitflow
 
-- Méthode de gestion des branches en utilisant Git.
+- Méthode de gestion des branches en utilisant Git. Approche très populaire pour les projets logiciels.
 - Permet de structurer le développement logiciel en définissant des règles pour les branches.
 - Utilise des branches spécifiques pour les fonctionnalités, les correctifs, les versions, les releases...
 - Permet de travailler sur plusieurs fonctionnalités en même temps sans impacter le code de production.
 
 ---
 
-# gitflow - branche **develop**
+<img src="/assets/git-model@2x.png" alt="gitflow - schéma" class="mx-auto block -mt-4 max-h-[56vh] w-auto max-w-full rounded-lg border border-slate-200 object-contain" />
 
-- La branche **main** est la branche principale du projet. Elle contient le code de production et doit rester stable.
+---
 
-- La branche **develop** est la branche de développement. Elle contient les fonctionnalités en cours de développement, ainsi la branche **main** reste stable et contient le code de production.
+# gitflow - branches **main**
 
-- On ne travaille jamais directement sur la branche **main**, afin de ne pas impacter involontairement le code de production (risque de bugs, de régressions...).
+- La branche **main** contient le code de production.
+- Elle doit rester stable.
+- On ne travaille pas directement dessus.
+- Les changements arrivent via une fusion depuis **develop**.
+
+---
+
+# gitflow - branches **develop**
+
+- La branche **develop** regroupe les fonctionnalités validées.
+- Elle sert de branche d'intégration avant la fusion vers **main**.
+- On y teste les changements avant de créer une nouvelle version.
+- Les fonctionnalités arrivent via les branches **feature**.
 
 ---
 
 # gitflow - branches **feature**
 
-- Créer une branche `feature/nom-fonctionnalite` depuis **develop**.
-- Développer la fonctionnalité de façon isolée.
-- Fusionner la branche vers **develop** une fois validée.
-- Permet d'avancer sur plusieurs fonctionnalités en parallèle sans bloquer l'équipe.
-- Une bonne pratique est d'attribuer un périmètre clair à chaque branche feature pour limiter les conflits.
+- Une branche **feature** porte une seule évolution.
+- Elle est créée depuis **develop**.
+- Elle est fusionnée vers **develop** après validation.
+- Elle permet d'avancer en parallèle sans casser la branche principale.
+- Exemple : **feature/improvements-endpoint-movies-popular** et **feature/health-check-endpoint**.
 
-
-Exemple concret : nous allons créer deux branches **feature** pour travailler sur deux évolutions en parallèle.
-  - **feature/improvements-endpoint-movies-popular** pour améliorer le end point REST qui récupère les films populaires.
-  - **feature/health-check-endpoint** pour ajouter un end point REST qui permet de vérifier que le serveur est bien en fonctionnement.
 
 ---
 
 # gitflow - Mise en pratique
 
-- Étape 1 : créer la branche **develop** depuis la branche principale.
-- Étape 2 : créer la branche **feature/improvements-endpoint-movies-popular**.
-- Étape 3 : créer la branche **feature/health-check-endpoint**.
-- Commandes :
+- **Étape 1:** créer la branche **develop** depuis la branche principale.
 
 ```bash
 git checkout -b develop
+```
+
+- **Étape 2:** créer la branche **feature/improvements-endpoint-movies-popular**.
+
+```bash
 git checkout -b feature/improvements-endpoint-movies-popular
+```
+
+- **Étape 3:** créer la branche **feature/health-check-endpoint**.
+
+```bash
 git checkout -b feature/health-check-endpoint
 ```
 
-- Résultat attendu : les trois branches locales sont prêtes pour développer en parallèle.
+- **Résultat attendu:** les trois branches locales sont prêtes pour développer en parallèle.
 
 ---
 
@@ -165,8 +245,6 @@ Résultat attendu:
 
 # gitflow - Mise en pratique (suite)
 
-Le graphe ci-dessous illustre ce qu'il va se passer lorsque nous allons travailler sur les branches **feature** en parallèle puis fusionner les branches **feature** avec la branche **develop** puis fusionner la branche **develop** avec la branche **main** pour créer une nouvelle version de l'application.
-
 ```mermaid
 gitGraph
     checkout main
@@ -191,19 +269,25 @@ gitGraph
     merge develop tag: "v0.3.0"
 ```
 
+<!--
+Le graphe ci-dessous illustre ce qu'il va se passer lorsque nous allons travailler sur les branches **feature** en parallèle puis fusionner les branches **feature** avec la branche **develop** puis fusionner la branche **develop** avec la branche **main** pour créer une nouvelle version de l'application.
+-->
+
+
 ---
 
 ## Health check endpoint
 
-Le endpoint `/api/health` est un endpoint REST qui permet de vérifier que le serveur est bien en fonctionnement. Il est très utile pour les tests automatisés et pour les outils de monitoring. Il ne fait que renvoyer un code HTTP 200 et un message JSON indiquant que le serveur est en fonctionnement.
-
-Travailler sur la branche **feature/health-check-endpoint** pour ajouter le endpoint `/api/health` dans le fichier `src/back-end/index.ts`.
+- **Objectif :** ajouter un endpoint de vérification de santé du serveur.
+- **Route :** `/api/health`.
+- **Réponse attendue :** code HTTP `200` avec un JSON `{ status: 'ok' }`.
+- **Étape 1 :** se placer sur la branche `feature/health-check-endpoint`.
 
 ```bash
 git checkout feature/health-check-endpoint
 ```
 
-Modifier le fichier `src/back-end/index.ts` pour ajouter le endpoint `/api/health`:
+- **Étape 2 :** modifier `src/back-end/index.ts` pour ajouter la route :
 
 ```typescript
 
@@ -222,19 +306,16 @@ app.get('/api/health', (_req: express.Request, res: express.Response) => {
 
 # Health check endpoint (suite)
 
-Vérifier que le serveur fonctionne correctement et que le endpoint `/api/health` renvoie bien un code HTTP 200 et un message JSON indiquant que le serveur est en fonctionnement.
-
-Démarrer le serveur avec la commande:
+- **Objectif :** vérifier que l'endpoint `/api/health` répond correctement.
+- **Étape 1 :** démarrer le serveur.
 ```bash
 npm run dev:server
 ```
-
-Vérifier que le endpoint `/api/health` fonctionne correctement avec la commande:
+- **Étape 2 :** appeler l'endpoint de health check.
 ```bash
 curl -i http://localhost:3000/api/health
 ```
-
-Résultat attendu:
+- **Résultat attendu :**
 
 ```bash
 @alexandre-girard-maif ➜ /workspaces/themoviedb-discovery-app-demo (feature/health-check-endpoint) $ curl -i http://localhost:3000/api/health
@@ -252,35 +333,47 @@ Keep-Alive: timeout=5
 
 # Health check endpoint (suite)
 
-Une fois que le endpoint `/api/health` fonctionne correctement, nous pouvons maintenant commiter ces modifications et les pousser vers le dépôt distant sur GitHub pour sauvegarder notre travail.
+- **Objectif :** sauvegarder la fonctionnalité sur la branche `feature/health-check-endpoint`.
+- **Commande :**
 
-**Remarque:** Notre travail est pour l'instant uniquement sur la branche **feature/health-check-endpoint**. Nous n'avons pas encore fusionné cette branche avec la branche **develop**. 
+```bash
+git add src/back-end/index.ts
+git commit -m "feat: add health check endpoint /api/health"
+git push origin feature/health-check-endpoint
+```
+
+- **Vérification :** les changements sont poussés sur la branche `feature/health-check-endpoint`.
+- **Remarque :** la fusion vers **develop** n'est pas encore faite. 
 
 ----
 
 # Films populaires (/api/movies/popular)
 
-Nous allons maintenant travailler sur la branche **feature/improvements-endpoint-movies-popular** pour améliorer le end point REST qui récupère les films populaires depuis l'API TMDB.
-
-Pour cela nous devons basculer sur la branche **feature/improvements-endpoint-movies-popular** avec la commande:
+- **Objectif :** améliorer l'endpoint `/api/movies/popular`.
+- **Branche :** `feature/improvements-endpoint-movies-popular`.
+- **Commande :**
 
 ```bash
 git checkout feature/improvements-endpoint-movies-popular
 ```
 
-On constate que le end pojnt 'api/health' ne fonctionne plus, c'est normal car nous avons basculé sur la branche **feature/improvements-endpoint-movies-popular** qui ne contient pas encore le endpoint `/api/health`.
-
-Nous verrons plus tard comment fusionner les branches **feature** avec la branche **develop** pour que le endpoint `/api/health` soit disponible dans la branche **develop**.
+- **Vérification :** l'endpoint `/api/health` n'est pas encore présent sur cette branche.
+- **Remarque :** il réapparaîtra après fusion des branches **feature** dans **develop**.
 
 ----
 
 # Films populaires (/api/movies/popular) (suite)
 
-Ajout d'un type pour la réponse de l'API TMDB afin d'améliorer la sécurité et la lisibilité du code. 
+- **Objectif :** typer la réponse TMDB pour améliorer la lisibilité et la sécurité.
+- **Étape 1 :** créer le fichier `MoviesTypes.ts`.
 
-Nous allons créer un fichier `MoviesTypes.ts` dans le dossier `src/back-end/schemas` pour définir les types utilisés pour consommer les films depuis l'API TMDB.
+```bash
+mkdir -p src/back-end/schemas
+touch src/back-end/schemas/MoviesTypes.ts
+```
 
-Nous allons modifier la réponse de l'API TMDB afin de supprimer les champs inutiles et ne garder que les informations pertinentes pour notre application. Cela permettra de réduire la quantité de données transférées et d'améliorer les performances de l'application.
+- **Étape 2 :** conserver uniquement les champs utiles pour l'application.
+- **Résultat attendu :** disposer de types clairs pour la réponse brute et la réponse exposée par l'API.
 
 ----
 
@@ -335,11 +428,24 @@ export type ApiErrorResponse = {
 
 ```
 
+<!--
+
+Pour notre application, nous n'avons pas besoin des champs `adult` et `video` de la réponse brute de l'API TMDB. Nous allons donc créer un type `Movie` qui omet ces deux champs pour ne garder que les informations pertinentes pour notre application.
+
+-->
+
 ----
 
 # Films populaires (/api/movies/popular) (suite)
 
-Ajouter une fonction utilitaire dans un nouveau fichier `utils.ts` pour transformer les films bruts de l'API TMDB en films supportés par notre application. Cette fonction prend un film brut de l'API TMDB et retourne un objet Movie avec uniquement les propriétés pertinentes.
+- **Objectif :** créer une fonction utilitaire pour transformer les films TMDB.
+- **Étape 1 :** créer le fichier `utils.ts`.
+
+```bash
+touch src/back-end/utils.ts
+```
+
+- **Résultat attendu :** disposer d'une fonction qui convertit un film brut en type `Movie`.
 
 ----
 
@@ -369,11 +475,18 @@ export const toSupportedMovie = (movie: TmdbMoviesRawResponse['results'][number]
 };
 ```
 
+<!--
+
+La fonction `toSupportedMovie` prend un objet `TmdbMovie` en entrée et retourne un objet `Movie` en omettant les propriétés `adult` et `video`. Cela permet de transformer les films bruts de l'API TMDB en films supportés par notre application avant de les renvoyer au client.
+
+-->
 ----
 
 # Films populaires (/api/movies/popular) (suite)
 
-Nous allons maintenant modifier notre endpoint `/api/movies/popular` pour utiliser la fonction `toSupportedMovie` afin de transformer les films bruts de l'API TMDB en films supportés par notre application avant de les renvoyer au client.
+- **Objectif :** utiliser `toSupportedMovie` dans l'endpoint `/api/movies/popular`.
+- **Étape 1 :** transformer la réponse brute TMDB avec `rawData.results.map(toSupportedMovie)`.
+- **Résultat attendu :** renvoyer une réponse JSON au format `MoviesApiResponse`.
 
 ```typescript
       ...
@@ -400,15 +513,24 @@ Nous allons maintenant modifier notre endpoint `/api/movies/popular` pour utilis
 
 # Films populaires (/api/movies/popular) (suite)
 
-Après avoir validé que le serveur fonctionne correctement et que l'endpoint `/api/movies/popular` renvoie les films populaires depuis l'API TMDB en ayant transformé les données brutes en films supportés par notre application, nous pouvons maintenant commiter ces modifications et les pousser vers le dépôt distant sur GitHub pour sauvegarder notre travail.
+- **Objectif :** sauvegarder l'amélioration de `/api/movies/popular` sur la branche feature.
+- **Commande :**
+
+```bash
+git add src/back-end/index.ts src/back-end/schemas/MoviesTypes.ts src/back-end/utils.ts
+git commit -m "feat: improve /api/movies/popular endpoint to return supported Movie objects"
+git push origin feature/improvements-endpoint-movies-popular
+```
+
+- **Vérification :** les changements sont poussés sur `feature/improvements-endpoint-movies-popular`.
 
 ---
 
 # Fusion des branches **feature** avec la branche **develop**
 
-Nous avons maintenant terminé le développement des deux branches **feature**. Les deux branches **feature** sont maintenant prêtes à être fusionnées avec la branche **develop** pour que les modifications soient disponibles dans la branche de développement.
-
-Nous aurons ainsi une branche **develop** qui contient les deux nouvelles fonctionnalités: le endpoint `/api/health` et le endpoint `/api/movies/popular` amélioré.
+- **Objectif :** intégrer les deux branches **feature** dans **develop**.
+- **Étape :** fusionner successivement chaque branche **feature**.
+- **Résultat attendu :** la branche **develop** contient `/api/health` et la version améliorée de `/api/movies/popular`.
 
 ----
 
@@ -435,7 +557,8 @@ gitGraph
 
 ----
 
-Fusionner la branche **feature/improvements-endpoint-movies-popular** avec la branche **develop** en se placant sur la branche **develop** et en utilisant la commande `git merge`:
+- **Objectif :** intégrer `feature/improvements-endpoint-movies-popular` dans `develop`.
+- **Commande :**
 
 ```bash
 git checkout develop
@@ -462,7 +585,8 @@ gitGraph
 
 ----
 
-Fusionner la branche **feature/health-check-endpoint** avec la branche **develop** en se plaçant sur la branche **develop** et en utilisant la commande `git merge`:
+- **Objectif :** intégrer `feature/health-check-endpoint` dans `develop`.
+- **Commande :**
 
 ```bash
 git checkout develop
@@ -492,15 +616,24 @@ gitGraph
 
 # Fusion des branches **feature** avec la branche **develop**
 
-Nous avons maintenant terminé la fusion des deux branches **feature** avec la branche **develop**. La branche **develop** contient maintenant les deux nouvelles fonctionnalités: le endpoint `/api/health` et le endpoint `/api/movies/popular` amélioré.
+- **Objectif :** valider la fusion des deux branches **feature** dans **develop**.
+- **Résultat attendu :** **develop** contient `/api/health` et la version améliorée de `/api/movies/popular`.
+- **Vérification :** tester les deux endpoints depuis la branche **develop**.
+- **Remarque :** en cas de conflit, il faut le résoudre avant la fusion.
+- **Suite :** fusionner ensuite **develop** dans **main**.
 
-Il est maintenant temps de fusionner la branche **develop** avec la branche **main** pour créer une nouvelle version de l'application.
+<!--
+
+Remarque: Il y aurait pu y avoir des conflits lors de la fusion des branches **feature** avec la branche **develop**. Dans ce cas, il aurait fallu résoudre les conflits avant de pouvoir fusionner les branches. Nous n'avons pas eu de conflits dans notre cas car les deux branches **feature** ne modifiaient pas les mêmes fichiers. Nous verrons plus tard comment gérer les conflits lors de la fusion des branches.
+
+-->
 
 ----
 
 # Fusion de la branche **develop** avec la branche **main** pour créer une nouvelle version de l'application.
 
-Fusionner la branche **develop** avec la branche **main** en se plaçant sur la branche **main** et en utilisant la commande `git merge`:
+- **Objectif :** publier les changements de **develop** dans **main**.
+- **Commande (fusion vers main) :**
 
 ```bash
 git checkout main
@@ -508,12 +641,14 @@ git merge develop
 git push origin main
 ```
 
-Créer un tag pour la nouvelle version de l'application avec la commande `git tag`:
+- **Commande (tag de version) :**
 
 ```bash
 git tag v0.3.0
 git push origin v0.3.0
 ```
+
+- **Résultat attendu :** la version `v0.3.0` est visible sur la branche `main` et sur le dépôt distant.
 
 ---
 
@@ -540,38 +675,39 @@ gitGraph
     checkout main
     merge develop tag: "v0.3.0"
 ```
-
+<!--
 Les branches **feature** ont été fusionnées avec la branche **develop** et la branche **develop** a été fusionnée avec la branche **main** pour créer une nouvelle version de l'application.
+-->
 
 ----
 
 # Nettoyage des branches **feature** après fusion avec la branche **develop**
 
-Les branches **feature** ont été fusionnées avec la branche **develop** et ne sont plus nécessaires. Il est donc recommandé de les supprimer pour éviter toute confusion et garder un dépôt Git propre.
-
-Supprimer les branches **feature** locales avec la commande:
+- **Objectif :** supprimer les branches **feature** devenues inutiles.
+- **Commande (local) :**
 
 ```bash
 git branch -d feature/improvements-endpoint-movies-popular
 git branch -d feature/health-check-endpoint
 ```
 
-Supprimer les branches **feature** distantes avec la commande:
+- **Commande (distant) :**
 
 ```bash
 git push origin --delete feature/improvements-endpoint-movies-popular
 git push origin --delete feature/health-check-endpoint
 ```
+
+- **Résultat attendu :** ne conserver que les branches actives du flux Gitflow.
 ----
 
 # Nettoyage des branches **feature** après fusion avec la branche **develop** (suite)
 
-Nous devrions maintenant avoir un dépôt Git propre avec uniquement les branches **main** et **develop** aussi bien localement que sur le dépôt distant.
-
-Liste des branches locales avec la commande:
+- **Vérification :** contrôler les branches locales après nettoyage.
 
 ```bash
 git branch -v
 ```
 
+- **Résultat attendu :** seules **main** et **develop** restent présentes.
 
