@@ -711,3 +711,11 @@ git branch -v
 
 - **Résultat attendu :** seules **main** et **develop** restent présentes.
 
+---
+
+# Récapitulatif de la version 0.3.0
+
+- Ajout de l'endpoint `/api/health` pour vérifier la santé du serveur.
+- Amélioration de l'endpoint `/api/movies/popular` pour renvoyer des films au format `Movie` supporté par l'application.
+- Introduction de la gestion des branches avec Gitflow pour isoler les évolutions et faciliter la collaboration.
+- Fusion des branches **feature** dans **develop** puis fusion de **develop** dans **main** pour créer la version `v0.3.0` de l'application.
