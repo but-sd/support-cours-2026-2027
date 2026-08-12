@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bash scripts/dev-portal.sh",
     "dev:slidev": "slidev --open slides.md",
-    "dev:intro": "slidev --open decks/introduction.md",
+    "dev:presentation": "slidev --open decks/presentation.md",
     "dev:architecture": "slidev --open decks/architecture-logicielle.md",
     "dev:backend": "slidev --open decks/backend.md",
     "dev:web": "slidev --open decks/web-html-css.md",

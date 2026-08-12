@@ -17,7 +17,7 @@ Puis ouvrir http://localhost:3030.
 - Lancer un deck existant:
 
 ```bash
-npm run dev:deck -- decks/algo-introduction.md
+npm run dev:deck -- decks/algo-presentation.md
 ```
 
 ## Scripts utiles

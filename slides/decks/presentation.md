@@ -1,6 +1,6 @@
 ---
 theme: seriph
-title: Introduction
+title: Présentation du cours
 class: intro-slide text-left
 duration: 2h
 routerMode: hash

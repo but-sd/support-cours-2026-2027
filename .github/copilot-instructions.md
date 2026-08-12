@@ -36,7 +36,7 @@ Deployment architecture (`.github/workflows/deploy-slides-pages.yml`):
 - GitHub Pages build runs on Node 20 and `npm ci` in `slides/`.
 - It builds:
   1. landing deck into `slides/dist` with `--base "/<repo-name>/"`.
-  2. introduction deck separately via `npm run build:deck -- decks/introduction.md --base "/<repo-name>/introduction/"`, then copies `decks/dist/*` into `dist/introduction/`.
+  2. presentation deck separately via `npm run build:deck -- decks/presentation.md --base "/<repo-name>/introduction/"`, then copies `decks/dist/*` into `dist/introduction/`.
 - Pages artifact is uploaded from `slides/dist`.
 
 ## Repository-specific conventions
