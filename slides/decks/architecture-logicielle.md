@@ -104,6 +104,17 @@ API serveur]
 
 ---
 
+# Protéger la clé API TMDB
+
+- **Objectif:** Empêcher l'exposition de la clé API TMDB
+- **Règle:** Le front-end ne connaît jamais la clé API
+- **Front-end:** Appeler uniquement les endpoints du back-end
+- **Back-end:** Utiliser la clé pour appeler l'API TMDB
+- **Stockage:** Conserver la clé dans une variable d'environnement, par exemple `TMDB_API_KEY`
+- **Anti-pattern à éviter:** Placer la clé dans le code front-end ou la publier dans Git
+
+---
+
 # Architecture logicielle - back-end (suite)
 
 - **Objectif:** Simplifier l'accès aux données **TMDB**
