@@ -104,17 +104,6 @@ API serveur]
 
 ---
 
-# Protéger la clé API TMDB
-
-- **Objectif:** Empêcher l'exposition de la clé API TMDB
-- **Règle:** Le front-end ne connaît jamais la clé API
-- **Front-end:** Appeler uniquement les endpoints du back-end
-- **Back-end:** Utiliser la clé pour appeler l'API TMDB
-- **Stockage:** Conserver la clé dans une variable d'environnement, par exemple `TMDB_API_KEY`
-- **Anti-pattern à éviter:** Placer la clé dans le code front-end ou la publier dans Git
-
----
-
 # Architecture logicielle - back-end (suite)
 
 - **Objectif:** Simplifier l'accès aux données **TMDB**
@@ -125,12 +114,33 @@ API serveur]
 
 ---
 
+# Architecture logicielle - back-end (suite)    
+
+## Protéger la clé API TMDB
+
+- **Objectif:** Empêcher l'exposition de la clé API TMDB
+- **Règle:** Le front-end ne connaît jamais la clé API
+- **Front-end:** Appeler uniquement les endpoints du back-end
+- **Back-end:** Utiliser la clé pour appeler l'API TMDB
+- **Stockage:** Conserver la clé dans une variable d'environnement
+- **Anti-pattern à éviter:** Placer la clé dans le code front-end ou la publier dans Git
+
+---
+
 # Librairies et frameworks
 
 - **Définition:** Une dépendance est un composant externe utilisé par l'application
 - **Objectif:** Ajouter des fonctionnalités sans les développer entièrement
 - **Pourquoi:** Gagner du temps et s'appuyer sur des solutions maintenues
 - **Sources:** **npm**, **PyPI**, Maven Central
+
+---
+
+# Librairie ou framework ?
+
+- **Librairie:** Ensemble d'outils appelés lorsque le code en a besoin
+- **Framework:** Structure et règles qui organisent l'application
+- **Différence clé:** La librairie s'adapte au code ; le framework impose un cadre
 
 ---
 
@@ -204,11 +214,15 @@ API serveur]
 
 ---
 
-# Librairie ou framework ?
 
-- **Librairie:** Ensemble d'outils appelés lorsque le code en a besoin
-- **Framework:** Structure et règles qui organisent l'application
-- **Différence clé:** La librairie s'adapte au code ; le framework impose un cadre
+# Choisir un outil front-end
+
+- **Objectif:** Choisir un outil adapté au projet
+- **Critère 1:** Les besoins fonctionnels et la complexité de l'interface
+- **Critère 2:** Les compétences de l'équipe et le marché local
+- **Critère 3:** La qualité de l'écosystème, de la documentation et de la maintenance
+- **Critère 4:** Les contraintes de performance, d'accessibilité et de sécurité
+- **Résultat attendu:** Justifier le choix technique selon le contexte, pas uniquement selon la popularité
 
 ---
 
