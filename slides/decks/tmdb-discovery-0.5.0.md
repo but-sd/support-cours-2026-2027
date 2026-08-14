@@ -411,22 +411,6 @@ ul et li sont utilisés pour lister les films populaires, et chaque film est con
 
 ---
 
-# feature - css styles (suite) - web sémantique
-
-Modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées. Le code suivant est un extrait du fichier `src/front-end/components/MovieItem.tsx`:
-
-```typescript
-...
-    <div>
-      <h2>{movie.title}</h2>
-      <p>{movie.overview}</p>
-      <p>Release Date: {movie.release_date}</p>
-      <p>Rating: {movie.vote_average}</p>
-    </div>
-...
-```
----
-
 # feature - css styles (suite) - contenu de movieItem
 
 Nous allons maintenant modifier le contenu du composant `MovieItem` pour afficher uniquement l'affiche du film, le titre du film, l'année de sortie et la note du film. 
@@ -466,13 +450,22 @@ export default function MovieItem({ movie }: MovieItemProps) {
 <!--
 
 **releaseYear:** nous extrayons l'année de sortie du film à partir de la date de sortie complète (format YYYY-MM-DD) en utilisant la méthode `slice(0, 4)` pour ne conserver que les 4 premiers caractères de la chaîne de caractères.
+
 **poster:** tmdb fournit différents formats d'affiches de films, nous avons choisi le format w185 pour avoir une affiche de taille moyenne. Le format w185 correspond à une largeur de 185 pixels et une hauteur proportionnelle à l'image originale suffisant pour avoir une bonne qualité d'image tout en limitant la taille du fichier.
+
 **rating:** la note du film est arrondie à une décimale pour avoir une meilleure lisibilité. 
 
 -->
 
+---
 
-TODO - à finir - voir si bug avec date française
+# feature - css styles (suite) - css
+
+Nous allons maintenant ajouter les styles CSS pour améliorer l'apparence de l'application.
+
+Lien vers la feuille de style: [assets/app.css](../../assets/app.css)
+
+
 
 ---
 
