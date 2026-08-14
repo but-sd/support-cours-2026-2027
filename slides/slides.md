@@ -15,7 +15,7 @@ duration: 5min
 <p class="landing-kicker">Parcours TMDB Discovery App</p>
 
 <ul>
-  <li><a href="./introduction/">Introduction</a></li>
+  <li><a href="./presentation/">Présentation</a></li>
   <li><a href="./architecture-logicielle/">Architecture logicielle - <b>TMDB Discovery App</b></a></li>
   <li><span class="versions-group-title">TMDB Discovery App</span>
     <ul class="versions-list">
