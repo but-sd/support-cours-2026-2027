@@ -3,11 +3,19 @@ set -euo pipefail
 
 npm run build
 
-for deck in decks/*.md; do
+shopt -s nullglob
+decks=(decks/*.md)
+
+if [ ${#decks[@]} -eq 0 ]; then
+  echo "No deck files found in decks/."
+  exit 0
+fi
+
+for deck in "${decks[@]}"; do
   slug="${deck##*/}"
   slug="${slug%.md}"
 
-  npm run build:deck -- "$deck" --base "./"
+  npm run build:deck -- --base "./" "$deck"
 
   mkdir -p "dist/${slug}"
   rm -rf "dist/${slug}"/*
