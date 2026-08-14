@@ -8,7 +8,7 @@ layout: tmdb-hero
 
 # TMDB Discovery App - 0.5.0
 
-<p class="hero-kicker">Query Params - ESLint - Prettier - Pull Requests</p>
+<p class="hero-kicker">lint - format - style - query params - pull requests</p>
 
 ---
 
@@ -16,13 +16,15 @@ layout: tmdb-hero
     
 ## Application
 
-- Exposition de paramètres lors de l'appel de l'API TMDB pour récupérer les films populaires (langue, page, ...)
-- Utilisation de query params pour passer les paramètres de l'API TMDB via l'URL (query params) depuis le front-end.
+- Application de style CSS pour améliorer l'apparence de l'application.
+- Ajout de la gestion des query params pour récupérer les films populaires depuis l'API TMDB.
+  - Exposition de paramètres lors de l'appel de l'API TMDB pour récupérer les films populaires (langue, page, ...)
+  - Utilisation de query params pour passer les paramètres de l'API TMDB via l'URL (query params) depuis le front-end.
     
 ## Ingénierie logicielle
 
-- prettier, outil de formatage de code pour maintenir un style de code cohérent
-- eslint, outil de linting pour le code JavaScript/TypeScript
+- oxfmt, outil de formatage de code pour maintenir un style de code cohérent
+- oxlint, outil de linting pour le code JavaScript/TypeScript
 - pull request, mécanisme de contribution sur GitHub pour proposer des modifications à un projet
 
 <!--
@@ -38,16 +40,23 @@ gitGraph
     branch develop
     checkout develop
     branch feature/lint-and-format
-    commit id: "add prettier"
-    commit id: "add eslint"
+    commit id: "add oxfmt"
+    commit id: "add oxlint"
     commit id: "add lint-staged"
     commit id: "add husky pre-commit hook"
+    commit id: "format code"
     checkout develop
     merge feature/lint-and-format
+    branch feature/css-styles
+    commit id: "config"
+    checkout develop
     branch feature/query-params
     commit id: "add query params"
     commit id: "add query params in front-end"
+    checkout feature/css-styles
+    commit id: "add ..."
     checkout develop
+    merge feature/css-styles
     merge feature/query-params
     checkout main
     merge develop tag: "0.5.0"
@@ -64,67 +73,17 @@ git switch -c feature/lint-and-format
 
 ---
 
-# formatage du code avec prettier
+# linting avec oxlint
 
-**prettier** est un outil de formatage de code qui permet de maintenir un style de code cohérent dans le projet. Il peut être utilisé en complément d'eslint pour formater automatiquement le code selon les règles définies.
+**oxlint** est un outil de linting pour le code JavaScript/TypeScript qui permet de détecter les erreurs de style, les problèmes potentiels et les violations des bonnes pratiques. 
 
-Installer prettier et les plugins nécessaires pour React et TypeScript:
+Il permet d'améliorer la qualité du code et de maintenir une cohérence dans le projet.
 
-```bash
-npm install -D prettier eslint-config-prettier eslint-plugin-prettier
-```
-
-Créer un fichier de configuration `prettier.config.ts` à la racine du projet avec le contenu suivant:
-
-```typescript
-import { defineConfig } from 'prettier'
-
-export default defineConfig({
-  semi: true,
-  singleQuote: true,
-  trailingComma: 'all',
-  printWidth: 80,
-  tabWidth: 2,
-})
-```
-
-----
-
-# formatage du code avec prettier (suite)
-
-Ajouter le script de formatage dans le fichier `package.json`:
-
-```json
-{
-  "scripts": {
-    ...
-    "format": "prettier --write ."
-    ...
-  }
-}
-```
-
-Committer les modifications avant de lancer le formatage du code qui va modifier plusieurs fichiers du projet puis commiter à nouveau les modifications apportées par prettier.
-
-Pour lancer le formatage du code, exécuter la commande suivante:
+Installer oxlint :
 
 ```bash
-npm run format
+npm install -D oxlint
 ```
-
----
-
-# linting avec eslint
-
-Le **linting** est le processus d'analyse statique du code pour identifier les erreurs de style, les problèmes potentiels et les violations des bonnes pratiques. Il permet d'améliorer la qualité du code et de maintenir une cohérence dans le projet.
-
-**eslint** est un outil de linting populaire pour JavaScript et TypeScript. Il permet de définir des règles de style et de détecter les problèmes dans le code.
-
-Installer eslint et les plugins nécessaires pour React et TypeScript:
-
-```bash
-npm install -D eslint @eslint/js eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript-eslint
-````
 
 Ajouter le script de linting dans le fichier `package.json`:
 
@@ -132,53 +91,153 @@ Ajouter le script de linting dans le fichier `package.json`:
 {
   "scripts": {
     ...
-    "lint": "eslint ."
+    "lint": "oxlint -c oxlint.config.ts .",
+    "lint:fix": "oxlint -c oxlint.config.ts --fix .",
     ...
   }
 }
 ```
 
-----
+---
 
-# linting avec eslint (suite)
+# linting avec oxlint (suite)
 
-Ajouter le fichier de configuration `eslint.config.ts` à la racine du projet avec le contenu du slide suivant. Ce fichier configure eslint pour analyser les fichiers TypeScript et React, en utilisant les règles recommandées pour chaque technologie.
-
-----
+Créer un fichier de configuration `oxlint.config.ts` à la racine du projet avec le contenu suivant:
 
 ```typescript
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import { defineConfig } from "oxlint";
 
-export default defineConfig([
-  globalIgnores(['dist', 'coverage']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
+export default defineConfig({
+  plugins: ["typescript", "unicorn", "oxc", "react"],
+  categories: {
+    correctness: "error",
   },
-  eslintConfigPrettier,
-]);
+  rules: {},
+  env: {
+    builtin: true,
+  },
+});
 
 ```
+
+Cela configure oxlint pour analyser les fichiers TypeScript et React, en utilisant les règles recommandées pour chaque technologie. unicorn et oxc sont des plugins qui ajoutent des règles supplémentaires pour améliorer la qualité du code.
+
+---
+
+# linting avec oxlint (suite)
+
+Lancer le linting du code avec oxlint pour vérifier que le code respecte les règles définies dans le fichier de configuration `oxlint.config.ts`.
+
+```bash
+npm run lint
+```
+
+Résultat du linting avec oxlint:
+
+```bash
+@alexandre-girard-maif ➜ /workspaces/themoviedb-discovery-app-demo-2026-2027 (feature/lint-and-format) $ npm run lint
+
+> themoviedb-discovery-app-demo-2026-2027@1.0.0 lint
+> oxlint -c oxlint.config.ts .
+
+
+  × eslint(no-unused-vars): Catch parameter 'error' is caught but never used.
+    ╭─[src/back-end/index.ts:44:12]
+ 43 │ 
+ 44 │   } catch (error) {
+    ·            ──┬──
+    ·              ╰── 'error' is declared here
+ 45 │     res.status(500).json({ error: 'Failed to fetch popular movies' });
+    ╰────
+  help: Consider handling this error.
+
+Found 0 warnings and 1 error.
+Finished in 49ms on 11 files with 115 rules using 2 threads.
+```
+
+---
+
+# linting avec oxlint (suite)
+
+On peut corriger l'erreur de linting en supprimant le paramètre `error` de la clause `catch` dans le fichier `src/back-end/index.ts` à la ligne 44:
+
+```typescript
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch popular movies' });
+  }
+```
+
+ou en traitant mieux par exemple en loggant l'erreur dans la console pour faciliter le débogage .
+
+```typescript
+  } catch (error) {
+    console.error('Error fetching popular movies:', error);
+    res.status(500).json({ error: 'Failed to fetch popular movies' });
+  }
+```
+
+Cette deuxième approche est préférable car elle permet de logguer l'erreur dans la console pour faciliter le débogage.
+
+---
+
+# formatage du code avec oxfmt
+
+**oxfmt** est un outil de formatage de code qui permet de maintenir un style de code cohérent dans le projet. Il peut être utilisé en complément d'oxlint pour formater automatiquement le code selon les règles définies.
+
+Installer oxfmt :
+
+```bash
+npm install -D oxfmt
+```
+
+Créer un fichier de configuration `oxfmt.config.ts` à la racine du projet avec le contenu suivant:
+
+```typescript
+import { defineConfig } from 'oxfmt';
+
+export default defineConfig({
+  semi: true,
+  singleQuote: true,
+  trailingComma: 'all',
+  printWidth: 80,
+  tabWidth: 2,
+});
+```
+
+---
+
+# formatage du code avec oxfmt (suite)
+
+Ajouter le script de formatage dans le fichier `package.json`:
+
+```json
+{
+  "scripts": {
+    ...
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    ...
+  }
+}
+```
+
+Pour vérifier que le code respecte les règles définies dans le fichier de configuration `oxfmt.config.ts`.
+
+```bash
+npm run fmt:check
+```
+
+On peut également lancer le formatage du code avec oxfmt pour corriger automatiquement les erreurs de formatage:
+
+```bash
+npm run fmt
+```
+
 ----
 
 # Contrôle avec lint-staged
 
-**lint-staged** est un outil qui permet d'exécuter des scripts de linting uniquement sur les fichiers modifiés dans un commit. Cela permet de s'assurer que le code ajouté ou modifié respecte les règles de linting définies dans le projet.
+**lint-staged** est un outil qui permet d'exécuter des scripts de linting uniquement sur les fichiers modifiés dans un commit. Cela permet de s'assurer que le code ajouté ou modifié respecte les règles de linting définies dans le projet et de ne pas reformater l'ensemble du code existant, ce qui pourrait introduire des modifications inutiles et rendre l'historique des commits plus difficile à suivre.
 
 Ajouter le package `lint-staged` pour exécuter eslint sur les fichiers modifiés avant chaque commit:
 
@@ -191,11 +250,11 @@ Configurer lint-staged dans le fichier `package.json` pour exécuter eslint et p
 ```json
   ...
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+    "*": [
+      "npm run fmt",
+      "npm run lint:fix"
     ]
-  },
+  }
   ...
 ```
 
@@ -215,27 +274,207 @@ Si des fichiers ne respectent pas les règles de linting, le commit sera annulé
 
 Avec cette configuration le code existant n'est pas modifié, seul le code ajouté ou modifié dans le commit est analysé et corrigé si nécessaire. Cette approche permet de maintenir un code propre et cohérent dans le projet sans avoir à reformater l'ensemble du code existant, qui pourrait introduire des modifications inutiles et rendre l'historique des commits plus difficile à suivre.
 
-----
+---
 
-# pull request - lint and format
+# Formatage initial du code
 
-Pousser les modifications sur la branche `feature/lint-and-format` sur le dépôt distant et créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment, nous allons d'abord ajouter la feature `query-params` avant de fusionner les deux features dans la branche `develop`.
+Nous allons tout de même lancer une première fois pour formater l'ensemble du code existant et corriger les erreurs de linting. Cela permettra de partir sur une base propre pour les prochaines modifications.
 
-----
+```bash
+npm run fmt
+npm run lint:fix
+```
 
-# pull request
+Nous pouvons constater que de nombreux fichiers ont été modifiés par le formatage.  Cela pourrait rendre l'historique des commits plus difficile à suivre, mais cela permettra de partir sur une base propre pour les prochaines modifications.
 
-Une **pull request** est un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elle permet aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet. 
+---
 
-Les pull requests sont souvent utilisées pour collaborer sur des projets open source, mais elles peuvent également être utilisées dans des projets privés pour faciliter la collaboration entre les membres d'une équipe.
+# merge de la feature `lint-and-format` dans la branche `develop`
 
-Elle présente même un intétrêt pour un projet personnel, car elle permet de relire son code avant de le fusionner dans la branche cible du projet. Cela permet de détecter des erreurs ou des problèmes potentiels avant qu'ils ne soient intégrés dans le code principal.
+```bash
+git checkout develop
+git merge feature/lint-and-format
+```
 
-Nous verrons plus tard que l'on peut utiliser la pull request pour ajouter des contrôles (tests unitaires, tests d'intégration, linting, ...) avant de fusionner les modifications dans la branche cible du projet.
+Nous avons maintenant une base de code propre et cohérente pour continuer le développement de l'application sur la branche `develop`. Nous ne mergerons pas encore la branche `develop` dans la branche `main` car il n'y a pas encore de nouvelle fonctionnalité implémentée. 
 
-La **pull request** est une fonctionnalité de GitHub mais elle est également disponible sur d'autres plateformes de gestion de code source comme GitLab, Bitbucket, etc, sous des noms différents (merge request sur GitLab par exemple).
+---
 
-----
+# feature - css styles
+
+Se positionner sur la branche develop pour démarrer une nouvelle feature `css-styles`.
+
+```bash
+git switch develop
+git switch -c feature/css-styles
+```
+
+L'objectif de cette feature est d'ajouter une feuille de style CSS pour améliorer l'apparence de l'application. et d'améliorer la sémantique du code HTML en utilisant des balises HTML5 appropriées. (header, main, article ...)
+
+---
+
+# feature - css styles (suite)
+
+Afin d'avoir une configuration TypeScript adaptée pour la partie front-end, nous allons créer un fichier `tsconfig.frontend.json` à la racine du projet.
+
+Nous allons au préalable modifier le fichier `tsconfig.json` pour ajouter de la configuration pour la partie front-end.
+  
+```json 
+{
+  "files": [],
+  "references": [{ "path": "./tsconfig.backend.json" }, { "path": "./tsconfig.frontend.json" }]
+}
+```
+
+---
+
+# feature - css styles (suite)
+
+et créer un fichier `tsconfig.frontend.json` pour la partie front-end avec le contenu suivant:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src/front-end/**/*.ts", "src/front-end/**/*.tsx"]
+}
+```
+
+---
+
+# feature - css styles (suite) - web sémantique
+
+La sémantique du code HTML est importante pour l'accessibilité et le référencement. Nous allons donc modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées.
+
+Quelques exemples de balises HTML5 sémantiques que nous utiliserons dans notre application:
+- main: pour le contenu principal de la page
+- nav: pour la navigation
+- header: pour l'en-tête de la page
+- footer: pour le pied de page
+- section: pour les sections de contenu
+- article: pour les articles de contenu
+- aside: pour les contenus secondaires
+
+Référence: https://web.dev/learn/html/semantic-html?hl=fr
+
+---
+
+# feature - css styles (suite) - web sémantique
+
+Modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées. Le code suivant est un extrait du fichier `src/front-end/App.tsx`:
+```typescript
+...
+    <main>
+      <header>
+        <h1>Films populaires</h1>
+        <h2>
+          Films tendances en France, d'après les données de <b>The Movie Database</b>
+        </h2>
+      </header>
+      <section>
+      {movies ? (
+        <ul>
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <article>
+                <MovieItem movie={movie} />
+              </article>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading...</p>
+      )}
+      </section>
+    </main>
+...
+```
+
+<!--
+
+L'entête de la page d'accueil est maintenant sémantique et contient un titre principal (h1) et un sous-titre (h2). Le contenu principal de la page est maintenant contenu dans une balise main, et les films populaires sont contenus dans une balise section.
+
+ul et li sont utilisés pour lister les films populaires, et chaque film est contenu dans une balise article. Cela permet de mieux structurer le contenu de la page et d'améliorer l'accessibilité pour les utilisateurs utilisant des lecteurs d'écran.
+
+-->
+
+---
+
+# feature - css styles (suite) - web sémantique
+
+Modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées. Le code suivant est un extrait du fichier `src/front-end/components/MovieItem.tsx`:
+
+```typescript
+...
+    <div>
+      <h2>{movie.title}</h2>
+      <p>{movie.overview}</p>
+      <p>Release Date: {movie.release_date}</p>
+      <p>Rating: {movie.vote_average}</p>
+    </div>
+...
+```
+---
+
+# feature - css styles (suite) - contenu de movieItem
+
+Nous allons maintenant modifier le contenu du composant `MovieItem` pour afficher uniquement l'affiche du film, le titre du film, l'année de sortie et la note du film. 
+
+Ressources: https://developer.themoviedb.org/reference/configuration-details
+
+---
+
+# feature - css styles (suite) - contenu de movieItem
+
+```typescript
+...
+export default function MovieItem({ movie }: MovieItemProps) {
+  const releaseYear = movie.release_date.slice(0, 4);
+  const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w185${movie.poster_path}` : null;
+  const rating = movie.vote_average.toFixed(1);
+
+  return (
+    <div>
+      {posterUrl ? (
+        <img  src={posterUrl} alt={`Affiche de ${movie.title}`} />
+      ) : (
+        <div />
+      )}
+      <div>
+        <h2>{movie.title}</h2>
+        <p>
+          {releaseYear} · Rating {rating}
+        </p>
+      </div>
+    </div>
+  );
+}
+...
+```
+
+<!--
+
+**releaseYear:** nous extrayons l'année de sortie du film à partir de la date de sortie complète (format YYYY-MM-DD) en utilisant la méthode `slice(0, 4)` pour ne conserver que les 4 premiers caractères de la chaîne de caractères.
+**poster:** tmdb fournit différents formats d'affiches de films, nous avons choisi le format w185 pour avoir une affiche de taille moyenne. Le format w185 correspond à une largeur de 185 pixels et une hauteur proportionnelle à l'image originale suffisant pour avoir une bonne qualité d'image tout en limitant la taille du fichier.
+**rating:** la note du film est arrondie à une décimale pour avoir une meilleure lisibilité. 
+
+-->
+
+
+TODO - à finir - voir si bug avec date française
+
+---
 
 # feature - query params
 
@@ -379,6 +618,33 @@ Nous verrons plus tard comment ajouter des contrôles pour permettre à l'utilis
 Pousser les modifications sur la branche `feature/query-params` sur le dépôt distant et créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment.
 
 ----
+
+----
+
+# pull request
+
+Une **pull request** est un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elle permet aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet. 
+
+Les pull requests sont souvent utilisées pour collaborer sur des projets open source, mais elles peuvent également être utilisées dans des projets privés pour faciliter la collaboration entre les membres d'une équipe.
+
+Elle présente même un intétrêt pour un projet personnel, car elle permet de relire son code avant de le fusionner dans la branche cible du projet. Cela permet de détecter des erreurs ou des problèmes potentiels avant qu'ils ne soient intégrés dans le code principal.
+
+Nous verrons plus tard que l'on peut utiliser la pull request pour ajouter des contrôles (tests unitaires, tests d'intégration, linting, ...) avant de fusionner les modifications dans la branche cible du projet.
+
+La **pull request** est une fonctionnalité de GitHub mais elle est également disponible sur d'autres plateformes de gestion de code source comme GitLab, Bitbucket, etc, sous des noms différents (merge request sur GitLab par exemple).
+
+---
+
+TODO trouver une autre idée de pull request => application d'une feuille de style CSS
+
+Créer une nouvelle branche `feature/css-styles` à partir de la branche `develop` pour ajouter une feuille de style CSS à l'application. 
+
+```bash
+git switch develop
+git switch -c feature/css-styles
+```
+
+---
 
 # pull request
 
