@@ -463,9 +463,117 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
 Nous allons maintenant ajouter les styles CSS pour améliorer l'apparence de l'application.
 
-Lien vers la feuille de style: [assets/app.css](../../assets/app.css)
+Lien vers la feuille de style globale: <a href="./assets/global.css" target="_blank" rel="noopener noreferrer">assets/global.css</a> à copier dans `src/front-end/global.css` et importer la feuille de style dans le fichier `src/front-end/main.tsx`.
+
+```typescript
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./global.css";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+```
+
+---
+
+# feature - css styles (suite) - css
+
+Lien vers la feuille de style: <a href="./assets/app.css" target="_blank" rel="noopener noreferrer">assets/app.css</a> à copier dans `src/front-end/app.css` et importer la feuille de style dans le fichier `src/front-end/App.tsx`.
+
+Et modifier le code HTML de la page d'accueil pour utiliser les classes CSS définies dans la feuille de style `app.css`. Le code suivant est un extrait du fichier `src/front-end/App.tsx`:
+
+---
 
 
+```typescript
+...
+import "./app.css";
+...
+<main className="app-shell">
+      <header className="app-header">
+        <h1>Films populaires</h1>
+        <h2>
+          Films tendances en France, d'après les données de <b>The Movie Database</b>
+        </h2>
+      </header>
+      <section>
+        {movies ? (
+          <ul className="movie-grid">
+            {movies.map((movie) => (
+              <li key={movie.id}>
+                <article>
+                  <MovieItem movie={movie} />
+                </article>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="status-message">Loading...</p>
+        )}
+      </section>
+    </main>
+...
+```
+
+---
+
+# feature - css styles (suite) - css
+
+Modifier le code HTML du composant `MovieItem` pour utiliser les classes CSS définies dans la feuille de style `app.css`. Le code suivant est un extrait du fichier `src/front-end/components/MovieItem.tsx`:
+
+---
+
+```typescript
+import type { Movie } from "../../back-end/schemas/MoviesTypes";
+
+type MovieItemProps = {
+  movie: Movie;
+};
+
+export default function MovieItem({ movie }: MovieItemProps) {
+  const releaseYear = movie.release_date.slice(0, 4);
+  const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w185${movie.poster_path}` : null;
+  const rating = movie.vote_average.toFixed(1);
+
+  return (
+    <div className="movie-card">
+      {posterUrl ? <img className="movie-poster" src={posterUrl} alt={`Affiche de ${movie.title}`} /> : <div />}
+      <div className="movie-card__content">
+        <h2>{movie.title}</h2>
+        <p>
+          {releaseYear} · Rating {rating}
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+Pousser les modifications de la branche `feature/css-styles` sur le dépôt distant.
+
+----
+
+# pull request
+
+Une **pull request** est un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elle permet aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet. 
+
+Les pull requests sont souvent utilisées pour collaborer sur des projets open source, mais elles peuvent également être utilisées dans des projets privés pour faciliter la collaboration entre les membres d'une équipe.
+
+Elle présente même un intétrêt pour un projet personnel, car elle permet de relire son code avant de le fusionner dans la branche cible du projet. Cela permet de détecter des erreurs ou des problèmes potentiels avant qu'ils ne soient intégrés dans le code principal.
+
+Nous verrons plus tard que l'on peut utiliser la pull request pour ajouter des contrôles (tests unitaires, tests d'intégration, linting, ...) avant de fusionner les modifications dans la branche cible du projet.
+
+La **pull request** est une fonctionnalité de GitHub mais elle est également disponible sur d'autres plateformes de gestion de code source comme GitLab, Bitbucket, etc, sous des noms différents (merge request sur GitLab par exemple).
+
+---
+
+# feature - css styles - pull request
+
+Créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment.
 
 ---
 
@@ -612,35 +720,8 @@ Pousser les modifications sur la branche `feature/query-params` sur le dépôt d
 
 ----
 
-----
-
 # pull request
 
-Une **pull request** est un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elle permet aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet. 
-
-Les pull requests sont souvent utilisées pour collaborer sur des projets open source, mais elles peuvent également être utilisées dans des projets privés pour faciliter la collaboration entre les membres d'une équipe.
-
-Elle présente même un intétrêt pour un projet personnel, car elle permet de relire son code avant de le fusionner dans la branche cible du projet. Cela permet de détecter des erreurs ou des problèmes potentiels avant qu'ils ne soient intégrés dans le code principal.
-
-Nous verrons plus tard que l'on peut utiliser la pull request pour ajouter des contrôles (tests unitaires, tests d'intégration, linting, ...) avant de fusionner les modifications dans la branche cible du projet.
-
-La **pull request** est une fonctionnalité de GitHub mais elle est également disponible sur d'autres plateformes de gestion de code source comme GitLab, Bitbucket, etc, sous des noms différents (merge request sur GitLab par exemple).
-
----
-
-TODO trouver une autre idée de pull request => application d'une feuille de style CSS
-
-Créer une nouvelle branche `feature/css-styles` à partir de la branche `develop` pour ajouter une feuille de style CSS à l'application. 
-
-```bash
-git switch develop
-git switch -c feature/css-styles
-```
-
----
-
-# pull request
-
-Nous avons maintenant deux pull requests ouvertes sur le dépôt distant, une pour la feature `lint-and-format` et une pour la feature `query-params`. Nous allons fusionner les deux pull requests dans la branche `develop` pour valider les modifications apportées par les deux features.
+Nous avons maintenant deux pull requests ouvertes sur le dépôt distant, une pour la feature `css-styles` et une pour la feature `query-params`. Nous allons fusionner les deux pull requests dans la branche `develop` pour valider les modifications apportées par les deux features.
 
 Une fois les deux pull requests fusionnées dans la branche `develop`, nous allons créer une nouvelle pull request pour fusionner la branche `develop` dans la branche `main` et ainsi valider les modifications apportées par les deux features dans la version 0.5.0 de l'application.
