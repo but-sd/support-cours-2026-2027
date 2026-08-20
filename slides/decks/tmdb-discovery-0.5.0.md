@@ -13,23 +13,30 @@ layout: tmdb-hero
 ---
 
 # Objectifs
-    
+
 ## Application
 
-- Application de style CSS pour améliorer l'apparence de l'application.
-- Ajout de la gestion des query params pour récupérer les films populaires depuis l'API TMDB.
-  - Exposition de paramètres lors de l'appel de l'API TMDB pour récupérer les films populaires (langue, page, ...)
-  - Utilisation de query params pour passer les paramètres de l'API TMDB via l'URL (query params) depuis le front-end.
-    
+- Améliorer l'apparence de l'application avec des styles CSS.
+- Utiliser des balises HTML5 pour structurer les contenus.
+- Gérer les query params pour récupérer les films populaires depuis l'API TMDB.
+
 ## Ingénierie logicielle
 
-- oxfmt, outil de formatage de code pour maintenir un style de code cohérent
-- oxlint, outil de linting pour le code JavaScript/TypeScript
-- pull request, mécanisme de contribution sur GitHub pour proposer des modifications à un projet
+- Utiliser **oxfmt** pour formater le code.
+- Utiliser **oxlint** pour analyser le code JavaScript et TypeScript.
+- Utiliser les **pull requests** pour proposer et relire les modifications.
 
 <!--
 
-Exemple de notes
+**C**ascading **S**tyle **S**heets (feuilles de style en cascade), un langage standard utilisé pour mettre en forme et concevoir le design des pages web en **HTML**.
+
+**HTML5** est la dernière version du langage de balisage HTML, qui est utilisé pour structurer et présenter le contenu sur le web. Il introduit de nouvelles balises sémantiques (comme `<header>`, `<footer>`, `<article>`, `<section>`, etc.) qui permettent de mieux organiser le contenu et d'améliorer l'accessibilité et le référencement des pages web.
+
+**Query params** (paramètres de requête) sont des paramètres qui sont ajoutés à l'URL d'une requête HTTP pour transmettre des informations supplémentaires au serveur. Ils sont généralement utilisés pour filtrer, trier ou paginer les résultats d'une requête.
+
+**oxfmt** et **oxlint** sont des outils de formatage et d'analyse de code pour JavaScript et TypeScript. Ils permettent de maintenir un style de code cohérent et de détecter les erreurs de style, les problèmes potentiels et les violations des bonnes pratiques.
+
+**Pull requests** sont un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elles permettent aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet.
 
 -->
 ---
@@ -62,30 +69,46 @@ gitGraph
     merge develop tag: "0.5.0"
 ```
 
+<!--
+
+Nous allons tout d'abord créer une branche `feature/lint-and-format` pour ajouter les outils de linting et de formatage de code. Nous allons ensuite créer une branche `feature/css-styles` pour ajouter les styles CSS et améliorer la sémantique du code HTML. Enfin, nous allons créer une branche `feature/query-params` pour gérer les query params dans le front-end et le back-end.
+
+Nous ne fusionnerons pas directement les branches `feature/css-styles` et `feature/query-params` nous passerons par le concept de pull request pour relire le code avant de le fusionner dans la branche `develop`.
+-->
+
 ---
 
-Se positionner sur la branche develop pour démarrer une nouvelle feature `lint-and-format`.
+# Linting et formatage du code
+
+- **Objectif :** démarrer la feature `lint-and-format` depuis `develop`.
+- **Commande :**
 
 ```bash
 git switch develop
 git switch -c feature/lint-and-format
 ```
 
+- **Vérification :** la branche `feature/lint-and-format` est créée et active.
+
+<!--
+
+**Linting** est le processus d'analyse du code source pour détecter les erreurs de style, les problèmes potentiels et les violations des bonnes pratiques (variable non utilisée, ordre des imports, etc.). Il permet d'améliorer la qualité du code et de maintenir une cohérence dans le projet.
+
+**Formatage** est le processus de mise en forme du code source pour qu'il respecte un style de code cohérent. Il permet d'améliorer la lisibilité du code et de faciliter la collaboration entre les développeurs.
+
+-->
 ---
 
-# linting avec oxlint
+# Linting avec **oxlint**
 
-**oxlint** est un outil de linting pour le code JavaScript/TypeScript qui permet de détecter les erreurs de style, les problèmes potentiels et les violations des bonnes pratiques. 
-
-Il permet d'améliorer la qualité du code et de maintenir une cohérence dans le projet.
-
-Installer oxlint :
+- **Objectif :** détecter les erreurs et appliquer des règles de qualité au code JavaScript et TypeScript.
+- **Étape 1 :** installer `oxlint`.
 
 ```bash
 npm install -D oxlint
 ```
 
-Ajouter le script de linting dans le fichier `package.json`:
+- **Étape 2 :** ajouter les scripts dans `package.json`.
 
 ```json
 {
@@ -98,11 +121,21 @@ Ajouter le script de linting dans le fichier `package.json`:
 }
 ```
 
+- **Résultat attendu :** les commandes `npm run lint` et `npm run lint:fix` sont disponibles.
+
+<!--
+
+**npm run lint** : exécute oxlint pour analyser le code et détecter les erreurs de style et les problèmes potentiels.
+
+**npm run lint:fix** : exécute oxlint pour analyser le code et corriger automatiquement les erreurs de style et les problèmes potentiels.
+-->
 ---
 
-# linting avec oxlint (suite)
+# Configuration d'**oxlint**
 
-Créer un fichier de configuration `oxlint.config.ts` à la racine du projet avec le contenu suivant:
+- **Objectif :** définir les règles appliquées par `oxlint`.
+- **Étape 1 :** créer le fichier `oxlint.config.ts` à la racine du projet.
+- **Étape 2 :** ajouter la configuration suivante.
 
 ```typescript
 import { defineConfig } from "oxlint";
@@ -117,22 +150,32 @@ export default defineConfig({
     builtin: true,
   },
 });
-
 ```
 
+- **Résultat attendu :** `oxlint` analyse les fichiers **TypeScript** et **React** avec les règles de correction activées.
+
+<!--
 Cela configure oxlint pour analyser les fichiers TypeScript et React, en utilisant les règles recommandées pour chaque technologie. unicorn et oxc sont des plugins qui ajoutent des règles supplémentaires pour améliorer la qualité du code.
 
+**categories: { correctness: "error" }** indique que toutes les erreurs de correction doivent être signalées comme des erreurs.
+
+**rules: {}** permet de définir des règles supplémentaires ou de modifier les règles existantes. Dans cet exemple, nous n'avons pas défini de règles supplémentaires, mais nous pourrions le faire si nous le souhaitons.
+
+**env: { builtin: true }** indique que l'environnement d'exécution est celui de Node.js, ce qui permet à oxlint de comprendre les fonctionnalités spécifiques à Node.js et d'éviter de signaler des erreurs pour les fonctionnalités qui sont disponibles dans cet environnement.
+
+-->
 ---
 
-# linting avec oxlint (suite)
+# Vérifier avec **oxlint**
 
-Lancer le linting du code avec oxlint pour vérifier que le code respecte les règles définies dans le fichier de configuration `oxlint.config.ts`.
+- **Objectif :** analyser le code avec la configuration `oxlint.config.ts`.
+- **Commande :**
 
 ```bash
 npm run lint
 ```
 
-Résultat du linting avec oxlint:
+- **Résultat attendu :** `oxlint` détecte le paramètre `error` non utilisé dans le `catch`.
 
 ```bash
 @alexandre-girard-maif ➜ /workspaces/themoviedb-discovery-app-demo-2026-2027 (feature/lint-and-format) $ npm run lint
@@ -157,9 +200,9 @@ Finished in 49ms on 11 files with 115 rules using 2 threads.
 
 ---
 
-# linting avec oxlint (suite)
+# Corriger une erreur de linting
 
-On peut corriger l'erreur de linting en supprimant le paramètre `error` de la clause `catch` dans le fichier `src/back-end/index.ts` à la ligne 44:
+- **Option 1 :** supprimer le paramètre `error` lorsqu'il n'est pas utilisé.
 
 ```typescript
   } catch {
@@ -167,7 +210,7 @@ On peut corriger l'erreur de linting en supprimant le paramètre `error` de la c
   }
 ```
 
-ou en traitant mieux par exemple en loggant l'erreur dans la console pour faciliter le débogage .
+- **Option 2 :** journaliser l'erreur lorsqu'elle aide au débogage.
 
 ```typescript
   } catch (error) {
@@ -176,21 +219,21 @@ ou en traitant mieux par exemple en loggant l'erreur dans la console pour facili
   }
 ```
 
-Cette deuxième approche est préférable car elle permet de logguer l'erreur dans la console pour faciliter le débogage.
+- **Résultat attendu :** l'erreur de linting est corrigée et `oxlint` ne signale plus d'erreur. L'option 2 est préférable pour le débogage et la maintenance du code.
 
 ---
 
-# formatage du code avec oxfmt
+# Formatage avec **oxfmt**
 
-**oxfmt** est un outil de formatage de code qui permet de maintenir un style de code cohérent dans le projet. Il peut être utilisé en complément d'oxlint pour formater automatiquement le code selon les règles définies.
-
-Installer oxfmt :
+- **Objectif :** appliquer un style de code cohérent avec `oxfmt`.
+- **Étape 1 :** installer `oxfmt`.
 
 ```bash
 npm install -D oxfmt
 ```
 
-Créer un fichier de configuration `oxfmt.config.ts` à la racine du projet avec le contenu suivant:
+- **Étape 2 :** créer le fichier `oxfmt.config.ts` à la racine du projet.
+- **Étape 3 :** ajouter la configuration TypeScript suivante.
 
 ```typescript
 import { defineConfig } from 'oxfmt';
@@ -203,12 +246,12 @@ export default defineConfig({
   tabWidth: 2,
 });
 ```
-
 ---
 
-# formatage du code avec oxfmt (suite)
+# Utiliser **oxfmt**
 
-Ajouter le script de formatage dans le fichier `package.json`:
+- **Objectif :** vérifier et appliquer le formatage du code.
+- **Étape 1 :** ajouter les scripts dans `package.json`.
 
 ```json
 {
@@ -221,31 +264,32 @@ Ajouter le script de formatage dans le fichier `package.json`:
 }
 ```
 
-Pour vérifier que le code respecte les règles définies dans le fichier de configuration `oxfmt.config.ts`.
+- **Étape 2 :** vérifier le formatage avec la configuration `oxfmt.config.ts`.
 
 ```bash
 npm run fmt:check
 ```
 
-On peut également lancer le formatage du code avec oxfmt pour corriger automatiquement les erreurs de formatage:
+- **Étape 3 (optionnelle) :** corriger les écarts avec `npm run fmt`. Ne pas l'exécuter à cette étape pour éviter de reformater le code existant.
 
 ```bash
 npm run fmt
 ```
 
+- **Résultat attendu :** `npm run fmt:check` signale les écarts sans modifier les fichiers.
+
 ----
 
-# Contrôle avec lint-staged
+# Contrôle avec **lint-staged**
 
-**lint-staged** est un outil qui permet d'exécuter des scripts de linting uniquement sur les fichiers modifiés dans un commit. Cela permet de s'assurer que le code ajouté ou modifié respecte les règles de linting définies dans le projet et de ne pas reformater l'ensemble du code existant, ce qui pourrait introduire des modifications inutiles et rendre l'historique des commits plus difficile à suivre.
-
-Ajouter le package `lint-staged` pour exécuter eslint sur les fichiers modifiés avant chaque commit:
+- **Objectif :** analyser uniquement les fichiers modifiés avant un commit.
+- **Étape 1 :** installer `lint-staged`.
 
 ```bash
 npm install -D lint-staged
 ```
 
-Configurer lint-staged dans le fichier `package.json` pour exécuter eslint et prettier sur les fichiers TypeScript et React modifiés:
+- **Étape 2 :** configurer les commandes à exécuter dans `package.json`.
 
 ```json
   ...
@@ -258,79 +302,105 @@ Configurer lint-staged dans le fichier `package.json` pour exécuter eslint et p
   ...
 ```
 
+- **Résultat attendu :** seuls les fichiers du commit sont formatés et analysés.
+
+<!--
+
+**lint-staged** est un outil qui permet d'exécuter des scripts de linting uniquement sur les fichiers modifiés dans un commit. 
+
+Cela permet de s'assurer que le code ajouté ou modifié respecte les règles de linting définies dans le projet et de ne pas reformater l'ensemble du code existant, ce qui pourrait introduire des modifications inutiles et rendre l'historique des commits plus difficile à suivre.
+
+-->
+
 ----
 
-# Contrôle avec lint-staged (suite)
+# Hook `pre-commit` avec **lint-staged**
 
-Afin de s'assurer que lint-staged est exécuté avant chaque commit, nous allons ajouter un hook git `pre-commit` qui va exécuter lint-staged. 
-
-Nous avons déjà installé `husky` dans le projet pour gérer les hooks git. Il suffit donc de créer le hook `pre-commit` dans le dossier `.husky` avec le contenu suivant:
+- **Objectif :** lancer `lint-staged` avant chaque commit.
+- **Étape 1 :** utiliser `husky` pour gérer le hook Git.
+- **Étape 2 :** créer le fichier `.husky/pre-commit`.
 
 ```bash
 echo "npx lint-staged" > .husky/pre-commit
 ```
 
-Si des fichiers ne respectent pas les règles de linting, le commit sera annulé et il faudra corriger les erreurs avant de pouvoir commiter à nouveau. Lorsque cela est possible, les modifications seront automatiquement corrigées par prettier et eslint.
+- **Résultat attendu :** le commit est annulé si les fichiers modifiés ne respectent pas les règles.
+- **En cas d'échec :** corriger les erreurs signalées, puis relancer le commit.
+
+<!--
 
 Avec cette configuration le code existant n'est pas modifié, seul le code ajouté ou modifié dans le commit est analysé et corrigé si nécessaire. Cette approche permet de maintenir un code propre et cohérent dans le projet sans avoir à reformater l'ensemble du code existant, qui pourrait introduire des modifications inutiles et rendre l'historique des commits plus difficile à suivre.
-
+-->
 ---
 
 # Formatage initial du code
 
-Nous allons tout de même lancer une première fois pour formater l'ensemble du code existant et corriger les erreurs de linting. Cela permettra de partir sur une base propre pour les prochaines modifications.
+- **Objectif :** partir d'une base de code formatée et sans erreur de linting.
+- **Étape 1 :** formater l'ensemble du code existant.
+- **Étape 2 :** corriger automatiquement les erreurs détectées par le linter.
 
 ```bash
 npm run fmt
 npm run lint:fix
 ```
 
-Nous pouvons constater que de nombreux fichiers ont été modifiés par le formatage.  Cela pourrait rendre l'historique des commits plus difficile à suivre, mais cela permettra de partir sur une base propre pour les prochaines modifications.
+- **Résultat attendu :** de nombreux fichiers peuvent être modifiés lors de cette initialisation.
+- **Attention :** isoler ce formatage dans un commit dédié pour garder un historique lisible.
 
 ---
 
-# merge de la feature `lint-and-format` dans la branche `develop`
+# Merger `lint-and-format` dans `develop`
+
+- **Objectif :** intégrer les outils de qualité dans la branche `develop`.
+- **Commande :**
 
 ```bash
 git checkout develop
 git merge feature/lint-and-format
 ```
 
-Nous avons maintenant une base de code propre et cohérente pour continuer le développement de l'application sur la branche `develop`. Nous ne mergerons pas encore la branche `develop` dans la branche `main` car il n'y a pas encore de nouvelle fonctionnalité implémentée. 
+- **Vérification :** `develop` contient le linting et le formatage.
+- **Suite :** conserver `main` inchangée jusqu'à l'ajout d'une fonctionnalité.
 
 ---
 
-# feature - css styles
+# Feature `css-styles`
 
-Se positionner sur la branche develop pour démarrer une nouvelle feature `css-styles`.
+- **Objectif :** améliorer l'apparence et la structure HTML de l'application.
+- **Commande :**
 
 ```bash
 git switch develop
 git switch -c feature/css-styles
 ```
 
-L'objectif de cette feature est d'ajouter une feuille de style CSS pour améliorer l'apparence de l'application. et d'améliorer la sémantique du code HTML en utilisant des balises HTML5 appropriées. (header, main, article ...)
+- **Vérification :** la branche `feature/css-styles` est créée et active.
+- **Suite :** ajouter les styles CSS et les balises HTML5 sémantiques.
 
 ---
 
-# feature - css styles (suite)
+# Configurer TypeScript pour le front-end
 
-Afin d'avoir une configuration TypeScript adaptée pour la partie front-end, nous allons créer un fichier `tsconfig.frontend.json` à la racine du projet.
+- **Objectif :** séparer la configuration TypeScript du back-end et du front-end.
+- **Étape 1 :** préparer le fichier `tsconfig.frontend.json` à la racine du projet.
+- **Étape 2 :** référencer cette configuration dans `tsconfig.json`.
 
-Nous allons au préalable modifier le fichier `tsconfig.json` pour ajouter de la configuration pour la partie front-end.
-  
-```json 
+```json
 {
   "files": [],
   "references": [{ "path": "./tsconfig.backend.json" }, { "path": "./tsconfig.frontend.json" }]
 }
 ```
 
+- **Résultat attendu :** TypeScript utilise une configuration dédiée pour le front-end.
+
 ---
 
-# feature - css styles (suite)
+# Configuration TypeScript du front-end
 
-et créer un fichier `tsconfig.frontend.json` pour la partie front-end avec le contenu suivant:
+- **Objectif :** adapter TypeScript aux fichiers React et Vite du front-end.
+- **Étape 1 :** créer le fichier `tsconfig.frontend.json`.
+- **Étape 2 :** ajouter la configuration suivante.
 
 ```json
 {
@@ -351,28 +421,32 @@ et créer un fichier `tsconfig.frontend.json` pour la partie front-end avec le c
 }
 ```
 
----
-
-# feature - css styles (suite) - web sémantique
-
-La sémantique du code HTML est importante pour l'accessibilité et le référencement. Nous allons donc modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées.
-
-Quelques exemples de balises HTML5 sémantiques que nous utiliserons dans notre application:
-- main: pour le contenu principal de la page
-- nav: pour la navigation
-- header: pour l'en-tête de la page
-- footer: pour le pied de page
-- section: pour les sections de contenu
-- article: pour les articles de contenu
-- aside: pour les contenus secondaires
-
-Référence: https://web.dev/learn/html/semantic-html?hl=fr
+- **Résultat attendu :** les fichiers `.ts` et `.tsx` du front-end sont vérifiés avec les types de Vite et React.
 
 ---
 
-# feature - css styles (suite) - web sémantique
+# feature - css styles - html sémantique
 
-Modifier le code HTML de la page d'accueil pour utiliser des balises HTML5 appropriées. Le code suivant est un extrait du fichier `src/front-end/App.tsx`:
+- **Objectif :** structurer la page pour améliorer l'accessibilité et le référencement.
+- **Définition :** les balises HTML5 décrivent le rôle de chaque zone de contenu.
+- **Pourquoi c'est utile :** les lecteurs d'écran et les moteurs de recherche comprennent mieux la page.
+- **Exemple rapide :** `main` contient la page, `header` présente le titre, `section` regroupe les films et `article` décrit un film.
+- **Référence :** https://web.dev/learn/html/semantic-html?hl=fr
+
+---
+
+# # feature - css styles (suite) - html sémantique
+
+- **Objectif :** utiliser des balises HTML5 adaptées dans `src/front-end/App.tsx`.
+- **Étape 1 :** placer le contenu principal dans `main`.
+- **Étape 2 :** utiliser `header` pour le titre et `section` pour la liste.
+- **Étape 3 :** encapsuler chaque film dans un `article`.
+- **Résultat attendu :** la page est plus lisible et mieux interprétée par les technologies d'assistance.
+
+---
+
+# feature - css styles (suite) - html sémantique
+
 ```typescript
 ...
     <main>
@@ -413,9 +487,11 @@ ul et li sont utilisés pour lister les films populaires, et chaque film est con
 
 # feature - css styles (suite) - contenu de movieItem
 
-Nous allons maintenant modifier le contenu du composant `MovieItem` pour afficher uniquement l'affiche du film, le titre du film, l'année de sortie et la note du film. 
-
-Ressources: https://developer.themoviedb.org/reference/configuration-details
+- **Objectif :** afficher les informations essentielles d'un film.
+- **Définition :** `MovieItem` présente l'affiche, le titre, l'année de sortie et la note.
+- **Pourquoi c'est utile :** une carte concise améliore la lecture de la liste de films.
+- **Exemple rapide :** utiliser une affiche TMDB optimisée pour limiter le poids des images.
+- **Référence :** https://developer.themoviedb.org/reference/configuration-details
 
 ---
 
@@ -461,9 +537,10 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
 # feature - css styles (suite) - css
 
-Nous allons maintenant ajouter les styles CSS pour améliorer l'apparence de l'application.
+- **Objectif :** appliquer les styles communs à toute l'application.
+- **Étape 1 :** copier <a href="./assets/global.css" target="_blank" rel="noopener noreferrer">assets/global.css</a> dans `src/front-end/global.css`.
+- **Étape 2 :** importer la feuille de style dans `src/front-end/main.tsx`.
 
-Lien vers la feuille de style globale: <a href="./assets/global.css" target="_blank" rel="noopener noreferrer">assets/global.css</a> à copier dans `src/front-end/global.css` et importer la feuille de style dans le fichier `src/front-end/main.tsx`.
 
 ```typescript
 import { StrictMode } from "react";
@@ -482,9 +559,11 @@ createRoot(document.getElementById("root")!).render(
 
 # feature - css styles (suite) - css
 
-Lien vers la feuille de style: <a href="./assets/app.css" target="_blank" rel="noopener noreferrer">assets/app.css</a> à copier dans `src/front-end/app.css` et importer la feuille de style dans le fichier `src/front-end/App.tsx`.
-
-Et modifier le code HTML de la page d'accueil pour utiliser les classes CSS définies dans la feuille de style `app.css`. Le code suivant est un extrait du fichier `src/front-end/App.tsx`:
+- **Objectif :** appliquer les styles spécifiques à l'écran des films populaires.
+- **Étape 1 :** copier <a href="./assets/app.css" target="_blank" rel="noopener noreferrer">assets/app.css</a> dans `src/front-end/app.css`.
+- **Étape 2 :** importer la feuille de style dans `src/front-end/App.tsx`.
+- **Étape 3 :** appliquer les classes CSS aux éléments de la page.
+- **Résultat attendu :** la page utilise les styles définis dans `app.css`.
 
 ---
 
@@ -523,7 +602,11 @@ import "./app.css";
 
 # feature - css styles (suite) - css
 
-Modifier le code HTML du composant `MovieItem` pour utiliser les classes CSS définies dans la feuille de style `app.css`. Le code suivant est un extrait du fichier `src/front-end/components/MovieItem.tsx`:
+- **Objectif :** appliquer les styles de `app.css` à chaque carte de film.
+- **Étape 1 :** ajouter les classes de la carte et de son contenu.
+- **Étape 2 :** appliquer une classe à l'affiche du film.
+- **Résultat attendu :** chaque film utilise la même présentation visuelle.
+
 
 ---
 
@@ -553,11 +636,19 @@ export default function MovieItem({ movie }: MovieItemProps) {
 }
 ```
 
-Pousser les modifications de la branche `feature/css-styles` sur le dépôt distant.
+- **Étape 3 :** pousser les modifications de `feature/css-styles` sur le dépôt distant.
 
 ----
 
-# pull request
+# Pull requests
+
+- **Objectif :** proposer une modification avant de l'intégrer dans une branche.
+- **Définition :** une pull request permet d'examiner et de discuter des changements avant leur fusion.
+- **Pourquoi c'est utile :** elle facilite la relecture, même dans un projet personnel, et détecte les problèmes plus tôt.
+- **Exemple rapide :** ajouter des contrôles de linting ou de tests avant la fusion.
+- **Plateformes :** GitHub utilise les pull requests ; GitLab les appelle merge requests.
+
+<!--
 
 Une **pull request** est un mécanisme de contribution sur GitHub qui permet de proposer des modifications à un projet. Elle permet aux contributeurs de soumettre leurs changements pour examen et discussion avant qu'ils ne soient fusionnés dans une branche du projet. 
 
@@ -569,36 +660,52 @@ Nous verrons plus tard que l'on peut utiliser la pull request pour ajouter des c
 
 La **pull request** est une fonctionnalité de GitHub mais elle est également disponible sur d'autres plateformes de gestion de code source comme GitLab, Bitbucket, etc, sous des noms différents (merge request sur GitLab par exemple).
 
+-->
 ---
 
-# feature - css styles - pull request
+# Créer la pull request `css-styles`
 
-Créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment.
+- **Objectif :** proposer les styles CSS à la relecture avant leur intégration.
+- **Étape 1 :** créer une pull request depuis `feature/css-styles`.
+- **Étape 2 :** choisir la branche `develop` comme cible.
+- **Résultat attendu :** la pull request est ouverte, sans fusion immédiate.
 
+<!--
+
+Nous ne validerons pas la pull request immédiatement, nous allons d'abord créer une nouvelle branche pour ajouter la feature `query-params`. Nous reviendrons ensuite sur cette pull request pour la relire et la fusionner dans `develop`.
+
+-->
 ---
 
-# feature - query params
+# Feature `query-params`
 
-Se positionner sur la branche develop pour démarrer une nouvelle feature `query-params`.
+- **Objectif :** transmettre des paramètres d'**URL** à l'**API** **TMDB** pour filtrer ou paginer les films.
+- **Étape 1 :** créer la branche `feature/query-params`.
 
 ```bash
 git switch develop
 git switch -c feature/query-params
 ```
 
-L'objectif de cette feature est de permettre à l'utilisateur de passer des paramètres à l'API TMDB pour récupérer les films populaires. Ces paramètres seront passés via l'URL (query params) depuis le front-end.
+- **Étape 2 :** transmettre les paramètres au back-end, puis vérifier la réponse de TMDB.
+- **Étape 3 :** lire les paramètres dans le front-end et les transmettre au back-end.
+- **Résultat attendu :** l'URL de l'application contrôle la requête de films populaires.
+
+<!--
 
 Les query params sont des paramètres qui sont ajoutés à l'URL d'une requête HTTP pour transmettre des informations supplémentaires au serveur. Ils sont généralement utilisés pour filtrer, trier ou paginer les résultats d'une requête.
 
 Nous allons avoir une approche progressive pour implémenter cette feature. Nous allons d'abord ajouter les query params dans le back-end, vérifier que l'API TMDB fonctionne correctement avec ces paramètres, puis nous allons ajouter les query params dans le front-end pour permettre à l'utilisateur de les modifier.
 
+-->
+
 ----
 
-# feature - query params - back-end
+# Paramètres par défaut du back-end
 
-Les query params sont déjà gérés par l'API TMDB, il suffit donc de les transmettre depuis notre back-end vers l'API TMDB. Nous allons donc modifier la route `/api/movies/popular` pour accepter les query params `language` et `page`.
-
-Nous allons dans un premier temps ajouter des constantes pour les query params dans le fichier `src/back-end/constants.ts`:
+- **Objectif :** transmettre les query params à **TMDB**.
+- **Étape 1 :** accepter `language`, `page` et `region` sur la route `/api/movies/popular`.
+- **Étape 2 :** définir les valeurs par défaut dans `src/back-end/constants.ts`.
 
 ```typescript
 // Langue par défaut pour les requêtes à l'API TMDB
@@ -611,13 +718,26 @@ export const DEFAULT_PAGE = '1';
 export const DEFAULT_REGION = 'FR';
 ```
 
-Nous aurons ainsi un comportement par défaut pour les requêtes à l'API TMDB si l'utilisateur ne fournit pas de query params.
+- **Résultat attendu :** la requête TMDB utilise ces valeurs lorsque l'URL ne fournit aucun paramètre.
 
+<!--
+
+Les query params sont déjà gérés par l'API TMDB, il suffit donc de les transmettre depuis notre back-end vers l'API TMDB. Nous allons donc modifier la route `/api/movies/popular` pour accepter les query params `language` et `page`.
+
+-->
 ----
 
-# feature - query params - back-end (suite)
+# feature - query params - back-end
 
-Extrait des modifications apportées à la route `/api/movies/popular` dans le fichier `src/back-end/index.ts` pour gérer les query params `language`, `page` et `region`:
+- **Objectif :** construire la requête TMDB à partir des paramètres reçus par le back-end.
+- **Étape 1 :** créer un `URLSearchParams` pour la requête sortante.
+- **Étape 2 :** lire `language`, `page` et `region` depuis la requête cliente.
+- **Étape 3 :** appliquer les valeurs par défaut et appeler TMDB.
+- **Résultat attendu :** TMDB reçoit les paramètres sélectionnés ou les valeurs par défaut.
+
+---
+
+# feature - query params - back-end
 
 ```typescript
 ...
@@ -643,31 +763,59 @@ Extrait des modifications apportées à la route `/api/movies/popular` dans le f
 ...
 ```
 
+<!--
+
+**URLSearchParams** est une interface qui permet de travailler avec les paramètres d'une URL. Elle fournit des méthodes pour ajouter, supprimer et récupérer des paramètres de requête.
+
+**_req.query** contient les paramètres de requête envoyés par le client. Nous extrayons `language`, `page` et `region` de cette propriété pour les utiliser dans la requête vers l'API TMDB.
+
+**queryParams.append** ajoute un paramètre de requête à l'objet `URLSearchParams`. Si le paramètre est fourni par le client, il est utilisé ; sinon, la valeur par défaut est appliquée.
+
+**popular?${queryParams.toString()}** construit l'URL finale pour la requête à l'API TMDB en incluant les paramètres de requête sous forme de chaîne de caractères.
+
+-->
+
 ----
 
-# feature - query params - back-end (suite)
+# Vérifier la route avec `curl`
 
-Tester la route `/api/movies/popular` avec les query params `language`, `page` et `region` pour vérifier que l'API TMDB fonctionne correctement avec ces paramètres.
-
-Pour ajouter les query params à la requête, il suffit de les ajouter à l'URL de la requête. Par exemple, pour récupérer les films populaires en anglais (en-US) et à la page 2, il suffit d'ajouter `?language=en-US&page=2` à l'URL de la requête.
+- **Test à exécuter :** appeler `/api/movies/popular` avec `language`, `page` et `region`.
+- **Commande :**
 
 ```bash
 curl -X GET "http://localhost:3000/api/movies/popular?language=en-US&page=2" -H "accept: application/json"
 ```
 
-Une fois que la route est testée et fonctionne correctement, commiter les modifications.
+- **Résultat attendu :** la réponse contient les films populaires en anglais de la page 2.
+
+<!--
+
+Pour ajouter les query params à la requête, il suffit de les ajouter à l'URL de la requête. Par exemple, pour récupérer les films populaires en anglais (en-US) et à la page 2, il suffit d'ajouter `?language=en-US&page=2` à l'URL de la requête.
+
+-->
+----
+
+# feature - query params - front-end
+
+- **Objectif :** utiliser l'URL de la page pour paramétrer la requête de films.
+- **Étape 1 :** lire `language`, `page` et `region` dans l'URL.
+- **Étape 2 :** appliquer les valeurs par défaut si un paramètre est absent.
+- **Étape 3 :** transmettre les paramètres au back-end lors de l'appel API.
+- **Résultat attendu :** l'URL avec les query params `language`, `page` et `region` correctement appliqués.
 
 ----
 
 # feature - query params - front-end
 
-Nous allons dans un premier temps uniquement gérer le fait de passer les query params `language`, `page` et `region` depuis le front-end vers le back-end en passant par l'URL de la requête. Nous verrons plus tard comment ajouter des contrôles pour permettre à l'utilisateur de modifier ces paramètres depuis l'interface utilisateur.
+- **Objectif :** transmettre les paramètres de l'URL à la requête de films.
+- **Étape 1 :** créer un `URLSearchParams` à partir de l'URL de la page.
+- **Étape 2 :** lire `language`, `page` et `region` avec leurs valeurs par défaut.
+- **Étape 3 :** ajouter ces paramètres à l'appel de `/api/movies/popular`.
+- **Résultat attendu :** le front-end demande les films correspondant à l'URL courante.
 
-----
+---
 
-# feature - query params - front-end (suite)
-
-Extrait des modifications apportées au fichier `src/front-end/App.tsx` pour gérer les query params `language`, `page` et `region`:
+# feature - query params - front-end
 
 ```typescript
 export default function App() {
@@ -693,24 +841,27 @@ export default function App() {
 
 ----
 
-# feature - query params - front-end (suite)
+# Vérifier les query params dans le navigateur
 
-Comme pour le back-end, nous allons tester que la page d'accueil du front-end fonctionne correctement avec les query params `language`, `page` et `region`. Pour cela, il suffit de modifier l'URL de la page d'accueil pour ajouter les query params.
-
-Par exemple, pour récupérer les films populaires en anglais (en-US) et à la page 2, il suffit d'ajouter `?language=en-US&page=2` à l'URL de la page d'accueil.
-
-Dans votre navigateur, vous pouvez tester l'URL suivante pour vérifier que les query params sont bien pris en compte par le front-end et le back-end:
+- **Test à exécuter :** ouvrir la page avec `language`, `page` et `region` dans l'URL.
+- **Commande :**
 
 ```bash
 http://127.0.0.1:5173/?language=en-US&page=2
 ```
 
-Notre application est maintenant capable de gérer les query params `language`, `page` et `region` pour récupérer les films populaires depuis l'API TMDB.
+- **Résultat attendu :** la page affiche les films populaires en anglais de la page 2.
 
 ----
 
-# feature - query params - front-end (suite)
+# Finaliser `query-params`
 
+- **Étape 1 :** afficher le titre `Films populaires` pour la langue française par défaut.
+- **Étape 2 :** reporter les contrôles de choix de langue, de page et de région à une évolution ultérieure.
+- **Étape 3 :** pousser `feature/query-params` et créer une pull request vers `develop`.
+- **Résultat attendu :** la pull request est ouverte, sans fusion immédiate.
+
+<!--
 
 La langue par défaut étant le français (fr-FR), modifier le titre de la page d'accueil pour afficher "Films populaires" au lieu de "Popular Movies".
 
@@ -718,10 +869,35 @@ Nous verrons plus tard comment ajouter des contrôles pour permettre à l'utilis
 
 Pousser les modifications sur la branche `feature/query-params` sur le dépôt distant et créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment.
 
+-->
 ----
 
-# pull request
+# Finaliser la version `0.5.0`
 
-Nous avons maintenant deux pull requests ouvertes sur le dépôt distant, une pour la feature `css-styles` et une pour la feature `query-params`. Nous allons fusionner les deux pull requests dans la branche `develop` pour valider les modifications apportées par les deux features.
+- **Étape 1 :** fusionner les pull requests `css-styles` et `query-params` dans `develop`.
+- **Étape 2 :** vérifier que `develop` contient les deux fonctionnalités.
+- **Étape 3 :** créer une pull request de `develop` vers `main`.
+- **Résultat attendu :** la version `0.5.0` est prête à être validée sur `main`.
 
-Une fois les deux pull requests fusionnées dans la branche `develop`, nous allons créer une nouvelle pull request pour fusionner la branche `develop` dans la branche `main` et ainsi valider les modifications apportées par les deux features dans la version 0.5.0 de l'application.
+<!--
+
+Lors de la fusion de pull request il peut y avoir des conflits si les mêmes fichiers ont été modifiés dans les deux branches. Il faudra alors résoudre ces conflits avant de finaliser la fusion.
+
+-->
+
+---
+
+# Récapitulatif de la version 0.5.0
+
+## Nouvelles fonctionnalités
+
+- Ajout de styles CSS pour améliorer l'apparence de l'application.
+- Utilisation de balises HTML5 pour structurer le contenu de la page.
+- Gestion des query params pour récupérer les films populaires depuis l'API TMDB.
+
+## Améliorations techniques
+
+- Mise en place de **oxfmt** pour le formatage du code.
+- Mise en place de **oxlint** pour l'analyse du code JavaScript et TypeScript.
+- Utilisation de **lint-staged** et **husky** pour exécuter le linting et le formatage avant chaque commit.
+- Utilisation de **pull requests** pour proposer et relire les modifications avant de les fusionner dans la branche cible.
