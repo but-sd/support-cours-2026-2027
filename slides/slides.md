@@ -23,7 +23,8 @@ duration: 5min
       <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
       <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>
       <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
-      <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0 - en cours</a></li>
+      <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0 - dernière passe sur le titre à faire</a></li>
+      <li><a href="./tmdb-discovery-0.6.0/">Version 0.6.0 - en cours de réalisation</a></li>
     </ul>
   </li>
 </ul>

@@ -399,8 +399,7 @@ git switch -c feature/css-styles
 # Configuration TypeScript du front-end
 
 - **Objectif :** adapter TypeScript aux fichiers React et Vite du front-end.
-- **Étape 1 :** créer le fichier `tsconfig.frontend.json`.
-- **Étape 2 :** ajouter la configuration suivante.
+- **Étape 1 :** ajouter la configuration suivante dans `tsconfig.frontend.json`.
 
 ```json
 {
@@ -874,10 +873,12 @@ Pousser les modifications sur la branche `feature/query-params` sur le dépôt d
 
 # Finaliser la version `0.5.0`
 
-- **Étape 1 :** fusionner les pull requests `css-styles` et `query-params` dans `develop`.
-- **Étape 2 :** vérifier que `develop` contient les deux fonctionnalités.
-- **Étape 3 :** créer une pull request de `develop` vers `main`.
-- **Résultat attendu :** la version `0.5.0` est prête à être validée sur `main`.
+- **Étape 1:** fusionner les pull requests `css-styles` et `query-params` dans `develop`.
+- **Étape 2:** vérifier que `develop` contient les deux fonctionnalités.
+- **Étape 3:** créer une pull request de `develop` vers `main`.
+- **Étape 4:** relire les modifications et valider la pull request.
+- **Étape 5:** fusionner la pull request et tagger la version `0.5.0`.
+- **Résultat attendu:** la branche `main` contient les deux fonctionnalités et est taggée avec `0.5.0`.
 
 <!--
 
