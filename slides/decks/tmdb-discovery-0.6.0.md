@@ -288,6 +288,77 @@ Il serait intéressant que la phase de tests unitaires soit automatisée dans le
 
 ---
 
-# ci - back-end - tests unitaires
+# ci - back-end - tests unitaires - vérification de la pull request
 
-TODO expliquer comment configurer le pipeline d'intégration continue pour exécuter les tests unitaires du back-end à chaque push sur la branche `develop` et à chaque pull request vers `develop`, et comment protéger la branche `develop` pour éviter de merger du code non testé.
+Bien que minimaliste, nous avons mis en place des tests unitaires pour le back-end de l'application TMDB Discovery App. 
+Dorénavant nous pourrions sécuriser nos commits et nos merges sur la branche `develop` en ajoutant une étape de tests unitaires avant de merger du code sur la branche `develop`. 
+L'idée est ici de vérifier que les tests unitaires passent avant de merger du code sur la branche `develop`. La pull request est le bon moment pour vérifier que les tests unitaires passent avant de merger du code sur la branche `develop`. Nous pourrions ajouter une étape maunuelle de vérification des tests unitaires avant de merger du code sur la branche `develop`, mais il serait plus intéressant d'automatiser cette étape dans le pipeline d'intégration continue pour éviter de merger du code non testé sur la branche `develop`. 
+
+---
+
+# ci - back-end - tests unitaires - vérification de la pull request
+
+Cette phase d'automatisation qui réagit à des événements git (push, pull request, etc.) est appelée intégration continue (CI). Elle permet de mettre en place des actions automatisées pour vérifier que le code répond à certains critères de qualité avant d'être intégré dans la branche cible ( lint, tests unitaires, tests d'intégration, etc.). Nous allons donc mettre en place une action GitHub pour vérifier que le formatage, le lint et les tests unitaires passent avant de merger du code sur la branche `develop`.
+
+Dans github, l'intégration continue est traitée par les actions GitHub (GitHub Actions) qui permettent d'automatiser des tâches en réponse à des événements git (push, pull request, etc.). Nous allons donc créer un fichier de configuration pour l'action GitHub qui va vérifier que le formatage, le lint et les tests unitaires passent avant de merger du code sur la branche `develop`.
+
+---
+
+# ci - back-end - tests unitaires - vérification de la pull request
+
+
+copier <a href="./assets/code-sample/back-end/ci.yml" target="_blank" rel="noopener noreferrer">ci.yml</a> vers `.github/workflows/ci.yml`.
+
+referrence https://docs.github.com/en/actions/get-started/quickstart
+
+
+Un workflow possède un nom, un déclencheur (trigger) et une ou plusieurs jobs. Un job est un ensemble d'étapes (steps) qui s'exécutent sur un runner. Un step est une action ou une commande qui s'exécute dans le contexte du job. Un workflow peut contenir plusieurs jobs qui s'exécutent en parallèle ou en séquence.
+
+Un workflow est défini dans un fichier YAML qui se trouve dans le répertoire `.github/workflows` du dépôt. Le nom du fichier n'a pas d'importance, mais il doit avoir l'extension `.yml` ou `.yaml`. Le nom du workflow est défini par la clé `name` et le déclencheur par la clé `on`. Les jobs sont définis par la clé `jobs` et chaque job possède un nom, un runner et une liste d'étapes.
+
+Un job s'exécute sur un runner qui est une machine virtuelle ou un conteneur qui exécute les étapes du job. Il faut considérer que chaque job s'exécute dans un environnement isolé et qu'il n'y a pas de partage d'état entre les jobs. Il est donc important de configurer correctement le runner pour qu'il dispose de toutes les dépendances nécessaires à l'exécution des étapes du job. Il faut aussi considérer que le runner ne contient pas d'outils, les action setup-* permettent d'installer les outils nécessaires à l'exécution des étapes du job. 
+
+---
+
+Une fois poussée la branche `feature/refactoring-backend` sur le dépôt distant, une action GitHub va se déclencher automatiquement pour vérifier que le formatage, le lint et les tests unitaires passent.
+
+Nous allons maintenant de protéger la branche `develop` pour éviter de merger du code non testé sur cette branche. Nous allons donc configurer les règles de protection de la branche `develop` pour exiger que les tests unitaires passent avant de pouvoir merger du code sur cette branche.
+
+Une fois la branche `develop` protégée, il ne sera plus possible de merger du code sur cette branche sans que les tests unitaires passent. Nous allons donc créer une pull request de la branche `feature/refactoring-backend` vers la branche `develop` et vérifier que la protection de la branche `develop` fonctionne correctement.
+
+---
+
+# end-point détail d'un film - back-end
+
+Créer une branche `feature/movie-detail-endpoint-backend` depuis `develop` pour ajouter le end-point détail d'un film pour le back-end.
+
+TODO ajouter le end-point détail d'un film pour le back-end. Le end-point doit être accessible à l'url `/api/movies/:id` où `:id` est l'identifiant du film. Le end-point doit retourner les détails du film correspondant à l'identifiant passé en paramètre. Le end-point doit retourner un code 404 si le film n'existe pas.
+
+---
+
+# page détail d'un film - front-end
+
+Créer une branche `feature/movie-detail-page-frontend` depuis `develop` pour ajouter la page détail d'un film pour le front-end.
+
+Problème notre application front-end contient pour l'instant uniquement une page d'accueil qui affiche la liste des films populaires. Nous allons donc ajouter une page détail d'un film pour le front-end. La page détail d'un film doit être accessible à l'url `/movies/:id` où `:id` est l'identifiant du film. La page détail d'un film doit afficher les détails du film correspondant à l'identifiant passé en paramètre. La page détail d'un film doit afficher un message d'erreur si le film n'existe pas.
+
+Afin de pouvoir mettre en place plusieurs pages dans notre application front-end, nous allons mettre en place un système de routage pour notre application front-end. 
+
+---
+
+Mise en place de react-router et react-router-dom
+
+Test avec des pages basiques pour vérifier que le routage fonctionne correctement.
+
+Utilisation de Navigate pour rediriger la page d'accueil vers la liste des films populaires.
+
+Reprise du code mis de côté pour la page d'accueil et la liste des films populaires.
+
+Récupération de l'identifiant du film depuis l'url pour afficher les détails du film correspondant.
+
+On ne peut plus avancer dans le développement de la page détail d'un film pour le front-end tant que le end-point détail d'un film pour le back-end n'est pas implémenté. Il faudra donc attendre que la branche `feature/movie-detail-endpoint-backend` soit mergée dans `develop` avant de pouvoir continuer le développement de la branche `feature/movie-detail-page-frontend` et il faudra mettre à jour la branche `feature/movie-detail-page-frontend` avec le code de la branche `develop` pour récupérer le end-point détail d'un film pour le back-end grâce à la commande `git rebase develop`.
+
+---
+
+TODO: la branche `feature/movie-detail-page-frontend` ne pourra être complète que lorsque le end-point détail d'un film pour le back-end sera implémenté. Il faudra donc attendre que la branche `feature/movie-detail-endpoint-backend` soit mergée dans `develop` avant de pouvoir continuer le développement de la branche `feature/movie-detail-page-frontend` en ce mettant à jour avec le code de la branche `develop`.  Explique le concept de rebase et comment l'utiliser pour mettre à jour la branche `feature/movie-detail-page-frontend` avec le code de la branche `develop`.
+
