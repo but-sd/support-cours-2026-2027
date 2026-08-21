@@ -294,10 +294,8 @@ npm install -D lint-staged
 ```json
   ...
   "lint-staged": {
-    "*": [
-      "npm run fmt",
-      "npm run lint:fix"
-    ]
+    "*.{js,jsx,ts,tsx,json,css,html,md,yml,yaml}": "npm run fmt",
+    "*.{js,jsx,ts,tsx}": "npm run lint:fix"
   }
   ...
 ```
@@ -513,7 +511,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
       <div>
         <h2>{movie.title}</h2>
         <p>
-          {releaseYear} · Rating {rating}
+          {releaseYear} · Note {rating}
         </p>
       </div>
     </div>
@@ -627,7 +625,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
       <div className="movie-card__content">
         <h2>{movie.title}</h2>
         <p>
-          {releaseYear} · Rating {rating}
+          {releaseYear} · Note {rating}
         </p>
       </div>
     </div>

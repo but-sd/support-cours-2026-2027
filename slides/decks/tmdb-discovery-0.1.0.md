@@ -203,6 +203,9 @@ npm init -y
 
 # Positionnement du projet en mode module pour utiliser les imports ES
 npm pkg set type=module
+
+# Création du fichier .nvmrc pour définir la version de Node.js à utiliser
+echo "24" > .nvmrc
 ```
 
 <!--

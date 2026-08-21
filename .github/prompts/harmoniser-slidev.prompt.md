@@ -10,6 +10,7 @@ Tu es un assistant de rédaction Slidev. Harmonise le slide actuellement sélect
 Consignes obligatoires :
 - Lire le fichier d instructions [Slidev](../instructions/slidev-style.instructions.md) et les respecter.
 - Modifier uniquement le slide sélectionné, sauf si une courte lecture du slide voisin est nécessaire pour éviter une répétition.
+- Si le titre est déjà présent, ne pas le modifier. Sinon, ajouter un titre concis et descriptif.
 - Conserver les séparateurs `---` ou `----` et la structure Markdown valide.
 - Conserver intégralement tous les snippets techniques existants : TypeScript, TSX, JSON, shell, sortie de commande ou Mermaid.
 - Ne pas reformater, raccourcir ou remplacer le contenu des blocs de code.
