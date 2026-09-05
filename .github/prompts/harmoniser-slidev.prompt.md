@@ -16,15 +16,18 @@ Consignes obligatoires :
 - Ne pas reformater, raccourcir ou remplacer le contenu des blocs de code.
 - Si le slide ne contient aucun extrait TypeScript, le signaler simplement dans le bilan final sans en ajouter.
 - Réduire les paragraphes en puces courtes et appliquer un seul gabarit principal :
+  - définition : Objectif / Définition / Pourquoi c’est utile / Exemple rapide ;
   - procédure : Objectif / Étape 1 / Étape 2 / Étape 3 / Résultat attendu ;
   - commande : Objectif / Commande / Vérification ;
   - validation : Test à exécuter / Commande / Résultat attendu / En cas d échec ;
   - bonnes pratiques : Règle 1 / Règle 2 / Règle 3 / Anti-pattern à éviter.
+- Pour un slide qui présente plusieurs notions à définir, utiliser le gabarit définition et décliner les puces `Définition` par notion, sans dépasser six puces.
+
 - Garder au maximum six puces et deux niveaux de listes.
 - Employer un français pédagogique, concret et concis.
 
 Workflow :
-1. Identifier le type du slide sélectionné et choisir le gabarit le plus approprié.
+1. Identifier le type du slide sélectionné et choisir le gabarit le plus approprié, notamment `définition` pour un slide conceptuel.
 2. Appliquer directement une modification minimale au slide.
 3. Relire le bloc modifié afin de vérifier que les snippets sont préservés.
 4. Compiler le deck ciblé depuis le dossier `slides/` avec :
