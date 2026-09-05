@@ -307,7 +307,7 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
   try {
     const response = await fetch('https://api.themoviedb.org/3/movie/popular', {
       headers: {
-        'Authorization': `Bearer ${tmdbAccessToken}`,
+        Authorization: `Bearer <TMDB_ACCESS_TOKEN>`,
         'Content-Type': 'application/json;charset=utf-8'
       }
     });

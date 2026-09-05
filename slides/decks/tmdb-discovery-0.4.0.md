@@ -134,7 +134,7 @@ npx vite
 - **En production :** bundle optimisé (minification + découpage des assets).
 
 Commiter les changements dans le **Source Control** avec un message de commit généré par Copilot
-----
+---
 
 # Configuration de l'application pour servir le front-end
 
@@ -158,7 +158,7 @@ Puis créer les scripts `dev` et `dev:client` dans le fichier `package.json` pou
 }
 ```
 
-----
+---
 
 # Configuration de l'application pour servir le front-end (suite)
 
@@ -200,7 +200,7 @@ npm run dev
 
 Committer les changements dans le **Source Control** avec un message de commit généré par Copilot
 
-----
+---
 
 # Configuration de l'application pour servir le front-end en react  
 
@@ -232,7 +232,7 @@ export default defineConfig({
 
 - **Résultat attendu :** les composants React se compilent et le HMR fonctionne.
 
-----
+---
 
 - **Objectif:** créer le composant racine et le point d'entrée React.
 - **Étape 1:** créer `src/front-end/App.tsx`.
@@ -261,7 +261,7 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
-----
+---
 
 - **Étape 3 :** modifier `index.html` pour charger `main.tsx`.
 
@@ -290,7 +290,7 @@ npm run dev
 - **Résultat attendu :** l'application React s'affiche correctement dans le navigateur.
 - **Ressources :** React https://fr.react.dev/ | Vite https://vitejs.dev/.
 
-----
+---
 
 # Chrome DevTools
 
@@ -309,7 +309,7 @@ Expliquer que nous aurons un usage plus avancé de Chrome DevTools pour le débo
 -->
 
 
-----
+---
 
 #  React - useEffect Hook
 
@@ -397,7 +397,7 @@ export default function App() {
 ...
 ```
 
-----
+---
 
 # React - useState Hook (suite)
 
@@ -433,7 +433,7 @@ Le code ci-dessus affiche la liste des films populaires récupérés depuis l'AP
 Faire une demo en limitant le réseau pour simuler un chargement lent et montrer que l'affichage est vide pendant le chargement des données. Cela met en évidence la nécessité d'améliorer l'expérience utilisateur avec un loader.
 -->
 
-----
+---
 
 # Refactoring du code pour créer un composant MovieItem
 
@@ -460,7 +460,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
 }
 ```
 
-----
+---
 
 # Refactoring du code pour créer un composant MovieItem (suite)
 
@@ -482,7 +482,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
 Committer les changements dans le **Source Control** avec un message de commit généré par Copilot
 
-----
+---
 
 # Amélioration de l'expérience utilisateur avec un loader
 
@@ -520,7 +520,7 @@ Rappel des étapes à suivre pour créer une nouvelle version de l'application:
 - Merger la branche **develop** dans **main**.
 - Créer un tag de version sur la branche **main**.
 
-----
+---
 
 # Récapitulatif de la version 0.4.0
 
