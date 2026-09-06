@@ -2,6 +2,7 @@
   "name": "support-cours-2026-2027-root",
   "private": true,
   "scripts": {
+    "dev:presentation": "npm --prefix slides run dev:presentation --",
     "dev:tmdb": "npm --prefix slides run dev:tmdb --"
   }
 }

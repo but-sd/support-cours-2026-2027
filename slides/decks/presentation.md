@@ -124,6 +124,15 @@ background: ./fond-amif.jpg
 }
 </style>
 
+<!-- 
+
+- **Mon rôle** : accompagner la MAIF dans le choix et l'utilisation de solutions technologiques adaptées aux besoins des équipes.
+
+- **La forge logicielle** : l'ensemble des outils qui accompagnent les développeurs, de la gestion du code jusqu'aux tests, à la qualité.
+
+-->
+
+
 ---
 class: forge-slide
 ---
@@ -156,6 +165,11 @@ flowchart LR
 
 </div>
 
+<!--
+
+- **Lecture du schéma** : un changement ou une pull request part de GitHub, Jenkins lance les vérifications, SonarQube valide la qualité du code, puis Nexus conserve les artefacts produits.
+
+-->
 ---
 
 # Organisation du cours (Regroupement de 2 modules)
