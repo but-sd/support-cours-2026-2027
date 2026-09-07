@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev:presentation": "npm --prefix slides run dev:presentation --",
+    "dev:architecture": "npm --prefix slides run dev:architecture --",
     "dev:tmdb": "npm --prefix slides run dev:tmdb --"
   }
 }

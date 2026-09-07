@@ -14,7 +14,7 @@ layout: tmdb-hero
 
 # Objectifs
 
-## Application
+## Objectif
 - Mise en place de l'architecture logicielle **back-end**
   - Utilisation de **Node.js** et **Express**
   - Exposition d'un premier endpoint __Hello World__ 
@@ -53,7 +53,7 @@ Système de gestion de version distribué
 - Chaque utilisateur possède une copie complète de l'historique du projet
 - Il est possible de travailler en local, sans connexion permanente à un serveur, contrairement aux anciens systèmes centralisés
 
-**git**  - https://git-scm.com/
+## **git**  - https://git-scm.com/
 
 - Créé par Linus Torvalds (créateur de Linux) en 2005,
 - Rapide, simple, léger, performant, open source
@@ -61,17 +61,33 @@ Système de gestion de version distribué
 - Services en ligne (GitHub, GitLab, Bitbucket, Azure DevOps) viennent ajouter des fonctionnalités (gestion de projet, CI/CD, wiki, issues, pull requests...)
 - Intégration dans les IDE (VSCode, IntelliJ, Eclipse...)
 
+<!--
+
+Ne pas confondre git et github, git est le "moteur", GitHub est un service en ligne qui utilise git pour gérer les dépôts et ajouter des fonctionnalités collaboratives.
+
+-->
+
 ---
 
 # git - terminologie
 
-- **repository**: dépôt it, contient l'historique des modifications du projet
+- **repository**: dépôt git, contient l'historique des modifications du projet
 - **commit**: enregistrement d'un ensemble de modifications dans le dépôt Git
 - **branch**: branche de développement indépendante dans le dépôt Git
 - **merge**: fusion de deux branches dans le dépôt Git
 - **tag**: marqueur pour une version spécifique du projet dans le dépôt Git
 
-Nous manipulerons ces concepts tout au long du développement de l'application TMDB Discovery App.
+Nous manipulerons ces concepts tout au long du développement de l'application **TMDB Discovery App**.
+
+<!--
+
+Il y a aussi d'autres concepts
+- **stash**: permet de mettre de côté temporairement des modifications en cours pour revenir à un état propre du dépôt
+- **rebase**: permet de réappliquer des commits d'une branche sur une autre, réécrivant l'historique
+- **pull**: récupérer les modifications depuis un dépôt distant et les fusionner avec la branche locale
+- **push**: envoyer les modifications locales vers un dépôt distant
+
+-->
 
 ---
 
@@ -82,14 +98,21 @@ gitGraph
 ```
 
 - 2 **commits** vont être réalisés dans cette version 0.1.0 du projet.
-- un premier **commit** pour la mise en place d'un serveur web avec **Express.js** et un endpoint REST __Hello World__
-- un second **commit** pour la transformation du projet pour utiliser **TypeScript**
+  - un premier **commit** pour la mise en place d'un serveur web avec **Express.js** et un endpoint REST __Hello World__
+  - un second **commit** pour la transformation du projet pour utiliser **TypeScript**
 
 - 1 **tag** sera créé pour marquer la version 0.1.0 du projet.
 
+<!--
+
+Nous verrons régulièrement qu'un commit doit être clair, concis et représenter un ensemble cohérent de modifications dans le projet.
+
+Le tag lui permet de marquer une version spécifique du projet, facilitant la gestion des versions et le suivi des évolutions.
+
+Nous verrons un peu plus tard comment est géree la numérotation des versions du projet.
+
+-->
 ---
-
-
 
 <style>
 .backend-showcase {

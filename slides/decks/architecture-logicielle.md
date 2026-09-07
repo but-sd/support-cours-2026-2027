@@ -14,7 +14,7 @@ layout: tmdb-hero
 
 # Objectifs
 
-- **Objectif 1:** Construire une application web à partir des données **TMDB**
+- **Objectif 1:** Construire une application web à partir des données **The Movie Database (TMDB)**
 - **Objectif 2:** Préparer une architecture qui pourra évoluer
 - **Objectif 3:** Travailler en mode **agile**
   - Livrer par petites itérations
@@ -52,6 +52,14 @@ Ressources:
   <img src="./assets/tmdb-discovery-2.png" alt="Capture films populaires" class="w-full rounded-lg border border-slate-200" />
 </div>
 
+<!--
+
+Les écrans présentés sont une proposition,  nous ferons évoluer l'interface au fur et à mesure du développement, en mode agile, nous ajusterons selon les retours.
+
+Selon notre avancement, nous irons plus ou moins loin dans les fonctionnalités et l'interface. L'intérêt ici est de travailler en mode agile et de pouvoir s'adapter rapidement aux besoins et aux retours des utilisateurs.
+
+-->
+
 ---
 
 # Architecture logicielle d'une application web
@@ -60,6 +68,17 @@ Ressources:
 - **Couche 1:** **Front-end** - interface utilisée par l'utilisateur
 - **Couche 2:** **Back-end** - traite les requêtes et applique les règles métier
 - **Couche 3:** **Données** - stocke les informations de l'application
+
+<!--
+
+L'architecture logicielle d'une application web permet de structurer le code en différentes couches, chacune ayant des responsabilités spécifiques. Cela facilite la maintenance, l'évolution et la compréhension du projet.
+
+Chaque couche a un rôle précis :
+- Le **front-end** s'occupe de l'affichage et de l'interaction avec l'utilisateur.
+- Le **back-end** gère la logique métier et la communication avec les sources de données.
+- La couche **données** assure le stockage et la récupération des informations nécessaires à l'application.
+
+-->
 ---
 
 # Architecture logicielle de TMDB Discovery App
@@ -70,6 +89,7 @@ Ressources:
 - **Source de données:** pas de base locale dans cette version
 - **Évolution possible:** séparer le front-end et le back-end en deux projets
 - **Technologie:** **TypeScript** avec **Node.js**
+
 ```mermaid
 flowchart LR
     U[Utilisateur]
@@ -91,6 +111,18 @@ API serveur]
     T -->|Films, séries, crédits| B
     B -->|JSON simplifié| F
 ```
+
+<!--
+
+Pour notre cas, front-end et back-end sont regroupés dans le même projet, pour simplifier le développement, mais chacun conserve ses responsabilités et son isolation logique.
+
+En entreprise, il est courant de séparer le front-end et le back-end en projets distincts pour mieux gérer les équipes, la scalabilité et la sécurité. Le backend pourrait proposer des technologies complètement différentes de celles utilisées par le front-end (par exemple, un front-end en React et un back-end en Python, Java ou Node.js).
+
+L'échange entre le front-end et le back-end se fait généralement via des API REST ou GraphQL, permettant au front-end de récupérer les données nécessaires sans connaître les détails de l'implémentation du back-end.
+
+Il y a un contrat entre le front-end et le back-end, défini par les endpoints exposés et les formats de données échangés. L'implémentation du back-end peut évoluer tant que ce contrat est respecté.
+
+-->
 
 ---
 
@@ -114,25 +146,12 @@ API serveur]
 
 ---
 
-# Architecture logicielle - back-end (suite)    
-
-## Protéger la clé API TMDB
-
-- **Objectif:** Empêcher l'exposition de la clé API TMDB
-- **Règle:** Le front-end ne connaît jamais la clé API
-- **Front-end:** Appeler uniquement les endpoints du back-end
-- **Back-end:** Utiliser la clé pour appeler l'API TMDB
-- **Stockage:** Conserver la clé dans une variable d'environnement
-- **Anti-pattern à éviter:** Placer la clé dans le code front-end ou la publier dans Git
-
----
-
 # Librairies et frameworks
 
 - **Définition:** Une dépendance est un composant externe utilisé par l'application
 - **Objectif:** Ajouter des fonctionnalités sans les développer entièrement
 - **Pourquoi:** Gagner du temps et s'appuyer sur des solutions maintenues
-- **Sources:** **npm**, **PyPI**, Maven Central
+- **Sources:** npm registry, PyPI, Maven Central
 
 ---
 
@@ -153,14 +172,20 @@ API serveur]
     - Construire l'interface utilisateur
     - Gérer l'état, les routes et les formulaires
 
+<!--
+
+- **back-end:** en node Express.js, en Python Flask ou en Java Spring Boot
+- **front-end:** généralement basé sur du node avec des frameworks comme React, Angular ou Vue.js
+
+-->
 ---
 
 # Librairies - Gestion des dépendances
 
 - **Définition:** Un gestionnaire de paquets installe et suit les dépendances
 - **Actions:** Installer, mettre à jour, supprimer et lister les paquets
-- **JavaScript:** **npm** ou Yarn
-- **Python:** **pip**, Poetry ou uv
+- **JavaScript:** npm ou yarn
+- **Python:** pip, Poetry ou uv
 - **Java:** Maven
 
 ---
@@ -173,24 +198,34 @@ API serveur]
 - **Règle 4:** Vérifier la licence et les conditions d'utilisation (MIT, Apache, GPL, etc.)
 - **Règle 5:** Utiliser le versionnement sémantique pour évaluer la compatibilité (SemVer)
 
+<!--
+- **obsolescence:** les librairies peuvent devenir obsolètes avec le temps, il est important de suivre leur évolution et de mettre à jour les dépendances régulièrement et parfois de remplacer celles qui ne sont plus maintenues
+- **licences**: certaines licences peuvent imposer des contraintes sur l'utilisation, la modification ou la redistribution du code. Il est important de les lire attentivement avant d'intégrer une librairie dans un projet.
+- **versionnement sémantique:** suivre les règles de SemVer pour évaluer la compatibilité des mises à jour des dépendances, si celui est respecté correctement, il permet de savoir si une mise à jour est majeure, mineure ou un correctif.
+
+-->
+
 ---
 
 # Architecture logicielle - back-end (suite)
 
 - **Technologie:** **Node.js** avec **Express.js**
 - **Structure:** Organiser le code avec des **routes** et des **contrôleurs**
-- **Routes:** Définir les **endpoints** de l'API
-- **Contrôleurs:** Appliquer la logique métier et construire les réponses
-- **Flux:** Appeler TMDB en HTTP et renvoyer un JSON simplifié
-- **Documentation:** Décrire les endpoints avec **Swagger**
+    - **Routes:** Définir les **endpoints** de l'API
+    - **Contrôleurs:** Appliquer la logique métier et construire les réponses
 
+<!--
+
+- **express.js:** framework web pour Node.js permettant de créer des API et des applications web rapidement et facilement, c'est de loin le plus populaire et le plus utilisé dans l'écosystème Node.js.
+
+-->
 ---
 
 # Architecture logicielle - front-end
 
 - **Objectif:** Construire l'interface plus vite et de façon cohérente
-- **Apport 1:** Éviter de réimplémenter des briques techniques
-- **Apport 2:** Gérer la compatibilité, la performance et l'accessibilité
+    - **Apport 1:** Éviter de réimplémenter des briques techniques
+    - **Apport 2:** Gérer la compatibilité, la performance et l'accessibilité
 - **Résultat attendu:** Se concentrer sur la logique métier et la valeur utilisateur
 
 ---
@@ -198,9 +233,9 @@ API serveur]
 # Architecture logicielle - front-end (suite)
 
 - **Objectif:** Choisir un outil pour construire l'interface
-- **React:** Librairie JavaScript pour créer des interfaces
-- **Angular:** Framework JavaScript pour créer des applications web
-- **Vue.js:** Framework progressif pour créer des interfaces
+    - **React:** Librairie JavaScript pour créer des interfaces
+    - **Angular:** Framework JavaScript pour créer des applications web
+    - **Vue.js:** Framework progressif pour créer des interfaces
 
 ---
 
@@ -218,10 +253,10 @@ API serveur]
 # Choisir un outil front-end
 
 - **Objectif:** Choisir un outil adapté au projet
-- **Critère 1:** Les besoins fonctionnels et la complexité de l'interface
-- **Critère 2:** Les compétences de l'équipe et le marché local
-- **Critère 3:** La qualité de l'écosystème, de la documentation et de la maintenance
-- **Critère 4:** Les contraintes de performance, d'accessibilité et de sécurité
+    - **Critère 1:** Les besoins fonctionnels et la complexité de l'interface
+    - **Critère 2:** Les compétences de l'équipe et le marché local
+    - **Critère 3:** La qualité de l'écosystème, de la documentation et de la maintenance
+    - **Critère 4:** Les contraintes de performance, d'accessibilité et de sécurité
 - **Résultat attendu:** Justifier le choix technique selon le contexte, pas uniquement selon la popularité
 
 ---
@@ -233,6 +268,14 @@ API serveur]
 - **Approche:** Déclarative et modulaire
 - **Atout:** Écosystème riche, avec une large communauté et de nombreux outils
 
+<!--
+
+Attention, le choix qui serait le bon aujourd'hui peut ne pas l'être plus tard, il est donc important de rester informé des évolutions technologiques.
+
+Les choix technologiques doivent être régulièrement réévalués, surtout sur les technologies front-end. Le back-end et les autres couches de l'application ne sont pas épargnés par cette règle mais évoluent généralement moins rapidement.
+
+-->
+
 ---
 
 # React + Vite + TypeScript
@@ -242,28 +285,51 @@ API serveur]
 - **TypeScript:** Fiabiliser le code grâce au typage statique
 - **Vite:** Démarrer vite, recharger instantanément et optimiser le build
 
+<!--
+
+Ce trio est actuellement très populaire pour le développement d'applications web modernes, offrant rapidité, maintenabilité et sécurité grâce à la combinaison de React, Vite et TypeScript.
+
+-->
+
 ---
 
 # Méthodes de développement agiles
 
 - **Objectif:** Livrer rapidement une première version fonctionnelle
-- **Principe 1:** Travailler par itérations courtes
-- **Principe 2:** Prioriser les fonctionnalités utiles
-- **Principe 3:** Collaborer en continu
-- **Principe 4:** Adapter le produit selon les retours
+    - **Principe 1:** Travailler par itérations courtes
+    - **Principe 2:** Prioriser les fonctionnalités utiles
+    - **Principe 3:** Collaborer en continu
+    - **Principe 4:** Adapter le produit selon les retours
 - **Contexte:** Simuler les retours des parties prenantes dans ce projet
+
+<!--
+
+Les méthodes agiles permettent de livrer rapidement des fonctionnalités tout en s'adaptant aux retours des parties prenantes. Elles favorisent la collaboration, la transparence et l'amélioration continue au sein de l'équipe de développement.
+
+Au paravent, les méthodes traditionnelles de développement suivaient un cycle en cascade, avec peu de place pour les ajustements en cours de projet. Cela pouvait entraîner des retards et des coûts supplémentaires lorsque des changements étaient nécessaires.
+
+Attention toutefois, les méthodes agiles ne sont pas une solution miracle et nécessitent un engagement constant de l'équipe et des parties prenantes pour être efficaces. Toutes les entreprises ne sont pas encore prêtes à adopter pleinement ces pratiques.
+
+-->
 
 ---
 
 # Rôles d'une équipe agile
 
-- **Principe:** Ajuster le développement grâce aux retours fréquents
 - **Product Owner:** Porter la vision produit et prioriser les fonctionnalités
 - **Scrum Master:** Faciliter l'équipe et les pratiques agiles
 - **Équipe de développement:** Concevoir, développer et tester le produit
 - **Parties prenantes:** Exprimer les besoins et partager leurs retours
 - **Contexte:** Simuler ces rôles dans ce projet
 
+
+<!--
+
+Le logiciel est vu comme un produit évolutif, développé de manière itérative et incrémentale, avec une forte collaboration entre les différentes parties prenantes. L'objectif est de livrer rapidement des fonctionnalités tout en restant flexible face aux changements de besoins.
+
+Apporter rapidement de la valeur aux utilisateurs tout en permettant des ajustements fréquents en fonction des retours.
+
+-->
 ---
 
 # Artefacts agiles
@@ -299,7 +365,7 @@ API serveur]
 
 # SemVer - Exemples de progression
 
-- **`0.1.0`:** Première version en développement
+- **`0.1.0`:** Première version en développement (non destinée à la production)
 - **`0.2.0`:** Ajout de fonctionnalités, toujours en développement
 - **`1.0.0-beta` puis `1.0.0-rc`:** Versions de test avant publication
 - **`1.0.0`:** Première version stable
