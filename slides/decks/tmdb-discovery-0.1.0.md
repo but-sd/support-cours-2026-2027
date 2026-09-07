@@ -235,6 +235,8 @@ echo "24" > .nvmrc
 
 Un fichier `package.json` est créé à la racine du projet avec les informations de configuration du projet Node.js. Il contient notamment le nom du projet, la version, les dépendances (aucune pour l'instant) et les scripts (comme `start`, `test`, etc.) qui peuvent être utilisés pour exécuter des commandes spécifiques.
 
+ https://nodejs.org/fr, version 24 **LTS** Long Term Support, garantir la compatibilité et bénéficier des dernières fonctionnalités stables.
+
 -->
 ---
 
@@ -351,6 +353,12 @@ Untracked files:
         package.json
 ```
 
+<!--
+
+Montrer aussi ce qui se passe dans vs-code, notamment l'interface graphique de gestion des fichiers et l'onglet de contrôle de version.
+
+-->
+
 ---
 
 La commande `git status` nous indique que nous avons des fichiers non suivis par **Git** (index.js, node_modules/, package-lock.json, package.json). Nous allons les ajouter à l'index **Git** pour les inclure dans le prochain commit. 
@@ -418,6 +426,12 @@ Changes to be committed:
         new file:   package-lock.json
         new file:   package.json
 ```
+
+<!--
+
+**git add .** permet d'ajouter tous les fichiers non suivis par Git à l'index, sauf ceux exclus par le fichier **.gitignore**. Pour ajouter un fichier spécifique, vous pouvez utiliser `git add <nom_du_fichier>`
+
+-->
 
 ---
 
@@ -526,11 +540,21 @@ Le **commit** initial a été poussé avec succès vers le dépôt distant sur *
 
 # TypeScript
 
+- **Objectif** : comprendre le rôle de **JavaScript** et de **TypeScript** dans le développement web.
+- **Définition** : **JavaScript** est utilisé côté client et côté serveur grâce à **Node.js**.
+- **Pourquoi c'est utile** : son typage dynamique facilite l'écriture rapide, mais peut laisser certaines erreurs apparaître à l'exécution.
+- **Définition** : **TypeScript** ajoute le typage statique et vérifie les types avant l'exécution.
+- **Exemple rapide** : utiliser TypeScript pour produire un code plus sûr et plus maintenable.
+
+<!--
+
 Le *JavaScript* était à l'origine le langage de programmation utilisé pour le développement web côté client. Cependant, il est devenu de plus en plus populaire pour le développement côté serveur grâce à **Node.js**. 
 
 Le **JavaScript** est un langage interprété, ce qui signifie qu'il n'est pas compilé avant d'être exécuté. Cela peut entraîner des erreurs à l'exécution si le code n'est pas correctement écrit ou si les types de données ne sont pas correctement gérés.
 
 Afin de résoudre ces problèmes, **TypeScript** a été créé. **TypeScript** est un sur-ensemble de **JavaScript** qui ajoute des fonctionnalités de typage statique et de vérification de type à la compilation. Cela permet aux développeurs de détecter les erreurs avant l'exécution et d'écrire du code plus sûr et plus maintenable.
+
+-->
 
 ---
 
