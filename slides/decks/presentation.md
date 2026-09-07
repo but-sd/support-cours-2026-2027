@@ -190,7 +190,7 @@ Mélangeant de la théorie et surtout beaucoup de pratique pour mettre en applic
 
 ## Mettre en place une application web en suivant les bonnes pratiques de développement
 
-Les technologies utilisées sont celles actuellement utilisées dans le monde professionnel.
+Les technologies abordées sont proches de celles utilisées aujourd'hui dans le monde professionnel.
 
  L'objectif est de vous:
  * __préparer__ au mieux pour votre future insertion professionnelle.
@@ -209,6 +209,11 @@ Exploration de l'**API** de **T**he **M**ovie **D**atabase (TMDB) pour découvri
   <img src="./assets/tmdb-discovery-2.png" alt="Capture films populaires" class="w-full rounded-lg border border-slate-200" />
 </div>
 
+<!--
+
+Avec l'aide de l'IA nous allons pouvoir aller plus vite, plus loin mais toujours en gardant un esprit critique et en comprenant les concepts sous-jacents.
+
+-->
 ---
 
 # Concepts manipulés (1/2)
