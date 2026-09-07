@@ -425,8 +425,8 @@ Une fois la branche `develop` protégée, il ne sera plus possible de merger du 
 - **Étape 2 :** mettre à jour `MoviesTypes.ts` avec <a href="./assets/code-sample/back-end/MoviesTypes.ts" target="_blank" rel="noopener noreferrer">MoviesTypes.ts</a>.
 - **Étape 3 :** implémenter `/api/movies/:id` dans `src/back-end/movies-api.ts`.
 - **Étape 4 :** retourner les détails du film.
-- **Étape 4 :** valider le fonctionnement du end-point, par exemple `http://127.0.0.1:5173/api/movies/1273221`
-- **Étape 5 :** ajouter un test unitaire dans `src/back-end/index.test.ts`.
+- **Étape 5 :** valider le fonctionnement du end-point, par exemple `http://127.0.0.1:5173/api/movies/1273221`
+- **Étape 6 :** ajouter un test unitaire dans `src/back-end/index.test.ts`.
 - **Résultat attendu :** le back-end expose les détails d'un film via son identifiant.
 - **Référence :** <a href="https://developer.themoviedb.org/reference/movie-details" target="_blank" rel="noopener noreferrer">TMDB API - Get Movie Details</a>. 
 
@@ -513,7 +513,7 @@ export default function NotFoundPage() {
 
 - **Étape 1 :** importer `Routes`, `Route` et les composants de pages dans `App.tsx`.
 - **Étape 2 :** associer la liste des films à la route `/`.
-- **Étape 3 :** associer le détail à `/movie/:id` et les URLs inconnues à `NotFoundPage`.
+- **Étape 3 :** associer le détail à `/movies/:id` et les URLs inconnues à `NotFoundPage`.
 - **Résultat attendu :** React Router affiche la page correspondant à l'URL.
 
 
@@ -528,7 +528,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<MoviesListPage />} />
-      <Route path="/movie/:id" element={<MovieDetailPage />} />
+      <Route path="/movies/:id" element={<MovieDetailPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
@@ -547,7 +547,7 @@ Naviguer entre les trois routes pour vérifier que le routage fonctionne correct
 
 - **Étape 1 :** utiliser `Navigate` pour rediriger `/` vers `/movies`.
 - **Étape 2 :** associer la liste des films à `/movies`.
-- **Étape 3 :** conserver la route détail `/movie/:id` et la page inconnue.
+- **Étape 3 :** conserver la route détail `/movies/:id` et la page inconnue.
 - **Résultat attendu :** la page d'accueil redirige vers la liste des films populaires.
 
 ```typescript
@@ -562,7 +562,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/movies" replace />} />
       <Route path="/movies" element={<MoviesListPage />} />
-      <Route path="/movie/:id" element={<MovieDetailPage />} />
+      <Route path="/movies/:id" element={<MovieDetailPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
@@ -584,7 +584,7 @@ export default function App() {
 
 - **Objectif :** ouvrir la page détail du film sélectionné.
 - **Étape 1 :** importer `Link` depuis `react-router`.
-- **Étape 2 :** entourer la carte `MovieItem` avec un lien vers `/movie/:id`.
+- **Étape 2 :** entourer la carte `MovieItem` avec un lien vers `/movies/:id`.
 - **Étape 3 :** utiliser l'identifiant du film dans la propriété `to`.
 - **Résultat attendu :** un clic sur une carte ouvre le détail du film correspondant.
 
@@ -604,7 +604,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
   const rating = movie.vote_average.toFixed(1);
 
   return (
-    <Link to={`/movie/${movie.id}`} className="movie-card-link">
+    <Link to={`/movies/${movie.id}`} className="movie-card-link">
       <div className="movie-card">
         {posterUrl ? <img className="movie-poster" src={posterUrl} alt={`Affiche de ${movie.title}`} /> : <div />}
         <div className="movie-card__content">
@@ -625,7 +625,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
 - **Objectif :** récupérer l'identifiant du film dans l'URL.
 - **Étape 1 :** importer `useParams` depuis `react-router`.
-- **Étape 2 :** lire le paramètre `id` de la route `/movie/:id`.
+- **Étape 2 :** lire le paramètre `id` de la route `/movies/:id`.
 - **Étape 3 :** afficher cet identifiant dans `MovieDetailPage`.
 - **Résultat attendu :** la page détail reçoit l'identifiant du film sélectionné.
 
@@ -682,8 +682,6 @@ TODO: Créer un composant `MovieDetailCard` pour afficher les détails du film e
 
 ---
 
----
-
 # Récapitulatif de la version 0.6.0
 
 ## Nouvelles fonctionnalités
@@ -697,4 +695,3 @@ TODO: Créer un composant `MovieDetailCard` pour afficher les détails du film e
 - test unitaire pour le back-end
 - ci pour automatiser les contrôles qualité du code (formatage, lint, tests unitaires)
 - protection de branches pour éviter de merger du code non validé sur la branche `develop
-

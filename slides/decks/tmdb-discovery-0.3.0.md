@@ -211,6 +211,7 @@ git checkout -b feature/improvements-endpoint-movies-popular
 - **Étape 3:** créer la branche **feature/health-check-endpoint**.
 
 ```bash
+git checkout develop
 git checkout -b feature/health-check-endpoint
 ```
 
@@ -345,7 +346,7 @@ git push origin feature/health-check-endpoint
 - **Vérification :** les changements sont poussés sur la branche `feature/health-check-endpoint`.
 - **Remarque :** la fusion vers **develop** n'est pas encore faite. 
 
-----
+---
 
 # Films populaires (/api/movies/popular)
 
@@ -360,7 +361,7 @@ git checkout feature/improvements-endpoint-movies-popular
 - **Vérification :** l'endpoint `/api/health` n'est pas encore présent sur cette branche.
 - **Remarque :** il réapparaîtra après fusion des branches **feature** dans **develop**.
 
-----
+---
 
 # Films populaires (/api/movies/popular) (suite)
 
@@ -375,7 +376,7 @@ touch src/back-end/schemas/MoviesTypes.ts
 - **Étape 2 :** conserver uniquement les champs utiles pour l'application.
 - **Résultat attendu :** disposer de types clairs pour la réponse brute et la réponse exposée par l'API.
 
-----
+---
 
 ```typescript
 // TypeScript type for the raw response from the TMDB API for popular movies.
@@ -405,7 +406,7 @@ export type TmdbMovie = {
 };
 ```
 
-----
+---
 
 ```typescript
 // TypeScript type for the API response when fetching movies, containing an array of supported Movie objects.
@@ -434,7 +435,7 @@ Pour notre application, nous n'avons pas besoin des champs `adult` et `video` de
 
 -->
 
-----
+---
 
 # Films populaires (/api/movies/popular) (suite)
 
@@ -447,7 +448,7 @@ touch src/back-end/utils.ts
 
 - **Résultat attendu :** disposer d'une fonction qui convertit un film brut en type `Movie`.
 
-----
+---
 
 ```typescript
 import type { TmdbMoviesRawResponse, Movie } from './schemas/MoviesTypes';
@@ -480,7 +481,7 @@ export const toSupportedMovie = (movie: TmdbMoviesRawResponse['results'][number]
 La fonction `toSupportedMovie` prend un objet `TmdbMovie` en entrée et retourne un objet `Movie` en omettant les propriétés `adult` et `video`. Cela permet de transformer les films bruts de l'API TMDB en films supportés par notre application avant de les renvoyer au client.
 
 -->
-----
+---
 
 # Films populaires (/api/movies/popular) (suite)
 
@@ -509,7 +510,7 @@ La fonction `toSupportedMovie` prend un objet `TmdbMovie` en entrée et retourne
 
 ```
 
-----
+---
 
 # Films populaires (/api/movies/popular) (suite)
 
@@ -532,7 +533,7 @@ git push origin feature/improvements-endpoint-movies-popular
 - **Étape :** fusionner successivement chaque branche **feature**.
 - **Résultat attendu :** la branche **develop** contient `/api/health` et la version améliorée de `/api/movies/popular`.
 
-----
+---
 
 # Fusion des branches **feature** avec la branche **develop** (suite)
 
@@ -555,7 +556,7 @@ gitGraph
     checkout develop
 ```
 
-----
+---
 
 - **Objectif :** intégrer `feature/improvements-endpoint-movies-popular` dans `develop`.
 - **Commande :**
@@ -583,7 +584,7 @@ gitGraph
     merge feature/improvements-endpoint-movies-popular
 ```
 
-----
+---
 
 - **Objectif :** intégrer `feature/health-check-endpoint` dans `develop`.
 - **Commande :**
@@ -612,7 +613,7 @@ gitGraph
     merge feature/health-check-endpoint
 ```
 
-----
+---
 
 # Fusion des branches **feature** avec la branche **develop**
 
@@ -628,7 +629,7 @@ Remarque: Il y aurait pu y avoir des conflits lors de la fusion des branches **f
 
 -->
 
-----
+---
 
 # Fusion de la branche **develop** avec la branche **main** pour créer une nouvelle version de l'application.
 
@@ -679,7 +680,7 @@ gitGraph
 Les branches **feature** ont été fusionnées avec la branche **develop** et la branche **develop** a été fusionnée avec la branche **main** pour créer une nouvelle version de l'application.
 -->
 
-----
+---
 
 # Nettoyage des branches **feature** après fusion avec la branche **develop**
 
@@ -699,7 +700,7 @@ git push origin --delete feature/health-check-endpoint
 ```
 
 - **Résultat attendu :** ne conserver que les branches actives du flux Gitflow.
-----
+---
 
 # Nettoyage des branches **feature** après fusion avec la branche **develop** (suite)
 

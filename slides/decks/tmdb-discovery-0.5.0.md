@@ -278,7 +278,7 @@ npm run fmt
 
 - **Résultat attendu :** `npm run fmt:check` signale les écarts sans modifier les fichiers.
 
-----
+---
 
 # Contrôle avec **lint-staged**
 
@@ -310,7 +310,7 @@ Cela permet de s'assurer que le code ajouté ou modifié respecte les règles de
 
 -->
 
-----
+---
 
 # Hook `pre-commit` avec **lint-staged**
 
@@ -635,7 +635,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
 
 - **Étape 3 :** pousser les modifications de `feature/css-styles` sur le dépôt distant.
 
-----
+---
 
 # Pull requests
 
@@ -696,7 +696,7 @@ Nous allons avoir une approche progressive pour implémenter cette feature. Nous
 
 -->
 
-----
+---
 
 # Paramètres par défaut du back-end
 
@@ -722,7 +722,7 @@ export const DEFAULT_REGION = 'FR';
 Les query params sont déjà gérés par l'API TMDB, il suffit donc de les transmettre depuis notre back-end vers l'API TMDB. Nous allons donc modifier la route `/api/movies/popular` pour accepter les query params `language` et `page`.
 
 -->
-----
+---
 
 # feature - query params - back-end
 
@@ -752,7 +752,7 @@ Les query params sont déjà gérés par l'API TMDB, il suffit donc de les trans
         `https://api.themoviedb.org/3/movie/popular?${queryParams.toString()}`,
         {
           headers: {
-            Authorization: `Bearer ${tmdbAccessToken}`,
+            Authorization: `Bearer <TMDB_ACCESS_TOKEN>`,
             'Content-Type': 'application/json;charset=utf-8',
           },
         },
@@ -772,7 +772,7 @@ Les query params sont déjà gérés par l'API TMDB, il suffit donc de les trans
 
 -->
 
-----
+---
 
 # Vérifier la route avec `curl`
 
@@ -780,17 +780,17 @@ Les query params sont déjà gérés par l'API TMDB, il suffit donc de les trans
 - **Commande :**
 
 ```bash
-curl -X GET "http://localhost:3000/api/movies/popular?language=en-US&page=2" -H "accept: application/json"
+curl -X GET "http://localhost:3000/api/movies/popular?language=en-US&page=2&region=US" -H "accept: application/json"
 ```
 
-- **Résultat attendu :** la réponse contient les films populaires en anglais de la page 2.
+- **Résultat attendu :** la réponse contient les films populaires en anglais, de la page 2 et pour la région US.
 
 <!--
 
 Pour ajouter les query params à la requête, il suffit de les ajouter à l'URL de la requête. Par exemple, pour récupérer les films populaires en anglais (en-US) et à la page 2, il suffit d'ajouter `?language=en-US&page=2` à l'URL de la requête.
 
 -->
-----
+---
 
 # feature - query params - front-end
 
@@ -800,7 +800,7 @@ Pour ajouter les query params à la requête, il suffit de les ajouter à l'URL 
 - **Étape 3 :** transmettre les paramètres au back-end lors de l'appel API.
 - **Résultat attendu :** l'URL avec les query params `language`, `page` et `region` correctement appliqués.
 
-----
+---
 
 # feature - query params - front-end
 
@@ -836,7 +836,7 @@ export default function App() {
   ...
 ```
 
-----
+---
 
 # Vérifier les query params dans le navigateur
 
@@ -844,12 +844,12 @@ export default function App() {
 - **Commande :**
 
 ```bash
-http://127.0.0.1:5173/?language=en-US&page=2
+http://127.0.0.1:5173/?language=en-US&page=2&region=US
 ```
 
-- **Résultat attendu :** la page affiche les films populaires en anglais de la page 2.
+- **Résultat attendu :** la page affiche les films populaires en anglais, de la page 2 et pour la région US.
 
-----
+---
 
 # Finaliser `query-params`
 
@@ -867,7 +867,7 @@ Nous verrons plus tard comment ajouter des contrôles pour permettre à l'utilis
 Pousser les modifications sur la branche `feature/query-params` sur le dépôt distant et créer une pull request qui permettra de fusionner les modifications dans la branche `develop`. Ne valider pas la pull request pour le moment.
 
 -->
-----
+---
 
 # Finaliser la version `0.5.0`
 
