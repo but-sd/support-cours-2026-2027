@@ -26,9 +26,9 @@ duration: 5min
 </nav>
 
 <section class="versions-section">
-  <h2>TMDB Discovery App</h2>
+  <h2>Versions</h2>
   <ul class="versions-list">
-    <li><a href="./tmdb-discovery-0.1.0/">Version 0.1.0</a></li>
+    <li><a href="./tmdb-discovery-0.1.0/">0.1.0</a></li>
     <!-- <li><a href="./tmdb-discovery-0.2.0/">Version 0.2.0</a></li>
     <li><a href="./tmdb-discovery-0.3.0/">Version 0.3.0</a></li>
     <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
