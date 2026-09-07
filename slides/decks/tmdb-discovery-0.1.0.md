@@ -247,12 +247,11 @@ Notes de présentation :
 
 **Codespaces** est un service proposé par **GitHub** qui permet de créer un environnement de développement complet dans le cloud, directement à partir d'un dépôt **GitHub**.
 
-Il offre une expérience de développement similaire à celle d'un **IDE** local, mais avec l'avantage de ne pas avoir à configurer l'environnement sur votre machine.
-
-**Codespaces** est un **VS Code** complet dans le navigateur, avec un terminal intégré, un débogueur, un gestionnaire de versions et d'autres fonctionnalités utiles pour le développement. Il permet de travailler sur le projet depuis n'importe quel appareil avec un navigateur web, sans avoir à installer de logiciels supplémentaires.
-
-Il est aussi possible d’utiliser **Codespaces** avec l’application **VS Code** installée sur votre machine, tout en conservant un environnement déjà configuré.
-
+- Offre un environnement de développement complet dans le cloud, directement lié à un dépôt **GitHub**.
+- Permet de travailler sur le projet depuis n'importe quel appareil avec un navigateur web.
+- Inclut un terminal intégré, un débogueur, un gestionnaire de versions et d'autres fonctionnalités utiles pour le développement.
+- Possède une configuration préétablie qui permet de commencer à coder immédiatement sans avoir à installer ou configurer des outils localement.
+- Permet de partager facilement l'environnement de développement avec d'autres membres de l'équipe, garantissant que tout le monde utilise la même configuration.
 <!--
 Notes de présentation :
 - **Codespaces** permet de créer un environnement de développement complet dans le cloud, directement à partir d'un dépôt **GitHub**.
@@ -271,7 +270,10 @@ Définition :
 
 # Initialisation du projet
 
-Dans un terminal intégré à **Codespaces**, nous allons initialiser notre projet Node.js avec les options par défaut et le configurer pour utiliser les modules ES.
+Dans un terminal intégré à **Codespaces**: 
+
+- Initialiser le projet Node.js avec les options par défaut
+- Et le configurer pour utiliser les modules ES.
 
 ```shell
 
@@ -297,7 +299,9 @@ Note de présentation :
 
 **Express.js** est un **framework** web pour **Node.js** qui facilite la création d'applications web et d'**API**. 
 
-Il fournit des fonctionnalités robustes pour gérer les requêtes **HTTP**, les routes, les middlewares et bien plus encore. 
+- Fournit un ensemble d'outils et de fonctionnalités pour simplifier le développement d'applications web avec **Node.js**.
+  - Permet de créer rapidement des serveurs web et des API REST avec une configuration minimale.
+  - Gestion des requêtes **HTTP**, des routes et des middlewares.
 
 Nous allons l'utiliser pour exposer notre back-end sous forme d'**API REST**.
 
@@ -319,9 +323,11 @@ Note de présentation :
 
 # Express.js (suite)
 
-Exposition d'un premier endpoint de notre **API REST** __Hello World__ avec Express.js.
+Exposition de la première route de notre **API REST** __Hello World__ avec Express.js.
 
-Nous allons mettre en place un serveur web simple qui écoute sur le port **3000** et répond à une requête **GET** sur la route racine `/` avec un message "Hello World!".
+- **Route racine `/`**: la route principale de notre API qui répond aux requêtes **GET** avec un message "Hello World!".
+- **Port**: le port sur lequel le serveur écoute les requêtes entrantes.
+- **Réponse**: le message renvoyé par le serveur en réponse à une requête sur la route racine `/`.
 
 Création du fichier `index.js` qui sera le point d'entrée de notre application back-end.
 
@@ -354,7 +360,7 @@ Note de présentation :
 
 # Express.js (suite)
 
-Pour vérifier que le serveur fonctionne correctement, lancez le serveur avec la commande suivante :
+- Vérification du bon fonctionnement du serveur Express.js en lançant le serveur et en accédant à la route racine `/` grâce à la commande:
 
 ```shell
 node index.js
@@ -373,7 +379,8 @@ Cette étape permet de vérifier que notre serveur Express.js fonctionne correct
 
 Nous avons une première version du projet back-end fonctionnelle. Il est temps de sauvegarder notre travail dans le dépôt **GitHub**.
 
-Cette sauvegarde se fait en trois étapes : **status**, **add** et **commit**. Nous allons ensuite pousser notre commit vers le dépôt distant sur **GitHub** avec la commande **push**.
+- Sauvegarde des modifications locales avec **git** en 3 étapes : **status**, **add** et **commit**.
+- Mettre à jour le référentiel distant sur **GitHub** avec la commande **git push**.
 
 Tout au long de ces étapes, nous allons utiliser la ligne de commande **git** dans le terminal intégré à **Codespaces**.
 
