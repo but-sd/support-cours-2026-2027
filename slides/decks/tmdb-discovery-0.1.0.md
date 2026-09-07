@@ -10,6 +10,12 @@ layout: tmdb-hero
 
 <p class="hero-kicker">Back-end Foundation - Express - TypeScript - Git</p>
 
+<!--
+Notes de présentation :
+- Présenter cette séance comme une première étape concrète du projet.
+- Le but n'est pas encore de construire toute l'application, mais de poser une base
+  fonctionnelle et versionnée.
+--> 
 ---
 
 # Objectifs
@@ -25,12 +31,27 @@ layout: tmdb-hero
     - **tags** pour versionner le projet
 
 <!--
+Notes de présentation :
 - **back-end**: partie serveur de l'application
 - **front-end**: partie client de l'application
 
-- **endpoint**: point d'accès à une ressource via une URL
-- **U**niform **R**esource **L**ocator: adresse permettant d'accéder à une ressource sur le web
+- **endpoint**: point d'accès à une ressource via une **U**niform **R**esource **L**ocator: adresse permettant d'accéder à une ressource sur le web
 
+-->
+---
+
+# Résultats attendus en version 0.1.0
+
+- Un serveur web fonctionnel avec **Express.js**
+- Un endpoint REST __Hello World__
+- Le projet configuré pour utiliser **TypeScript**
+- Un dépôt Git initialisé
+- Un **tag** pour marquer la version 0.1.0 du projet
+
+<!--
+Notes de présentation :
+- En version 0.1.0, nous nous concentrons sur la mise en place de la base du projet back-end.
+- L'objectif est d'avoir un serveur fonctionnel avec un premier endpoint et une gestion de version avec Git.
 -->
 ---
 
@@ -44,6 +65,13 @@ Système qui permet de suivre les modifications apportées aux fichiers d’un p
 - Travailler en parallèle sur différentes branches de développement (feature, bugfix...) par des personnes différentes sans affecter la branche principale (main, develop...)
 - Marquer des versions stables du projet (release)
 
+<!--
+Notes de présentation :
+
+- Le SCM permet de gérer efficacement l'historique des modifications d'un projet.
+- Git est un exemple de DVCS largement utilisé dans l'industrie et l'open source.
+
+-->
 ---
 
 # Distributed Version Control System
@@ -62,8 +90,9 @@ Système de gestion de version distribué
 - Intégration dans les IDE (VSCode, IntelliJ, Eclipse...)
 
 <!--
-
-Ne pas confondre git et github, git est le "moteur", GitHub est un service en ligne qui utilise git pour gérer les dépôts et ajouter des fonctionnalités collaboratives.
+Notes de présentation :
+- Ne pas confondre git et github, git est le "moteur", GitHub est un service en ligne qui utilise git pour gérer les dépôts et ajouter des fonctionnalités collaboratives.
+- Nous utiliserons Git tout au long du développement de l'application pour gérer les versions et collaborer efficacement.
 
 -->
 
@@ -72,21 +101,45 @@ Ne pas confondre git et github, git est le "moteur", GitHub est un service en li
 # git - terminologie
 
 - **repository**: dépôt git, contient l'historique des modifications du projet
+- **checkout**: changer de branche ou revenir à un état précédent du projet
 - **commit**: enregistrement d'un ensemble de modifications dans le dépôt Git
 - **branch**: branche de développement indépendante dans le dépôt Git
-- **merge**: fusion de deux branches dans le dépôt Git
+- **push**: envoyer les modifications locales vers un dépôt distant
 - **tag**: marqueur pour une version spécifique du projet dans le dépôt Git
 
 Nous manipulerons ces concepts tout au long du développement de l'application **TMDB Discovery App**.
 
 <!--
+Notes de présentation :
+- Il y a aussi d'autres concepts
+  - **merge**: fusion de deux branches dans le dépôt Git
+  - **stash**: permet de mettre de côté temporairement des modifications en cours pour revenir à un état propre du dépôt
+  - **rebase**: permet de réappliquer des commits d'une branche sur une autre, réécrivant l'historique
+  - **pull**: récupérer les modifications depuis un dépôt distant et les fusionner avec la branche locale
+  
+-->
 
-Il y a aussi d'autres concepts
-- **stash**: permet de mettre de côté temporairement des modifications en cours pour revenir à un état propre du dépôt
-- **rebase**: permet de réappliquer des commits d'une branche sur une autre, réécrivant l'historique
-- **pull**: récupérer les modifications depuis un dépôt distant et les fusionner avec la branche locale
-- **push**: envoyer les modifications locales vers un dépôt distant
+---
 
+# Cycle git
+
+Un cycle git typique pour un projet comprend les étapes suivantes :
+- Modification des fichiers du projet
+- Ajout des modifications à l'index avec `git add`
+- Création d'un commit avec `git commit`
+- Poussée des commits vers un dépôt distant avec `git push`
+
+
+```mermaid
+flowchart LR
+    A[Working tree<br/>fichiers modifiés] -->|git add| B[Staging area<br/>fichiers préparés]
+    B -->|git commit| C[Local repository<br/>historique]
+    C -->|git push| D[GitHub<br/>dépôt distant]
+```
+
+<!--
+Notes de présentation :
+- Le diagramme ci-dessus illustre le cycle git typique, montrant comment les modifications passent du répertoire de travail à l'index, puis au dépôt local, et enfin au dépôt distant sur GitHub.
 -->
 
 ---
@@ -104,14 +157,11 @@ gitGraph
 - 1 **tag** sera créé pour marquer la version 0.1.0 du projet.
 
 <!--
-
-Nous verrons régulièrement qu'un commit doit être clair, concis et représenter un ensemble cohérent de modifications dans le projet.
-
-Le tag lui permet de marquer une version spécifique du projet, facilitant la gestion des versions et le suivi des évolutions.
-
-Nous verrons un peu plus tard comment est géree la numérotation des versions du projet.
-
+Notes de présentation :
+- Un **commit** représente un ensemble cohérent de modifications dans le projet.
+- Un **tag** permet de marquer une version spécifique du projet.
 -->
+
 ---
 
 <style>
@@ -183,14 +233,11 @@ Nous verrons un peu plus tard comment est géree la numérotation des versions d
 </div>
 
 <!--
-
-**github** est un service en ligne qui permet de gérer des projets utilisant le système de gestion de version **git**. Il existe d'autres services similaires comme **GitLab**, **Bitbucket** ou **Azure DevOps**.
-
-**github** est le service en ligne le plus populaire pour héberger des projets open source et collaborer avec d'autres développeurs. Il offre des fonctionnalités supplémentaires comme la gestion de projet, l'intégration continue, la documentation et la communication entre les membres de l'équipe.
-
-**open source** signifie que le code source du projet est accessible à tous et peut être modifié et redistribué librement. Cela favorise la collaboration, l'innovation et la transparence dans le développement logiciel.
-
-**Public** signifie que le projet est visible par tous et peut être consulté, cloné et forké par n'importe qui. Cela permet à la communauté de contribuer au projet et d'en bénéficier. Pour notre cas cela permet de bénéficier de fonctionnalités supplémentaires qui ne sont proposées gratuitement que pour les projets publics.
+Notes de présentation :
+- **github** est un service en ligne qui permet de gérer des projets utilisant le système de gestion de version **git**. Il existe d'autres services similaires comme **GitLab**, **Bitbucket** ou **Azure DevOps**.
+- **github** est le service en ligne le plus populaire pour héberger des projets open source et collaborer avec d'autres développeurs. Il offre des fonctionnalités supplémentaires comme la gestion de projet, l'intégration continue, la documentation et la communication entre les membres de l'équipe.
+- **open source** signifie que le code source du projet est accessible à tous et peut être modifié et redistribué librement. Cela favorise la collaboration, l'innovation et la transparence dans le développement logiciel.
+- **Public** signifie que le projet est visible par tous et peut être consulté, cloné et forké par n'importe qui. Cela permet à la communauté de contribuer au projet et d'en bénéficier. Pour notre cas cela permet de bénéficier de fonctionnalités supplémentaires qui ne sont proposées gratuitement que pour les projets publics.
 
 -->
 
@@ -207,10 +254,17 @@ Il offre une expérience de développement similaire à celle d'un **IDE** local
 Il est aussi possible d’utiliser **Codespaces** avec l’application **VS Code** installée sur votre machine, tout en conservant un environnement déjà configuré.
 
 <!--
+Notes de présentation :
+- **Codespaces** permet de créer un environnement de développement complet dans le cloud, directement à partir d'un dépôt **GitHub**.
+- Il offre une expérience similaire à celle d'un **IDE** local, mais sans avoir à configurer l'environnement sur votre machine.
+- **VS Code** dans le navigateur avec **Codespaces** inclut un terminal intégré, un débogueur, un gestionnaire de versions et d'autres fonctionnalités utiles pour le développement.
+- Il est possible d'utiliser **Codespaces** avec l'application **VS Code** installée sur votre machine tout en conservant un environnement déjà configuré.  
 
-**Integrated Development Environment**, c'est un logiciel qui regroupe plusieurs outils pour faciliter le développement d'applications. Il inclut généralement un éditeur de code, un débogueur, un compilateur ou interpréteur, un gestionnaire de versions et d'autres fonctionnalités utiles pour le développement.
+Définition :
 
-**VS Code** est un éditeur de code source développé par Microsoft, qui est gratuit, open source et multiplateforme. Il est très populaire parmi les développeurs pour sa légèreté, sa rapidité et sa richesse en fonctionnalités. Il supporte de nombreux langages de programmation et dispose d'une vaste bibliothèque d'extensions pour ajouter des fonctionnalités supplémentaires.
+**Integrated Development Environment**, c'est un logiciel qui regroupe plusieurs outils pour faciliter le développement d'applications. 
+
+**VS Code** est un éditeur de code source développé par Microsoft, qui est gratuit, open source et multiplateforme. 
 -->
 
 ---
@@ -232,19 +286,23 @@ echo "24" > .nvmrc
 ```
 
 <!--
-
-Un fichier `package.json` est créé à la racine du projet avec les informations de configuration du projet Node.js. Il contient notamment le nom du projet, la version, les dépendances (aucune pour l'instant) et les scripts (comme `start`, `test`, etc.) qui peuvent être utilisés pour exécuter des commandes spécifiques.
-
- https://nodejs.org/fr, version 24 **LTS** Long Term Support, garantir la compatibilité et bénéficier des dernières fonctionnalités stables.
+Note de présentation :
+- Un fichier `package.json` est créé à la racine du projet avec les informations de configuration du projet Node.js. Il contient notamment le nom du projet, la version, les dépendances (aucune pour l'instant) et les scripts (comme `start`, `test`, etc.) qui peuvent être utilisés pour exécuter des commandes spécifiques.
+- La version de Node.js utilisée est définie dans le fichier `.nvmrc` pour garantir la compatibilité et bénéficier des dernières fonctionnalités stables. Version 24 **LTS** Long Term Support, garantir la compatibilité et bénéficier des dernières fonctionnalités stables.
 
 -->
 ---
 
 # Express.js
 
-**Express.js** est un **framework** web pour **Node.js** qui facilite la création d'applications web et d'**API**. Il fournit des fonctionnalités robustes pour gérer les requêtes **HTTP**, les routes, les middlewares et bien plus encore. Nous allons l'utiliser pour exposer notre back-end sous forme d'**API REST**.
+**Express.js** est un **framework** web pour **Node.js** qui facilite la création d'applications web et d'**API**. 
+
+Il fournit des fonctionnalités robustes pour gérer les requêtes **HTTP**, les routes, les middlewares et bien plus encore. 
+
+Nous allons l'utiliser pour exposer notre back-end sous forme d'**API REST**.
 
 Pour plus d'informations sur **Express.js**, vous pouvez consulter la documentation officielle : [https://expressjs.com/fr/](https://expressjs.com/fr/)
+
 
 ```shell
 # Installation d'express pour créer le serveur web
@@ -252,14 +310,9 @@ npm install express
 ```
 
 <!--
-
-**framework**: ensemble d'outils et de bibliothèques qui facilite le développement d'applications en fournissant une structure et des fonctionnalités préconçues.
-
-**Node.js**: environnement d'exécution JavaScript côté serveur qui permet d'exécuter du code JavaScript en dehors d'un navigateur web.
-
-**routes**: chemins d'accès aux différentes ressources de l'application, définis par des URL et associés à des fonctions qui traitent les requêtes et renvoient des réponses.
-
-**middlewares**: fonctions qui s'exécutent entre la réception d'une requête et l'envoi d'une réponse, permettant de modifier la requête ou la réponse, de gérer les erreurs, d'authentifier les utilisateurs, etc.
+Note de présentation :
+- **routes**: chemins d'accès aux différentes ressources de l'application, définis par des URL et associés à des fonctions qui traitent les requêtes et renvoient des réponses.
+- **middlewares**: fonctions qui s'exécutent entre la réception d'une requête et l'envoi d'une réponse, permettant de modifier la requête ou la réponse, de gérer les erreurs, d'authentifier les utilisateurs, etc.
 
 -->
 ---
@@ -288,14 +341,12 @@ app.listen(port, () => {
 ```
 
 <!--
-
-**A**pplication **P**rogramming **I**nterface: ensemble de règles et de conventions qui permet à des applications de communiquer entre elles. Une API REST (Representational State Transfer) est un type d'API qui utilise le protocole HTTP pour échanger des données entre un client et un serveur, en suivant les principes de l'architecture REST.
+Note de présentation :
+- **A**pplication **P**rogramming **I**nterface: ensemble de règles et de conventions qui permet à des applications de communiquer entre elles. Une API REST (Representational State Transfer) est un type d'API qui utilise le protocole HTTP pour échanger des données entre un client et un serveur, en suivant les principes de l'architecture REST.
 
 **HTTP**: protocole de communication utilisé pour échanger des données sur le web. Il définit les méthodes (GET, POST, PUT, DELETE, etc.) et les codes de statut (200, 404, 500, etc.) pour indiquer le résultat d'une requête.
 
-**REST**: style d'architecture pour concevoir des services web qui utilisent le protocole HTTP et les principes de l'architecture REST. Il repose sur l'utilisation de ressources identifiées par des URL, la manipulation de ces ressources via des méthodes HTTP et la représentation de l'état des ressources sous forme de données (souvent au format JSON).
-
-**JSON**: format de données léger et facile à lire pour représenter des objets et des tableaux, utilisé pour échanger des données entre un client et un serveur. Il est basé sur la syntaxe des objets JavaScript, mais peut être utilisé avec n'importe quel langage de programmation.
+**JSON** (JavaScript Object Notation): format de données léger et facile à lire pour représenter des objets et des tableaux, utilisé pour échanger des données entre un client et un serveur. Il est basé sur la syntaxe des objets JavaScript, mais peut être utilisé avec n'importe quel langage de programmation.
 
 -->
 
@@ -311,6 +362,10 @@ node index.js
 
 Vous pouvez accéder à l'adresse [http://localhost:3000](http://localhost:3000). Vous devriez voir le message "Hello World!" s'afficher.
 
+<!--
+Note de présentation :
+Cette étape permet de vérifier que notre serveur Express.js fonctionne correctement en accédant à l'URL racine. Si tout est configuré correctement, nous devrions voir le message "Hello World!" s'afficher dans le navigateur.
+-->
 
 ---
 
@@ -324,6 +379,10 @@ Tout au long de ces étapes, nous allons utiliser la ligne de commande **git** d
 
 Il est également possible d'utiliser l'interface graphique de **VS Code** pour effectuer ces opérations, mais nous allons privilégier (dans un premier temps) la ligne de commande pour mieux comprendre le fonctionnement de **git**.
 
+<!--
+Note de présentation :
+Cette section explique l'utilisation des commandes **git** pour gérer l'état du projet et préparer les fichiers pour le commit.
+-->
 ---
 
 # GIT - status
@@ -354,8 +413,8 @@ Untracked files:
 ```
 
 <!--
-
-Montrer aussi ce qui se passe dans vs-code, notamment l'interface graphique de gestion des fichiers et l'onglet de contrôle de version.
+Notes de présentation :
+- Montrer aussi ce qui se passe dans vs-code, notamment l'interface graphique de gestion des fichiers et l'onglet de contrôle de version.
 
 -->
 
@@ -387,12 +446,12 @@ Untracked files:
 ```
 
 <!--
-
-avec **node.js**, les dépendances sont déclarées dans le fichier **package.json** et installées dans le dossier **node_modules**. Le fichier **package-lock.json** est généré automatiquement lors de l'installation des dépendances et permet de verrouiller les versions des dépendances pour garantir que le projet fonctionne de manière cohérente sur différentes machines.
-
-Si les fichiers **package.json** et **package-lock.json** sont suivis par Git, il est inutile de suivre le dossier **node_modules**, car il peut être recréé à partir de ces fichiers. C'est pourquoi nous l'excluons avec le fichier **.gitignore**.
-
-**.gitignore** est un fichier texte qui contient une liste de fichiers et de dossiers à ignorer par Git. Il permet d'éviter d'ajouter des fichiers temporaires, des fichiers de configuration locaux ou des dépendances dans le dépôt Git.
+Notes de présentation :
+- Expliquer l'importance de suivre les fichiers **package.json** et **package-lock.json** pour gérer les dépendances du projet.
+- Expliquer pourquoi il est important d'exclure le dossier **node_modules/** du dépôt Git.
+- Mentionner le rôle du fichier **.gitignore** dans la gestion des fichiers à ignorer par Git.
+- Mentionner que le fichier **.gitignore** permet d'éviter d'ajouter des fichiers temporaires, des fichiers de configuration locaux ou des dépendances dans le dépôt Git.
+- Expliquer que le fichier **.gitignore** doit être versionné dans le dépôt Git pour que tous les collaborateurs bénéficient des mêmes règles d'exclusion.
 
 -->
 
@@ -428,8 +487,10 @@ Changes to be committed:
 ```
 
 <!--
-
-**git add .** permet d'ajouter tous les fichiers non suivis par Git à l'index, sauf ceux exclus par le fichier **.gitignore**. Pour ajouter un fichier spécifique, vous pouvez utiliser `git add <nom_du_fichier>`
+Notes de présentation :
+- Expliquer que la commande `git add` permet de préparer les fichiers pour le commit en les ajoutant à l'index Git.
+- Mentionner que les fichiers exclus par le fichier **.gitignore** ne seront pas ajoutés à l'index Git.
+- Préciser que pour ajouter un fichier spécifique, il est possible d'utiliser `git add <nom_du_fichier>`. 
 
 -->
 
@@ -458,6 +519,11 @@ Résultat attendu :
 
 ```
 
+<!--
+Notes de présentation :
+- Expliquer que la commande `git commit` permet de valider les modifications ajoutées à l'index Git et de créer un nouveau commit dans l'historique du projet.
+- Mentionner l'importance de rédiger un message de commit clair et descriptif pour faciliter la compréhension de l'historique du projet.
+-->
 ---
 
 # Git - commit (suite)
@@ -480,6 +546,12 @@ Your branch is ahead of 'origin/main' by 1 commit.
 nothing to commit, working tree clean
 ```
 
+<!--
+Notes de présentation :
+- Expliquer que la commande `git push` permet d'envoyer les commits locaux vers le dépôt distant sur GitHub.
+- Mentionner que la branche locale doit être à jour avec la branche distante avant de pousser les modifications.
+- Expliquer que la commande `git push` met à jour la branche distante avec les commits locaux.
+-->
 ---
 
 # Git - push
@@ -528,6 +600,11 @@ Your branch is up to date with 'origin/main'.
 nothing to commit, working tree clean
 ```
 
+<!--
+Notes de présentation :
+- Expliquer que la vérification de l'état du projet avec `git status` permet de s'assurer que la branche locale est à jour avec la branche distante après un `git push`.
+-->
+
 ---
 
 # Git - push (suite)
@@ -536,6 +613,11 @@ Le **commit** initial a été poussé avec succès vers le dépôt distant sur *
 
 ![GitHub - Initial Commit](./assets/github-com-initial-commit.png)
 
+<!--
+Notes de présentation :
+- Expliquer que le commit initial a été poussé avec succès vers le dépôt distant sur GitHub.
+- Mentionner que l'on peut vérifier la présence du commit dans l'historique du dépôt en visitant la page du dépôt sur GitHub. 
+-->
 ---
 
 # TypeScript
@@ -547,13 +629,11 @@ Le **commit** initial a été poussé avec succès vers le dépôt distant sur *
 - **Exemple rapide** : utiliser TypeScript pour produire un code plus sûr et plus maintenable.
 
 <!--
-
-Le *JavaScript* était à l'origine le langage de programmation utilisé pour le développement web côté client. Cependant, il est devenu de plus en plus populaire pour le développement côté serveur grâce à **Node.js**. 
-
-Le **JavaScript** est un langage interprété, ce qui signifie qu'il n'est pas compilé avant d'être exécuté. Cela peut entraîner des erreurs à l'exécution si le code n'est pas correctement écrit ou si les types de données ne sont pas correctement gérés.
-
-Afin de résoudre ces problèmes, **TypeScript** a été créé. **TypeScript** est un sur-ensemble de **JavaScript** qui ajoute des fonctionnalités de typage statique et de vérification de type à la compilation. Cela permet aux développeurs de détecter les erreurs avant l'exécution et d'écrire du code plus sûr et plus maintenable.
-
+Notes de présentation :
+- Expliquer le rôle de JavaScript dans le développement web côté client et côté serveur.
+- Mentionner les limitations du typage dynamique de JavaScript.
+- Introduire TypeScript comme solution pour ajouter le typage statique et améliorer la sécurité et la maintenabilité du code.
+- L'objectif est de montrer comment TypeScript peut améliorer la sécurité et la maintenabilité du code en ajoutant un typage statique et une vérification des types avant l'exécution.
 -->
 
 ---
@@ -642,6 +722,11 @@ addTax("10"); // "102" (concaténation), pas 12
   </div>
 </div>
 
+<!--
+Notes de présentation :
+- Expliquer que TypeScript permet de détecter les erreurs avant l'exécution grâce au typage statique.
+- Montrer l'exemple de la fonction addTax pour illustrer la différence entre JavaScript et TypeScript.
+-->
 ---
 
 # TypeScript - Ce que l'on gagne
@@ -675,7 +760,9 @@ addTax("10"); // Erreur TypeScript
 
 # TypeScript - Installation
 
-Nous allons donc convertir notre projet back-end en **TypeScript** pour bénéficier de ces avantages. Cela implique d'installer **TypeScript**, de configurer le projet pour utiliser **TypeScript** et de renommer nos fichiers **JavaScript** en fichiers **TypeScript**.
+Nous allons donc convertir notre projet back-end en **TypeScript** pour bénéficier de ces avantages. 
+
+Cela implique d'installer **TypeScript**, de configurer le projet pour utiliser **TypeScript** et de renommer nos fichiers **JavaScript** en fichiers **TypeScript**.
 
 ```shell
 # Installation de TypeScript et des types pour Node.js et Express
@@ -684,6 +771,11 @@ npm install typescript @types/node @types/express tsx --save-dev
 ```
 
 Les types sont des définitions qui permettent à **TypeScript** de comprendre les types de données utilisés par **Node.js** et **Express**, ce qui améliore la vérification des types et l'auto-complétion dans l'éditeur.
+
+<!--
+Notes de présentation :
+- Expliquer que l'installation de TypeScript et des types pour Node.js et Express est nécessaire pour bénéficier de la vérification statique des types et de l'auto-complétion dans l'éditeur.
+-->
 
 ---
 
@@ -720,6 +812,11 @@ mv index.js src/back-end/index.ts
 ```
 
 Sur le slide suivant, nous allons créer le fichier `tsconfig.backend.json` qui contiendra la configuration propre au back-end.
+
+```bash
+# Création du fichier tsconfig.backend.json pour la configuration du back-end
+touch tsconfig.backend.json
+```
 
 ---
 
@@ -859,12 +956,10 @@ Vous pouvez retrouver le **tag** v0.1.0 dans l'onglet "Tags" de votre dépôt Gi
 
 ---
 
-# Récapitulatif de la version 0.1.0
+# Bilan: une base prête pour la suite
 
-- Initialisation du projet Node.js avec Express.js
-- Création d'un endpoint REST __Hello World__
-- Transformation du projet pour utiliser TypeScript
-- Ajout d'un script pour lancer le serveur en mode développement avec rechargement automatique
-- Sauvegarde du projet sur GitHub avec un commit initial
-- Création d'un **tag** pour marquer la version 0.1.0
-
+- **Application :** un serveur Express répond à `GET /`.
+- **Organisation :** le code back-end se trouve dans `src/back-end`.
+- **Qualité :** TypeScript vérifie les types avant l'exécution.
+- **Développement :** `npm run dev:server` lance le serveur en mode watch.
+- **Historique :** les étapes sont publiées par commits et marquées par `v0.1.0`.
