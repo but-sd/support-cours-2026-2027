@@ -13,6 +13,12 @@ mermaid:
 
 <p class="hero-kicker">TMDB API - Commits atomiques - Commitlint - Husky</p>
 
+<!--
+Notes de présentation:
+- exploitation de l'API TMDB pour récupérer les films populaires
+- aide à la création des messages de commit clairs et précis et validés automatiquement.
+
+-->
 ---
 
 # Objectifs
@@ -30,9 +36,14 @@ mermaid:
 - Validation des messages de commit avec **commitlint**
 - Contrôle automatique via un hook **Git** avec **Husky**
 - Amélioration de la lisibilité des commits avec **devmoji**
+- Instructions pour Copilot: génération des messages de commit clairs et précis et respectant les conventions définies.
 
 <!--
-
+Notes de présentation :
+- commit atomique: un commit qui ne contient qu'un seul changement cohérent. Il est plus facile à comprendre et à maintenir.
+- commitlint: outil pour valider les messages de commit selon des règles prédéfinies.
+- husky: outil pour gérer les hooks Git, permettant d'exécuter des scripts avant ou après certaines actions Git.
+- devmoji: outil pour améliorer la lisibilité des commits en ajoutant des emojis significatifs.
 commit atomique: un commit qui ne contient qu'un seul changement cohérent. Il est plus facile à comprendre et à maintenir.
 
 -->
@@ -44,18 +55,26 @@ gitGraph
     commit id: "add .env file to .gitignore" 
     commit id: "add /api/movies/popular endpoint"
     commit id: "add husky and commitlint"
-    commit id: "add devmoji dependency" tag: "0.2.0"
+    commit id: "add devmoji dependency" 
+    commit id: "copilot instructions for commit messages" tag: "0.2.0"
 
 ```
 
-- 4 **commits** atomiques vont être réalisés dans cette version 0.2.0.
+- 5 **commits** atomiques vont être réalisés dans cette version 0.2.0.
   - 1 commit pour sécuriser la configuration (.env dans .gitignore).
   - 1 commit pour ajouter l'endpoint /api/movies/popular.
   - 1 commit pour mettre en place **Husky** et **commitlint**.
   - 1 commit pour ajouter **devmoji**.
+  - 1 commit pour ajouter les instructions Copilot pour les messages de commit.
 
 - 1 **tag** sera créé pour marquer la version 0.2.0.
 
+<!--
+Notes de présentation:
+
+- 5 commits atomiques qui permettent de suivre clairement l'évolution de l'application et de maintenir un historique de modifications compréhensible.
+
+-->
 ---
 
 <style>
@@ -130,6 +149,12 @@ gitGraph
   </div>
 </div>
 
+<!--
+Notes de présentation:
+
+- Exploitation de l'API TMDB pour récupérer les films populaires.
+-->
+
 ---
 
 # Exploitation de l'API TMDB
@@ -144,6 +169,10 @@ gitGraph
   - recherche,
   - détails,
   - recommandations.
+
+<!-- Notes de présentation:
+ - Possibilité de tester les endpoints directement depuis la documentation.
+-->
 
 ---
 
@@ -160,10 +189,13 @@ Dans ce cours, nous utiliserons directement l'API REST pour bien comprendre :
 - la lecture des réponses,
 - la gestion des erreurs.
 
+<!-- Notes de présentation:
+- Importance de comprendre la construction des requêtes HTTP pour interagir avec l'API TMDB.
+-->
+
 ---
 
 # Authentification avec l'API TMDB
-
 
 - Créer un compte sur [TMDB](https://www.themoviedb.org/?language=fr).
 - Générer des identifiants d'API depuis :
@@ -175,6 +207,16 @@ Dans ce cours, nous utiliserons directement l'API REST pour bien comprendre :
   - token d'accès.
 - Dans ce cours, nous privilégions le token d'accès (plus sécurisé).
 - Le token est envoyé dans l'en-tête HTTP `Authorization`.
+
+<!-- Notes de présentation:
+- Clé d'API:
+  - Moins sécurisée que le token d'accès.
+  - Peut être utilisée directement dans les requêtes HTTP.
+  - Doit également être protégée et ne jamais être committée dans le dépôt.
+- Token d'accès:
+  - Plus sécurisé que la clé d'API.
+  - Doit être stocké dans un fichier `.env` et jamais committé dans le dépôt.
+-->
 ---
 
 # Authentification avec l'API TMDB (suite)
@@ -190,6 +232,10 @@ echo "TMDB_ACCESS_TOKEN=your_access_token_here" > .env
 
 - Étape 3 : remplacer `your_access_token_here` par votre vrai token TMDB.
 
+<!-- Notes de présentation:
+- Importance de sécuriser le token d'accès TMDB en utilisant un fichier `.env`.
+- Ne jamais commiter le fichier `.env` contenant le token d'accès.
+-->
 ---
 
 # Github et sécurité des informations sensibles
@@ -208,7 +254,12 @@ echo "TMDB_ACCESS_TOKEN=your_access_token_here" > .env
 - Pourquoi révoquer ?
   - Git conserve l'historique,
   - un secret déjà poussé peut rester accessible dans les anciens commits.
-  
+
+<!-- Notes de présentation:
+- Importance de ne jamais commiter des informations sensibles dans le dépôt.
+- Utiliser `.gitignore` pour protéger les fichiers contenant des secrets.
+- En cas de fuite, révoquer immédiatement le secret compromis.
+-->
 ---
 
 # Authentification avec l'API TMDB (suite)
@@ -229,6 +280,10 @@ git add .gitignore .env
 git commit -m "🔒 Add .env file to .gitignore to secure TMDB access token"
 ```
 
+<!-- Notes de présentation:
+- Importance d'ajouter le fichier `.env` dans `.gitignore` pour éviter tout commit accidentel.
+- Faire un commit atomique pour ce changement de sécurité.
+-->
 ---
 
 # Authentification avec l'API TMDB (suite)
@@ -241,6 +296,11 @@ git commit -m "🔒 Add .env file to .gitignore to secure TMDB access token"
 # Installation de dotenv
 npm install dotenv
 ```
+
+<!-- Notes de présentation:
+- Objectif : charger automatiquement les variables d'environnement depuis le fichier `.env`.
+- Solution : utiliser la bibliothèque `dotenv`.
+-->
 ---
 
 # Authentification avec l'API TMDB (suite)
@@ -293,6 +353,10 @@ export { tmdbAccessToken };
   - renvoyer la réponse JSON au client,
   - retourner une erreur HTTP 500 en cas d'échec.
 
+<!-- Notes de présentation:
+- Objectif : exposer un endpoint REST pour les films populaires.
+- Solution : créer une route `/api/movies/popular` dans `index.ts` du back-end.
+-->
 ---
 
 # Films populaires (/api/movies/popular) (suite)
@@ -307,7 +371,7 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
   try {
     const response = await fetch('https://api.themoviedb.org/3/movie/popular', {
       headers: {
-        Authorization: `Bearer <TMDB_ACCESS_TOKEN>`,
+        Authorization: `Bearer ${tmdbAccessToken}`,
         'Content-Type': 'application/json;charset=utf-8'
       }
     });
@@ -326,6 +390,13 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
 ...
 ```
 
+<!-- Notes de présentation:
+- **app.get** est utilisé pour définir un gestionnaire de route pour l'endpoint `/api/movies/popular` en HTTP GET (lecture des films populaires).
+- **fetch** est utilisé pour effectuer une requête HTTP vers l'API TMDB.
+- Le token d'accès est transmis dans l'en-tête `Authorization` pour authentifier la requête.
+- En cas de succès, la réponse JSON est renvoyée au client.
+- En cas d'échec, une erreur HTTP 500 est renvoyée.
+-->
 ---
 
 ## Films populaires (/api/movies/popular) (suite)
@@ -341,6 +412,12 @@ npm run dev:server
   - [http://localhost:3000/api/movies/popular](http://localhost:3000/api/movies/popular)
 
 - Étape 3 : vérifier que la réponse est un JSON avec les films populaires TMDB.
+
+<!-- Notes de présentation:
+- montrer le cas passant
+- montrer le cas d'erreur (mauvaise configuration du token ou indisponibilité de l'API) et explique que l'erreur HTTP 500 est renvoyée au client, un console.log peut être utilisé pour inspecter l'erreur côté serveur.
+
+-->
 ---
 
 ## Films populaires (/api/movies/popular) (suite)
@@ -399,6 +476,12 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
   - Pourquoi ?
 
 - Si le message devient difficile à rédiger, le commit est probablement trop large.
+
+<!--Notes de présentation:
+- incister sur le fait que chaque commit doit représenter un changement cohérent et compréhensible.
+- rappeler que les messages de commit doivent être clairs et explicites pour faciliter la relecture et la collaboration.
+-->
+
 ---
 
 # GIT - Bonnes pratiques pour le commit (suite)
@@ -421,7 +504,6 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
 
 # GIT - Conventionnal Commits
 
-
 - Les **Conventional Commits** standardisent les messages de commit.
 - Format recommandé : `type: description`.
 - Objectif : un historique plus lisible et plus facile à exploiter.
@@ -436,6 +518,10 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
   - **chore** : tâches techniques (dépendances, scripts, etc.)
 
 - Référence : [https://www.conventionalcommits.org/fr/v1.0.0/#summary](https://www.conventionalcommits.org/fr/v1.0.0/#summary)
+
+<!--Notes de présentation:
+- expliquer l'intérêt des Conventional Commits pour la lisibilité de l'historique et l'automatisation des processus.
+-->
 ---
 
 # GIT - Conventionnal Commits (suite)
@@ -447,6 +533,10 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
   - aide au versioning.
 - Les messages peuvent être validés automatiquement avec des outils dédiés.
 
+<!--Notes de présentation:
+- par exemple si l'on veut générer automatiquement un changelog à partir des commits qui retracent l'historique des changements.
+- versioning automatique basé sur les types de commits (feat pour les nouvelles fonctionnalités, fix pour les corrections de bugs, etc.).
+-->
 ---
 
 # GIT - Conventionnal Commits - commitlint
@@ -458,7 +548,7 @@ git commit -m "✨ Add /api/movies/popular endpoint to fetch popular movies from
 **Étape 1 - Installation**
 
 ```bash
-npm install -D @commitlint/cli @commitlint/config-conventional
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
 ```
 
 **Étape 2 - Configuration**
@@ -480,6 +570,12 @@ extends: ['@commitlint/config-conventional'],
 
 export default config;
 ```
+
+<!--Notes de présentation:
+- commitlint permet de vérifier automatiquement que les messages de commit respectent la convention choisie.
+- expliquer l'option `--save-dev` utilisée lors de l'installation des dépendances de développement et son raccourci `-D`.
+
+-->
 ---
 
 # GIT - Conventionnal Commits - commitlint (suite)
@@ -521,12 +617,17 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 
 - Référence : https://git-scm.com/book/en/Customizing-Git-Git-Hooks
 
+<!--Notes de présentation:
+- expliquer l'intérêt des hooks git pour automatiser les vérifications et les actions avant ou après certaines opérations Git.
+- par exemple, utiliser un hook `commit-msg` pour s'assurer que tous les messages de commit respectent la convention choisie.
+-->
 ---
 
 # GIT - hooks - husky
-
-
+  
 - **husky** simplifie la gestion des hooks **git** dans un projet Node.js.
+
+- Référence : https://typicode.github.io/husky/#/
 
 - Étape 1 - Installer husky :
 
@@ -539,6 +640,11 @@ npm install --save-dev husky
 ```bash
 npx husky init
 ```
+
+<!--Notes de présentation:
+- montrer comment husky simplifie la gestion des hooks git dans un projet Node.js.
+- expliquer l'intérêt d'automatiser les vérifications avec des hooks comme `commit-msg`.
+-->
 ---
 
 # GIT - hooks - husky (suite)
@@ -590,6 +696,12 @@ Nous avons maintenant un contrôle automatique avec **commitlint** + **husky**.
 
 - Résultat : des commits plus rapides à lire dans l'historique.
 - Référence : https://github.com/folke/devmoji
+
+<!--Notes de présentation:
+- expliquer l'intérêt de devmoji pour rendre les messages de commit plus visuels et faciles à lire.
+- montrer comment devmoji s'intègre avec husky pour automatiser l'ajout des emojis dans les messages de commit.
+--->
+
 ---
 
 # GIT - Conventionnal Commits - devmoji (suite)
@@ -614,6 +726,66 @@ echo "npx devmoji -e --lint" > .husky/prepare-commit-msg
 git add .
 git commit -m "feat: add devmoji dependency for improved commit message management"
 ```
+---
+
+# Copilot - instructions
+
+- Objectif : montrer comment utiliser GitHub Copilot pour générer les messages de commit automatiquement.
+- Référence : https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions#creating-custom-instructions
+
+---
+
+# GitHub Copilot - instructions (suite)
+
+Créer un fichier `.github/copilot-instructions.md` à la racine du dépôt pour définir les instructions personnalisées pour GitHub Copilot.
+
+````markdown
+## Commit Message Guidelines
+
+Commit messages should use the conventional commit format. For example:
+
+```
+feat: add new feature
+fix: fix a bug
+docs: update documentation
+style: update styles
+refactor: refactor code
+test: add tests
+chore: update dependencies
+build: update build process
+ci: update continuous integration
+perf: improve performance
+revert: revert to previous commit
+```
+
+The commit message should be in the imperative mood, meaning it should describe what the commit does, not what it did.
+
+The commit message should be concise and to the point, ideally no more than 72 characters in length. If the commit message is longer than 72 characters, it should be wrapped to the next line.
+
+````
+
+<!--Notes de présentation
+- Montrer comment utiliser GitHub Copilot pour générer les messages de commit automatiquement.
+-->
+
+---
+
+# Gestion de secrets dans Code Spaces
+
+- Objectif : sécuriser les informations sensibles (comme le token d'accès TMDB) dans l'environnement de développement.
+- Code Spaces permet de définir des secrets qui seront injectés dans l'environnement sans être exposés dans le dépôt.
+- Exemple : ajouter le token d'accès TMDB comme secret dans Code Spaces.
+- Référence : https://docs.github.com/en/codespaces/developing-in-codespaces/using-secrets-in-codespaces
+
+---
+
+# Gestion de secrets dans Code Spaces (suite)
+
+- Étape 1 : aller dans les paramètres de votre Codespace.
+- Étape 2 : naviguer vers "Secrets" puis "Codespaces".
+- Étape 3 : ajouter un nouveau secret avec le nom `TMDB_ACCESS_TOKEN` et la valeur correspondante.
+- Étape 4 : vérifier que le secret est correctement injecté en démarrant le serveur de développement.
+
 ---
 
 # GIT - push and tag
@@ -643,4 +815,6 @@ git push origin v0.2.0
 - Ajout de l'endpoint `/api/movies/popular` pour récupérer les films populaires.
 - Mise en place de **Husky** et **commitlint** pour valider les messages de commit.
 - Ajout de **devmoji** pour améliorer la lisibilité des messages de commit.
+- Copilot pour générer automatiquement les messages de commit.
+- Ajout de la gestion des secrets dans Code Spaces pour sécuriser le token d'accès TMDB.
 - Création du tag `v0.2.0` pour marquer cette version.
