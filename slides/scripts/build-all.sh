@@ -16,6 +16,9 @@ for deck in "${decks[@]}"; do
   slug="${slug%.md}"
 
   npm run build:deck -- --base "./" "$deck"
+  if [[ "$slug" == tmdb-discovery-* ]]; then
+    npm run export:deck -- "$deck" --output "dist/${slug}.pdf"
+  fi
 
   mkdir -p "dist/${slug}"
   rm -rf "dist/${slug}"/*

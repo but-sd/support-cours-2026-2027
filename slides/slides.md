@@ -28,8 +28,8 @@ duration: 5min
 <section class="versions-section">
   <h2>Versions</h2>
   <ul class="versions-list">
-    <li><a href="./tmdb-discovery-0.1.0/">0.1.0</a></li>
-    <li><a href="./tmdb-discovery-0.2.0/">0.2.0</a></li>
+    <li><a href="./tmdb-discovery-0.1.0/">0.1.0</a> · <a href="./tmdb-discovery-0.1.0.pdf">PDF</a></li>
+    <li><a href="./tmdb-discovery-0.2.0/">0.2.0</a> · <a href="./tmdb-discovery-0.2.0.pdf">PDF</a></li>
     <!--
     <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
     <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0 <span class="version-note">Dernière passe sur le titre</span></a></li>
