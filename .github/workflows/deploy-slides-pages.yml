@@ -45,6 +45,9 @@ jobs:
           for deck in decks/*.md; do
             slug="$(basename "$deck" .md)"
             npm run build:deck -- "$deck" --base "./"
+            if [[ "$slug" == tmdb-discovery-* ]]; then
+              npm run export:deck -- "$deck" --output "dist/${slug}.pdf"
+            fi
 
             mkdir -p "dist/${slug}"
             rm -rf "dist/${slug}"/*
