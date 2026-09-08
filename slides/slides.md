@@ -26,14 +26,18 @@ duration: 5min
 </nav>
 
 <section class="versions-section">
-  <h2>Versions</h2>
+  <h2>Versions disponibles</h2>
   <ul class="versions-list">
-    <li><a href="./tmdb-discovery-0.1.0/">0.1.0</a> · <a href="./tmdb-discovery-0.1.0.pdf">PDF</a></li>
-    <li><a href="./tmdb-discovery-0.2.0/">0.2.0</a> · <a href="./tmdb-discovery-0.2.0.pdf">PDF</a></li>
-    <!--
-    <li><a href="./tmdb-discovery-0.4.0/">Version 0.4.0</a></li>
-    <li><a href="./tmdb-discovery-0.5.0/">Version 0.5.0 <span class="version-note">Dernière passe sur le titre</span></a></li>
-    <li><a href="./tmdb-discovery-0.6.0/">Version 0.6.0 <span class="version-note">En cours de réalisation</span></a></li> -->
+    <li>
+      <span class="version-number">0.1.0</span>
+      <a class="version-label" href="./tmdb-discovery-0.1.0/">Base back-end Express/TypeScript et premiers repères Git</a>
+      <span class="version-links"><a href="./tmdb-discovery-0.1.0.pdf">PDF</a></span>
+    </li>
+    <li>
+      <span class="version-number">0.2.0</span>
+      <a class="version-label" href="./tmdb-discovery-0.2.0/">API TMDB, commits atomiques et qualité Git automatisée</a>
+      <span class="version-links"><a href="./tmdb-discovery-0.2.0.pdf">PDF</a></span>
+    </li>
   </ul>
 </section>
 
@@ -121,27 +125,57 @@ duration: 5min
 }
 
 .versions-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.35rem 1rem;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.versions-list a {
-  color: #0f766e;
+.versions-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.45rem 0;
+}
+
+.version-number {
+  min-width: 3.5rem;
+  color: #0f172a;
   font-size: 0.86rem;
-  text-decoration: none;
+  font-weight: 800;
 }
 
-.versions-list a:hover {
-  text-decoration: underline;
+.version-label {
+  flex: 1;
+  color: #475569;
+  font-size: 0.78rem;
+  border-bottom: 0 !important;
+  text-decoration: none !important;
 }
 
-.version-note {
-  color: #64748b;
-  font-size: 0.72rem;
+.version-label:hover {
+  color: #0f766e;
+  border-bottom: 0 !important;
+  text-decoration: none !important;
+}
+
+.version-links {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.version-links a {
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-bottom: 0 !important;
+  text-decoration: none !important;
+}
+
+.version-links a:hover {
+  border-bottom: 0 !important;
+  text-decoration: none !important;
 }
 
 .slide-footer {
@@ -156,6 +190,12 @@ duration: 5min
   .landing-nav,
   .versions-list {
     grid-template-columns: 1fr;
+  }
+
+  .versions-list li {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.8rem;
   }
 }
 </style>
