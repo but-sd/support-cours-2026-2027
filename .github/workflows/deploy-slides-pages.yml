@@ -13,8 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || 'pages' }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -22,6 +22,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Checkout main site for PR preview
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          path: _main
 
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -39,10 +46,12 @@ jobs:
         run: npm ci
 
       - name: Build landing deck
+        if: github.event_name != 'pull_request'
         working-directory: slides
         run: npm run build -- --base "/${{ github.event.repository.name }}/"
 
       - name: Build all decks
+        if: github.event_name != 'pull_request'
         working-directory: slides
         run: |
           for deck in decks/*.md; do
@@ -69,6 +78,72 @@ jobs:
             done
           done
 
+      - name: Build main site for PR preview
+        if: github.event_name == 'pull_request'
+        working-directory: _main/slides
+        run: |
+          npm ci
+          npm run build -- --base "/${{ github.event.repository.name }}/"
+
+          for deck in decks/*.md; do
+            slug="$(basename "$deck" .md)"
+            npm run build:deck -- "$deck" --base "./"
+            if [[ "$slug" == tmdb-discovery-* ]] && npm ls playwright-chromium --depth=0 >/dev/null 2>&1; then
+              npm run export:deck -- "$deck" --output "dist/${slug}.pdf"
+            fi
+
+            mkdir -p "dist/${slug}"
+            rm -rf "dist/${slug}"/*
+            cp -R decks/dist/. "dist/${slug}/"
+
+            # Copy deck-local static assets (images, logos, etc.) referenced with relative paths.
+            for item in decks/*; do
+              name="$(basename "$item")"
+              case "$name" in
+                *.md|dist)
+                  continue
+                  ;;
+              esac
+
+              cp -R "$item" "dist/${slug}/"
+            done
+          done
+
+          rm -rf ../../slides/dist
+          mkdir -p ../../slides/dist
+          cp -R dist/. ../../slides/dist/
+
+      - name: Build PR preview
+        if: github.event_name == 'pull_request'
+        working-directory: slides
+        run: |
+          preview_dir="dist/pr-preview/pr-${{ github.event.pull_request.number }}"
+          npm run build -- --base "/${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.pull_request.number }}/" --out "$preview_dir"
+
+          for deck in decks/*.md; do
+            slug="$(basename "$deck" .md)"
+            npm run build:deck -- "$deck" --base "./"
+            if [[ "$slug" == tmdb-discovery-* ]]; then
+              npm run export:deck -- "$deck" --output "${preview_dir}/${slug}.pdf"
+            fi
+
+            mkdir -p "${preview_dir}/${slug}"
+            rm -rf "${preview_dir}/${slug}"/*
+            cp -R decks/dist/. "${preview_dir}/${slug}/"
+
+            # Copy deck-local static assets (images, logos, etc.) referenced with relative paths.
+            for item in decks/*; do
+              name="$(basename "$item")"
+              case "$name" in
+                *.md|dist)
+                  continue
+                  ;;
+              esac
+
+              cp -R "$item" "${preview_dir}/${slug}/"
+            done
+          done
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
@@ -77,12 +152,10 @@ jobs:
   deploy:
     environment:
       name: ${{ github.event_name == 'pull_request' && format('github-pages-pr-{0}', github.event.pull_request.number) || 'github-pages' }}
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ github.event_name == 'pull_request' && format('{0}pr-preview/pr-{1}/', steps.deployment.outputs.page_url, github.event.pull_request.number) || steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-        with:
-          preview: ${{ github.event_name == 'pull_request' }}
