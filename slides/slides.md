@@ -33,11 +33,16 @@ duration: 5min
       <a class="version-label" href="./tmdb-discovery-0.1.0/">Base back-end Express/TypeScript et premiers repères Git</a>
       <span class="version-links"><a href="./tmdb-discovery-0.1.0.pdf">PDF</a></span>
     </li>
-    <li>
-      <span class="version-number">0.2.0</span>
-      <a class="version-label" href="./tmdb-discovery-0.2.0/">API TMDB, commits atomiques et qualité Git automatisée</a>
-      <span class="version-links"><a href="./tmdb-discovery-0.2.0.pdf">PDF</a></span>
-    </li>
+      <li>
+        <span class="version-number">0.2.0</span>
+        <a class="version-label" href="./tmdb-discovery-0.2.0/">API TMDB, commits atomiques et qualité Git automatisée</a>
+        <span class="version-links"><a href="./tmdb-discovery-0.2.0.pdf">PDF</a></span>
+      </li>
+      <li>
+        <span class="version-number">0.3.0</span>
+        <a class="version-label" href="./tmdb-discovery-0.3.0/">Ajout de la gestion des utilisateurs et amélioration de l'interface</a>
+        <span class="version-links"><a href="./tmdb-discovery-0.3.0.pdf">PDF</a></span>
+      </li>
   </ul>
 </section>
 
