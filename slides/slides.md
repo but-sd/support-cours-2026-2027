@@ -62,21 +62,51 @@ duration: 5min
 
 <style>
 .slidev-layout {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
   background: linear-gradient(140deg, #f7fbff 0%, #eef6ff 48%, #e8f7f5 100%);
 }
 
 .landing-list {
   width: min(92ch, calc(100vw - 3.2rem));
-  margin: 0 auto;
+  align-self: flex-start;
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(100% - 4rem);
+  max-height: none;
+  margin: 0;
   padding: 1.45rem 1.6rem 1.35rem;
-  max-height: calc(100vh - 3.4rem);
-  overflow-y: auto;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
   border-top: 5px solid;
   border-image: linear-gradient(90deg, #0ea5e9, #14b8a6, #22c55e) 1;
   border-radius: 1.1rem;
   background: rgba(255, 255, 255, 0.72);
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
   color: #0f172a;
+}
+
+.landing-list::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.landing-list::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.24);
+  border-radius: 0.5rem;
+}
+
+.landing-list::-webkit-scrollbar-thumb {
+  background: #0f766e;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 0.5rem;
+}
+
+.landing-list::-webkit-scrollbar-thumb:hover {
+  background: #115e59;
 }
 
 .landing-list h1 {
@@ -199,6 +229,7 @@ duration: 5min
   position: absolute;
   right: 1.2rem;
   bottom: 0.8rem;
+  z-index: 1;
   font-size: 0.78rem;
   color: #475569;
 }
