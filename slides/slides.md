@@ -29,6 +29,11 @@ duration: 5min
   <h2>Versions disponibles</h2>
   <ul class="versions-list">
     <li>
+      <span class="version-number">0.6.0</span>
+      <a class="version-label" href="./tmdb-discovery-0.6.0/">Test unitaire, intégration continue, router</a>
+      <span class="version-links"><a href="./tmdb-discovery-0.5.0.pdf">PDF</a></span>
+    </li>
+    <li>
       <span class="version-number">0.5.0</span>
       <a class="version-label" href="./tmdb-discovery-0.5.0/">Amélioration de la qualité du code, pull request et revue de code</a>
       <span class="version-links"><a href="./tmdb-discovery-0.5.0.pdf">PDF</a></span>
