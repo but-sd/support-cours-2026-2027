@@ -423,14 +423,20 @@ Une fois la branche `develop` protégée, il ne sera plus possible de merger du 
 
 - **Étape 1 :** créer `feature/movie-detail-endpoint-backend` depuis `develop`.
 - **Étape 2 :** mettre à jour `MoviesTypes.ts` avec <a href="./assets/code-sample/back-end/MoviesTypes.ts" target="_blank" rel="noopener noreferrer">MoviesTypes.ts</a>.
-- **Étape 3 :** implémenter `/api/movies/:id` dans `src/back-end/movies-api.ts`.
+- **Étape 3 :** implémenter `/api/movies/:id` dans `src/back-end/movies-api.ts` et les éventuelles transformations nécessaires des données ( _req.params.id permet de récupérer l'identifiant du film ).
 - **Étape 4 :** retourner les détails du film.
-- **Étape 5 :** valider le fonctionnement du end-point, par exemple `http://127.0.0.1:5173/api/movies/1273221`
+- **Étape 5 :** valider le fonctionnement du end-point, par exemple `http://localhost:5173/api/movies/1273221`
 - **Étape 6 :** ajouter un test unitaire dans `src/back-end/index.test.ts`.
 - **Résultat attendu :** le back-end expose les détails d'un film via son identifiant.
 - **Référence :** <a href="https://developer.themoviedb.org/reference/movie-details" target="_blank" rel="noopener noreferrer">TMDB API - Get Movie Details</a>. 
 
 Pousser la branche `feature/movie-detail-endpoint-backend` sur le dépôt distant et créer une pull request vers `develop`. Ne pas valider la pull request pour l'instant.
+
+<!--
+
+- Ajouter la fonction toSupportedMovieDetails dans `src/back-end/utils.ts` pour transformer les détails d'un film provenant de l'API TMDB en un format supporté par notre application.
+
+-->
 
 ---
 
@@ -484,19 +490,23 @@ createRoot(document.getElementById("root")!).render(
 - **Étape 3 :** créer `MoviesListPage.tsx`, `MovieDetailPage.tsx` et `NotFoundPage.tsx` dans `src/front-end/pages`.
 
 
+Contenu temporaire de `MoviesListPage.tsx` :
 ```tsx
-
 export default function MoviesListPage() {
   return <main className="app-shell">Main content of the MoviesListPage component</main>;
 }
 ```
 
+Contenu temporaire de `MovieDetailPage.tsx` :
 ```tsx
 export default function MovieDetailPage() {
   return <main className="app-shell">Main content of the MovieDetailPage component</main>;
 } 
 ```
 
+---
+
+Contenu temporaire de `NotFoundPage.tsx` :
 ```tsx
 export default function NotFoundPage() {
   return <main className="app-shell">Main content of the NotFoundPage component</main>;
@@ -511,44 +521,15 @@ export default function NotFoundPage() {
 
 # routage - front-end
 
+- **Étape 0 :** Ecraser le contenu de `App.tsx` avec le nouveau routage ( nous pourrons récupérer l'ancien code depuis la branche `develop`)
 - **Étape 1 :** importer `Routes`, `Route` et les composants de pages dans `App.tsx`.
 - **Étape 2 :** associer la liste des films à la route `/`.
 - **Étape 3 :** associer le détail à `/movies/:id` et les URLs inconnues à `NotFoundPage`.
 - **Résultat attendu :** React Router affiche la page correspondant à l'URL.
 
-
-```tsx
-import { Route, Routes } from "react-router";
-import "./app.css";
-import MovieDetailPage from "./pages/MovieDetailPage";
-import MoviesListPage from "./pages/MoviesListPage";
-import NotFoundPage from "./pages/NotFoundPage";
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<MoviesListPage />} />
-      <Route path="/movies/:id" element={<MovieDetailPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  );
-}
-```
-
-<!--
-
-Naviguer entre les trois routes pour vérifier que le routage fonctionne correctement. La page d'accueil affiche la liste des films populaires, la page détail d'un film affiche les détails du film correspondant à l'identifiant passé en paramètre et la page NotFoundPage affiche un message d'erreur pour les URLs inconnues.
-
--->
+Voir code dans le slide suivant.
 
 ---
-
-# routage - front-end
-
-- **Étape 1 :** utiliser `Navigate` pour rediriger `/` vers `/movies`.
-- **Étape 2 :** associer la liste des films à `/movies`.
-- **Étape 3 :** conserver la route détail `/movies/:id` et la page inconnue.
-- **Résultat attendu :** la page d'accueil redirige vers la liste des films populaires.
 
 ```typescript
 import { Navigate, Route, Routes } from "react-router";
@@ -569,12 +550,27 @@ export default function App() {
 }
 ```
 
+Tester le routage en ouvrant les URLs suivantes dans le navigateur :
+- http://localhost:5173/
+- http://localhost:5173/movies
+- http://localhost:5173/movies/1
+- http://localhost:5173/unknown-route
+
+<!--
+
+- Navigate : permet de rediriger automatiquement l'utilisateur vers une autre route. Dans notre cas, la route `/` redirige vers `/movies`.
+
+Naviguer entre les trois routes pour vérifier que le routage fonctionne correctement. La page d'accueil affiche la liste des films populaires, la page détail d'un film affiche les détails du film correspondant à l'identifiant passé en paramètre et la page NotFoundPage affiche un message d'erreur pour les URLs inconnues.
+
+-->
+
+
 ---
 
 # routage - front-end
 
 - **Étape 1 :** reprendre le code de la liste des films populaires depuis `develop`.
-- **Étape 2 :** l'intégrer dans `MoviesListPage`.
+- **Étape 2 :** l'intégrer dans `MoviesListPage` en l'adaptant au nouveau composant.
 - **Étape 3 :** vérifier l'affichage de la liste sur la route `/movies`.
 - **Résultat attendu :** la page de liste affiche à nouveau les films populaires.
 
@@ -639,6 +635,16 @@ export default function MovieDetailPage() {
 }
 ```
 
+<!--
+
+Montrer la différence entre la balise a `<a>` et le composant `Link` de `react-router`.
+
+Expliquer que pour l'instant on n'a pas l'implémentation de l'api `/api/movies/:id` qui est encore un pull request en attente de fusion vers `develop`.
+
+Nous allons valider la PR pour mettre à jour `develop` puis nous allons mettre à jour la branche front-end avec les derniers changements de `develop` grâce au rebase.
+
+-->
+
 ---
 
 # mise à jour de la branche front-end
@@ -663,7 +669,7 @@ git switch feature/movie-detail-page-frontend
 git rebase develop
 ```
 
-- **Résultat attendu :** la branche front-end peut appeler l'endpoint détail du back-end (par exemple `http://127.0.0.1:5173/api/movies/1273221`)
+- **Résultat attendu :** la branche front-end peut appeler l'endpoint détail du back-end (par exemple `http://localhost:5173/api/movies/1273221`)
 
 <!--
 
@@ -673,12 +679,26 @@ Montrer le graphe d'historique avant et après dans vs-code et sur github pour i
 -->
 
 ---
+
 # front-end - détail d'un film
 
 Nous pouvons maintenant implémenter la page détail d'un film en appelant l'endpoint `/api/movies/:id` du back-end pour récupérer les détails du film sélectionné.
 
-TODO: Créer un composant `MovieDetailCard` pour afficher les détails du film et l'utiliser dans `MovieDetailPage`.
+En vous inspirant du code existant, créez le composant `MovieDetailCard` et intégrez-le dans `MovieDetailPage`.
 
+L"extrait de code suivant, permet de récupérer l'identifiant du film depuis l'URL afin de pouvoir appeler l'endpoint `/api/movies/:id` et afficher les détails du film correspondant.
+
+```jsx
+const { id } = useParams<{ id: string }>();
+```
+
+La feuille de style associée à `MovieDetailCard`, <a href="./assets/MovieDetailCard.css" target="_blank" rel="noopener noreferrer">MovieDetailCard.css</a>, permettra de structurer et de mettre en forme les informations du film de manière claire et esthétique.
+
+Une copie d'écran du résultat attendu est présentée dans le slide suivant.
+
+---
+
+<img src="./assets/movie-detail.png" alt="Capture détail d'un film" class="mx-auto max-h-[55vh] max-w-[85vw] object-contain rounded-lg border border-slate-200" />
 
 ---
 
