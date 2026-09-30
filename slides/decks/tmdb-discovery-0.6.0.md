@@ -700,6 +700,19 @@ Une copie d'écran du résultat attendu est présentée dans le slide suivant.
 
 <img src="./assets/movie-detail.png" alt="Capture détail d'un film" class="mx-auto max-h-[55vh] max-w-[85vw] object-contain rounded-lg border border-slate-200" />
 
+
+---
+
+# Test Unitaires - back-end - utils.tsx
+
+Nous allons écrire des tests unitaires pour les fonctions utilitaires définies dans `utils.tsx` afin de garantir leur bon fonctionnement. 
+
+Ceci permettra de détecter rapidement toute régression ou erreur dans ces fonctions lors des modifications futures.
+
+Les tests seront écrits dans un fichier `utils.test.tsx` pour avoir le test unitaire au plus proche du code source. L'objectif est d'avoir une couverture à 100% des fonctions utilitaires.
+
+Nous allons mettre en place ces tests sur une nouvelle branche `feature/utils-test` à partir de la branche `develop`.
+
 ---
 
 # Récapitulatif de la version 0.6.0
