@@ -68,6 +68,27 @@ layout: tmdb-hero
 - Étape 2 : ajouter les informations de copyright et les liens vers les réseaux sociaux.
 - Étape 3 : appliquer la feuille de style <a href="./assets/Footer.css" target="_blank" rel="noopener noreferrer">Footer.css</a>.
 - Résultat attendu : un composant **Footer** fonctionnel et cohérent avec le reste de l’application, voir capture d’écran ci-dessous.
+
+---
+
+# front-end - Footer (suite)
+
+Afin d'afficher le numéro de version dans le footer, modifiez le fichier de configuration `vite.config.ts` pour y ajouter une variable d'environnement contenant la version de l'application. 
+
+```ts
+// vite.config.ts
+...
+import packageJson from './package.json' with { type: 'json' };
+...
+
+export default defineConfig({
+  ...
+  define: {
+    __APP_VERSION__: JSON.stringify(packageJson.version),
+  },
+  ...
+});
+```
 ---
 
 # front-end - Footer
@@ -76,54 +97,80 @@ layout: tmdb-hero
 
 ---
 
-# front-end - les différents types de tests
+# back-end - Tests unitaires
 
-- Objectif : comprendre les niveaux de tests logiciels.
-- Définition : chaque type de test vérifie l’application à une échelle différente.
-- Pourquoi c’est utile : choisir le test le plus efficace pour chaque risque.
-- Exemple rapide : tester une fonction, une API, puis un parcours utilisateur.
+- Objectif : écrire des tests unitaires pour le back-end afin de garantir le bon fonctionnement des différentes fonctionnalités.
+- Approche : identifier les fonctions critiques et écrire des tests unitaires pour chacune d’elles, cela ne garantit pas une couverture complète mais permet de se concentrer sur les parties les plus importantes.
+- Résultat attendu : une suite de tests unitaires complète et fiable pour le back-end.
 
----
-
-# Pourquoi tester ?
-
-- Objectif : sécuriser l’évolution de l’application.
-- Règle 1 : vérifier que l’application fonctionne comme prévu.
-- Règle 2 : détecter rapidement les régressions après une modification.
-- Règle 3 : valider les règles métier importantes.
-- Anti-pattern à éviter : viser 100 % de couverture sans réfléchir à la pertinence des tests.
+<!--
+Notes:
+- Il est parfois difficile d'avoir une couverture complète des tests unitaires, surtout lorsque le code évolue rapidement. Il est donc important de se concentrer sur les parties critiques et à risque élevé de l'application.
+- Pour notre application nous allons tout de même viser une couverture à 100 % même si ce qui est important est de tester les cas pertinents et critiques.
+-->
 
 ---
 
-# Test Unitaires - back-end - utils.tsx
+# back-end - Tests unitaires (suite)
 
-Nous allons écrire des tests unitaires pour les fonctions utilitaires définies dans `utils.tsx` afin de garantir leur bon fonctionnement. 
+- Objectif : pour notre application, garantir une couverture complète des tests unitaires.
 
-Ceci permettra de détecter rapidement toute régression ou erreur dans ces fonctions lors des modifications futures.
+Afin de vérifier que notre couverture à 100 % est pertinente et efficace, nous allons configurer notre application pour être en erreur si l'on n'atteint pas cette couverture.
 
-Les tests seront écrits dans un fichier `utils.test.tsx` pour avoir le test unitaire au plus proche du code source. L'objectif est d'avoir une couverture à 100% des fonctions utilitaires.
+```ts
+// vite.config.ts
+export default defineConfig({
+  ...
+  test: {
+    include: ['src/back-end/**/*.test.ts'],
+    coverage: {
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
+    },
+  },
+  ...
+});
+```
 
-Nous allons mettre en place ces tests sur une nouvelle branche `feature/utils-test` à partir de la branche `develop`.
+<!--
+Notes:
+  - Pour notre application, nous allons viser une couverture à 100 % des tests unitaires afin de garantir que toutes les fonctions critiques sont correctement testées et que toute régression est rapidement détectée. Cependant, il est important de noter que viser une couverture à 100 % ne doit pas se faire au détriment de la pertinence des tests. Il faut privilégier les tests des cas critiques et à risque élevé.
+
+-->
 
 ---
 
-# dépendance TMDB API - mock
+# Test unitaires - Bonnes pratiques
 
-- Objectif : tester le front-end sans dépendre de l’API TMDB.
-- Définition : un mock simule un composant, une API ou une base de données.
-- Pourquoi c’est utile : isoler le code testé des données changeantes, de la latence et des indisponibilités.
-- Exemple rapide : remplacer l’API TMDB par des réponses attendues et maîtrisées.
+- Ecrire le test unitaire au plus proche du code source. Par exemple, pour une fonction définie dans `utils.tsx`, le test correspondant doit être dans `utils.test.tsx`.
+- Le test unitaire doit être indépendant des autres tests et ne doit pas dépendre de l'état global de l'application ou de l'ordre d'exécution des tests.
+- Il est recommandé de suivre la structure Arrange-Act-Assert (AAA) pour organiser les tests unitaires de manière claire et cohérente.
+- Il est également conseillé de nommer les tests de manière descriptive pour indiquer clairement ce qu'ils vérifient **describe** et **it** blocs afin de faciliter la lecture et la maintenance des tests.
+- Avec un objectif de couverture de test à 100 %, le test doit couvrir 100% du fichier source correspondant, même s'il peut potentiellement couvrir d'autres fichiers ou fonctionnalités.
+- Tester le comportement plutôt que l’implémentation interne.
+- Rendre les tests déterministes dans les mêmes conditions.
 
 
+<!--
+Notes:
+
+- Faire la démonstation en écrivant les tests unitaires pour utils.tsx., health-api.tsx puis movies-api.tsx.
+  - montrer l'usage de copilot pour aider, générer des tests unitaires rapidement et efficacement.
+  - expliquer que les tests générés automatiquement doivent être revus et adaptés pour s'assurer qu'ils couvrent les cas pertinents et critiques.
+
+-->
 ---
 
-# dépendance TMDB API - mock (suite)
+# Tests unitaires - mock
 
-
-- Objectif : tester chaque partie de l’application avec une dépendance isolée.
-- Définition : le front-end et le back-end sont considérés comme deux applications distinctes.
-- Pourquoi c’est utile : limiter les causes possibles quand un test échoue.
-- Exemple rapide : tester le front-end avec un back-end mocké, puis le back-end avec l’API TMDB mockée.
+- Objectif : tester les composants isolément en simulant leurs dépendances.
+- Définition : un mock remplace une dépendance réelle par une version contrôlée.
+- Pourquoi c’est utile : s’assurer que les tests ne dépendent pas de l’état ou du comportement des dépendances externes.
+- Dans notre application, nous allons utiliser des mocks pour isoler les appels aux API externes et tester les composants de manière indépendante.
 
 ---
 
@@ -183,22 +230,21 @@ flowchart LR
 
 ---
 
+# Les différents types de tests
+
+- Objectif : comprendre les niveaux de tests logiciels.
+- Définition : chaque type de test vérifie l’application à une échelle différente.
+- Pourquoi c’est utile : choisir le test le plus efficace pour chaque risque.
+- Exemple rapide : tester une fonction, une API, puis un parcours utilisateur.
+
+---
+
 # Tests unitaires
 
 - Objectif : vérifier une petite unité de code isolée.
 - Définition : tester une fonction, une méthode, une classe ou un composant seul.
 - Pourquoi c’est utile : obtenir un retour rapide et facile à diagnostiquer.
-- Exemple rapide : contrôler le résultat de **getReleaseYear**.
-
-~~~text
-getReleaseYear('02-12-2023')
-        ↓
-       2023
-
-getReleaseYear('wrong format' or null)
-        ↓
-       unknown
-~~~
+- Couverture de code : viser à tester toutes les branches et cas possibles d’une unité.
 
 ---
 
@@ -207,7 +253,6 @@ getReleaseYear('wrong format' or null)
 - Règle 1 : exécuter ces tests souvent, localement et en CI.
 - Règle 2 : multiplier les scénarios simples et ciblés.
 - Règle 3 : isoler le code testé des API, bases de données et interfaces.
-- Anti-pattern à éviter : croire qu’un test unitaire valide toute l’application.
 
 ---
 
@@ -229,7 +274,6 @@ Front-end → Back-end → Base de données / API externe
 - Règle 1 : tester les échanges réels entre composants.
 - Règle 2 : garder les scénarios centrés sur les contrats importants.
 - Règle 3 : prévoir une configuration de test stable et reproductible.
-- Anti-pattern à éviter : transformer chaque test d’intégration en parcours complet.
 
 ---
 
@@ -265,16 +309,6 @@ Utilisateur → Accès à la page d'accueil → Navigation → Sélection d'un f
 
 ---
 
-# Exemples de tests spécialisés
-
-- Fonctionnel : appliquer la livraison gratuite dès 50 € d’achat.
-- Régression : relancer les tests automatiquement dans la CI/CD.
-- Performance : tenir 100 utilisateurs simultanés ou 10 000 requêtes par minute.
-- Sécurité : détecter une injection SQL ou un contrôle d’accès incorrect.
-- Contrat : repérer un changement de format dans une réponse d’API.
-
----
-
 # La pyramide des tests
 
 - Objectif : équilibrer confiance, vitesse et coût de maintenance.
@@ -301,7 +335,6 @@ Utilisateur → Accès à la page d'accueil → Navigation → Sélection d'un f
 - Objectif : reconnaître une stratégie de test coûteuse.
 - Définition : beaucoup de tests E2E, peu de tests unitaires et d’intégration.
 - Pourquoi c’est risqué : les retours deviennent lents, fragiles et difficiles à diagnostiquer.
-- Exemple rapide : un test “finaliser la commande” échoue sans indiquer la cause précise.
 
 ~~~text
               _____________
@@ -321,45 +354,6 @@ Utilisateur → Accès à la page d'accueil → Navigation → Sélection d'un f
 - Règle 1 : tester une règle métier complexe avec un test unitaire.
 - Règle 2 : tester une interaction entre composants avec un test d’intégration.
 - Règle 3 : tester un parcours utilisateur critique avec un test E2E.
-- Anti-pattern à éviter : choisir un type de test par habitude plutôt que par risque.
-
----
-
-# Bonnes pratiques de test
-
-- Règle 1 : tester le comportement plutôt que l’implémentation interne.
-- Règle 2 : rendre chaque test indépendant des autres.
-- Règle 3 : rendre les tests déterministes dans les mêmes conditions.
-- Anti-pattern à éviter : faire dépendre un test de l’heure réelle, du hasard ou d’un ordre d’exécution.
-
----
-
-# Cas limites et maintenance
-
-- Règle 1 : tester aussi les erreurs, pas seulement le happy path.
-- Règle 2 : garder une suite de tests rapide pour l’exécuter souvent.
-- Règle 3 : privilégier des tests utiles plutôt que nombreux.
-- Anti-pattern à éviter : maintenir 100 tests qui vérifient tous la même chose.
-
----
-
-# Exemple de stratégie e-commerce
-
-- Objectif : répartir les tests selon leur granularité.
-- Unitaires : prix, promotions, TVA, validation et règles métier.
-- Intégration : API avec base de données, paiement et services internes.
-- E2E : connexion, achat et paiement sur les parcours critiques.
-- Résultat attendu : beaucoup de tests rapides, quelques intégrations, peu de E2E.
-
----
-
-# À retenir
-
-- Définition unitaire : vérifie les briques de code.
-- Définition intégration : vérifie que les briques fonctionnent ensemble.
-- Définition E2E : vérifie l’ensemble comme attendu par l’utilisateur.
-- Pourquoi c’est utile : combiner plusieurs niveaux de tests selon le risque.
-- Exemple rapide : une bonne pyramide limite les tests lents, fragiles et coûteux.
 
 ---
 
