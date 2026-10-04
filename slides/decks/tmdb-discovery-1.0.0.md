@@ -95,6 +95,18 @@ layout: tmdb-hero
 
 ---
 
+# Test Unitaires - back-end - utils.tsx
+
+Nous allons écrire des tests unitaires pour les fonctions utilitaires définies dans `utils.tsx` afin de garantir leur bon fonctionnement. 
+
+Ceci permettra de détecter rapidement toute régression ou erreur dans ces fonctions lors des modifications futures.
+
+Les tests seront écrits dans un fichier `utils.test.tsx` pour avoir le test unitaire au plus proche du code source. L'objectif est d'avoir une couverture à 100% des fonctions utilitaires.
+
+Nous allons mettre en place ces tests sur une nouvelle branche `feature/utils-test` à partir de la branche `develop`.
+
+---
+
 # dépendance TMDB API - mock
 
 - Objectif : tester le front-end sans dépendre de l’API TMDB.
